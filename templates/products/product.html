@@ -1,0 +1,123 @@
+{% extends "users/index.html" %}
+
+{% block content %}
+<div class="flex flex-col min-h-[80dvh] w-[100dvw]">
+    <div class="flex items-center justify-center gap-[2rem] border-b-[1px] border-black">
+        <img class="size-[30rem]" src="{{ product.image.url }}" alt="{{ product.name }}">
+        <div class="flex flex-col gap-[2rem] p-[1rem_2rem]">
+            <div class="text-5xl">{{ product.name }}</div>
+            <div class="text-3xl flex items-start"><span class="text-lg">&#x20B9;</span>{{ product.price }}</div>
+            <div class="flex justify-between w-3/5">
+                <div class="flex flex-col gap-[2rem]">
+                    <div 
+                    onclick="addToCart('{{product.id}}')" 
+                    class="bg-orange-500 hover:bg-orange-400 transition-all text-blue-900 font-bold w-[8rem] text-center py-[.5rem] cursor-pointer rounded-xl">Add to Cart</div>
+                    <div class="bg-yellow-400 hover:bg-yellow-300 transition-all text-blue-900 font-bold w-[8rem] text-center py-[.5rem] cursor-pointer rounded-xl">Buy Now</div>
+                </div>
+                <div class="flex flex-col justify-center gap-[2rem] text-xl font-semibold">
+                    <div class="ml-[2rem]">Weight: {{ product.weight }}</div>
+                    <div class="ml-[2rem] flex gap-[.5rem] items-center">
+                        <div>Categories:</div> 
+                        <div class="flex gap-[.5rem]">
+                            {% for category in product.get_categories %}
+                            <div class="bg-blue-400 rounded-3xl p-[.4rem_.6rem]">{{category}}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="border-b-[1px] p-[2rem_4rem] border-black">
+        <div class="text-2xl mb-[1rem] font-semibold">Product Description:</div>
+        <div class="[text-indent:3rem]">{{ product.description }}</div>
+    </div>
+    <div class="p-[2rem_4rem] border-black">
+        <div class="flex gap-4">
+            <button onclick="openModal('howToUseModal')" class="bg-blue-500 text-white px-4 py-2 rounded">How to Use</button>
+            <button onclick="openModal('benefitsModal')" class="bg-green-500 text-white px-4 py-2 rounded">Benefits</button>
+            <button onclick="openModal('precautionModal')" class="bg-red-500 text-white px-4 py-2 rounded">Precaution</button>
+        </div>
+    </div>
+    <div class="flex flex-col p-[2rem]">
+        <div class="text-2xl font-semibold">Related Items</div>
+        <div class="scroll flex gap-[2rem] m-[2rem] overflow-x-scroll scroll-smooth snap-x snap-mandatory">
+        {% for item in related_products %}
+            <div onclick="window.location.href='/products/{{ item.id }}'"
+            class="w-[14rem] h-[17rem] p-[1rem] flex flex-col items-center cursor-pointer gap-[1rem] rounded-xl snap-start border-2 border-black">
+                <img class="w-2/3 h-2/3" src="{{ item.image.url }}" alt="{{ item.name }}">
+                <div class="w-[25ch] line-clamp-3 overflow-hidden text-center text-ellipsis">{{ item.name }}</div>
+                <div class="bg-green-700 rounded-lg text-white p-[.1rem_.5rem]">&#x20B9;{{ item.price }}</div>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+</div>
+
+<!-- Modals -->
+<div id="howToUseModal" class="modal hidden">
+    <div class="modal-content">
+        <span onclick="closeModal('howToUseModal')" class="close">&times;</span>
+        <div class="text-2xl mb-4 font-semibold">How to Use:</div>
+        <div>{{ product.how_to_use }}</div>
+    </div>
+</div>
+<div id="benefitsModal" class="modal hidden">
+    <div class="modal-content">
+        <span onclick="closeModal('benefitsModal')" class="close">&times;</span>
+        <div class="text-2xl mb-4 font-semibold">Benefits:</div>
+        <div>{{ product.benefits }}</div>
+    </div>
+</div>
+<div id="precautionModal" class="modal hidden">
+    <div class="modal-content">
+        <span onclick="closeModal('precautionModal')" class="close">&times;</span>
+        <div class="text-2xl mb-4 font-semibold">Precaution:</div>
+        <div>{{ product.precaution }}</div>
+    </div>
+</div>
+
+<script>
+    function openModal(modalId) {
+        document.getElementById(modalId).classList.remove('hidden');
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.add('hidden');
+    }
+</script>
+
+<style>
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+    .modal.hidden {
+        display: none;
+    }
+    .modal-content {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        max-width: 500px;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .close {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: black;
+        cursor: pointer;
+        float: right;
+    }
+</style>
+
+{% endblock content %}

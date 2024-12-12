@@ -1,0 +1,51 @@
+{% extends "users/base.html" %} {% load static %} {% block main %}
+<div class="min-h-[100vh] flex flex-col">
+  <div class="flex items-center justify-between bg-emerald-700 px-[5vw] z-10 h-[10dvh]">
+    <div class="font-bold text-3xl text-white"
+    style="-webkit-text-stroke:.05rem black"
+    >MedicoMart</div>
+    <div class="flex items-center justify-center text-lg gap-6">
+      <a href="/" class="">Home</a>
+      <a href="/products" class="">Products</a>
+      <a href="/users/about" class="">About</a>
+      <a href="/users/contact" class="">Contact</a>
+    </div>
+    <div class="flex items-center text-lg font-medium gap-[2rem]">
+      {% if user.username %}
+      <div class="">Hello {{ user.username }} !</div>
+      <div onclick="window.location.href='/cart'" class="size-[2rem] cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="black"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg></div>
+      <div class="relative -mx-[1rem] text-black" onclick="toggleMore()">
+        <div class="options display absolute z-10 w-max flex flex-col bg-white top-[3.9rem] right-0">
+          <a class="p-[.5rem_1.5rem]" href="/users/edit_profile">Edit Profile</a>
+          <a class="p-[.5rem_1.5rem]" href="/users/help_support">Help & Support</a>
+          <a class="p-[.5rem_1.5rem]" href="/users/logout">Logout</a>
+        </div>
+      {% if custom_user.profile_image %}
+       <img class="size-[3rem] object-cover rounded-full" src="{{ custom_user.profile_image.url }}" alt="{{custom_user.user.username}}">
+      {% else %}
+      <img class="size-[3rem] object-cover rounded-full" src="{% static "images/avatar.jpg" %}" alt="{{custom_user.user.username}}">     
+      {% endif %}
+      </div>
+      {% else %}
+      <a
+        href="/users/login"
+        class="h-[6dvh] w-[7vw] flex justify-center items-center rounded-xl border-4 border-sky-400 transition-colors hover:text-white hover:bg-sky-400"
+      >
+        Login
+      </a>
+      <a
+        href="/users/register"
+        class="h-[6dvh] w-[7vw] flex justify-center items-center rounded-xl border-4 border-sky-400 text-white bg-sky-400 hover:bg-green-400 hover:text-black"
+      >
+        Sign up
+      </a>
+      {% endif %}
+    </div>
+  </div>
+  <hr class="h-[.1rem] bg-black" />
+  {% block content %}{% endblock content %}
+  <hr class="h-[.1rem] bg-black" />
+  <div class="flex flex-col h-[20vh] bg-emerald-700">{% include "users/footer.html" %}</div>
+</div>
+
+{% endblock main %}

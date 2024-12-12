@@ -1,0 +1,54 @@
+{% extends "users/index.html" %} {% load static %} {% block content %}
+
+<div class="flex flex-col items-center justify-center px-[5rem] min-h-[80dvh]">
+  <div class="hero relative -mt-[1.7rem] z-0 w-[100dvw] h-[30rem]">
+    <button id="prev" class="absolute bg-red-200 z-10 text-2xl rounded-[50%] top-[45%] font-mono left-[2rem] size-[3rem]">
+      &lt;
+    </button>
+      <div class="slider absolute flex w-max h-full transition-all duration-[1s]">
+        <div style="background:url({% static "images/wallpaperflare.com_wallpaper.jpg" %}) no-repeat;background-size:cover;" class="flex justify-center w-[100dvw]"> <div
+            onclick="window.location.href='/products'"
+            class="bg-yellow-500 hover:bg-yellow-300 text-violet-800 p-[.7rem_1.5rem] mr-[10rem] mb-[2rem] self-end h-[3.2rem] text-lg font-bold rounded-xl cursor-pointer"
+          >
+            Shop Now
+          </div></div>
+        <div class="bg-red-600 w-[100dvw]"></div>
+        <div class="bg-yellow-600 w-[100dvw]"></div>
+      </div>
+      <button id="next" class="absolute bg-red-200 z-10 text-2xl rounded-[50%] font-mono top-[45%] right-[2rem] size-[3rem]">
+        &gt;
+      </button>
+  </div>
+</div>
+
+<script>
+      next = document.getElementById('next');
+      prev = document.getElementById('prev');
+      slider = document.querySelector('.slider')
+      slides = document.querySelectorAll('.slider div')
+      let active = 0;
+      let length = slides.length - 1
+
+      function loadSlider(){
+        let left = slides[active].offsetLeft;
+        slider.style.left = -left + 'px';
+      } 
+
+      next.onclick=()=>{
+        if(active + 1 > length) active = 0;
+        else active +=1;
+        loadSlider();
+      }
+      prev.onclick=()=>{
+        if(active - 1 < 0) active = length;
+        else active -=1;
+        loadSlider();
+      }
+
+      {% comment %} setInterval(()=>{next.click()},3000) {% endcomment %}
+
+      loadSlider();
+
+</script>
+
+{% endblock content %}

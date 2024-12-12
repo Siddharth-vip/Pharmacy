@@ -1,0 +1,120 @@
+{% extends "users/base.html" %} {% load static %} {% block main %}
+
+<div
+  class="min-h-[100dvh] flex items-center justify-center"
+  style="
+    background-image: url('{% static 'images/bg.jpg' %}');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  "
+>
+  <form
+    class="flex flex-col justify-center items-center pb-[2rem] bg-[rgba(255,255,255,0.5)] w-[40vw] gap-[5vh] backdrop-blur-sm"
+    method="post"
+  >
+    {% csrf_token %}
+    <div class="text-[4rem] py-[2rem] font-semibold">Signup</div>
+    <div class="relative h-[5vh] w-[70%]">
+      <input
+        name="username"
+        id="username"
+        class="peer border-b-2 border-black bg-transparent outline-none h-full w-full"
+        type="text"
+        value="{{ form.username.value | default:'' }}"
+        placeholder=""
+      />
+      <label
+        for="username"
+        class="absolute -top-1 left-0 text-sm -translate-y-1/2 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-lg"
+      >
+        Username
+      </label>
+    </div>
+    <div class="relative h-[5vh] w-[70%]">
+      <input
+        name="email"
+        id="email"
+        class="peer border-b-2 border-black bg-transparent outline-none h-full w-full"
+        type="email"
+        value="{{ form.email.value | default:'' }}"
+        placeholder=""
+      />
+      <label
+        for="email"
+        class="absolute -top-1 left-0 text-sm -translate-y-1/2 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-lg"
+        >Email</label
+      >
+    </div>
+    <div class="relative h-[5vh] w-[70%]">
+      <input
+        name="contact_number"
+        id="contact_number"
+        class="peer border-b-2 border-black bg-transparent outline-none h-full w-full"
+        type="text"
+        value="{{ form.contact_number.value | default:'' }}"
+        placeholder=""
+      />
+      <label
+        for="contact_number"
+        class="absolute -top-1 left-0 text-sm -translate-y-1/2 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-lg"
+      >
+        Contact Number:
+      </label>
+    </div>
+    <div class="relative h-[5vh] w-[70%]">
+      <input
+        name="password1"
+        id="password1"
+        class="peer border-b-2 border-black bg-transparent outline-none h-full w-full"
+        type="password"
+        placeholder=""
+      />
+      <label
+        for="password1"
+        class="absolute -top-1 left-0 text-sm -translate-y-1/2 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-lg"
+        >Password</label
+      >
+    </div>
+    <div class="relative h-[5vh] w-[70%]">
+      <input
+        name="password2"
+        id="password2"
+        class="peer border-b-2 border-black bg-transparent outline-none h-full w-full"
+        type="password"
+        placeholder=""
+      />
+      <label
+        for="password2"
+        class="absolute -top-1 left-0 text-sm -translate-y-1/2 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-lg"
+        >Confirm Password</label
+      >
+    </div>
+    {% for message in messages %}
+    <div class="text-red-700 text-lg flex gap-2 justify-center items-center">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24px"
+        viewBox="0 -960 960 960"
+        width="24px"
+        fill="rgb(185,28,28)"
+      >
+        <path
+          d="M480-280q17 0 28.5-11.5T520-320q0-17-11.5-28.5T480-360q-17 0-28.5 11.5T440-320q0 17 11.5 28.5T480-280Zm-40-160h80v-240h-80v240Zm40 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"
+        />
+      </svg>
+      <p>{{ message }}</p>
+    </div>
+    {% endfor %} 
+    <div class="text-base">
+      Already have an account?
+      <a href="/users/login" class="text-lg text-violet-700 hover:underline">Login</a>
+    </div>
+    <input
+      type="submit"
+      class="bg-sky-400 rounded-xl cursor-pointer p-[.5rem_1.5rem] border-[.2rem] border-sky-400 text-white text-lg hover:border-white"
+      value="Signup"
+    />
+  </form>
+</div>
+{% endblock main %}

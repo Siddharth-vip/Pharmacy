@@ -1,0 +1,182 @@
+{% extends "users/index.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help and Support</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            background-color: #2874f0;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.5em;
+        }
+
+        .header button {
+            background-color: white;
+            color: #2874f0;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .header button:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Container */
+        .container {
+            display: flex;
+            margin: 20px auto;
+            max-width: 1200px;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 25%;
+            background: #f2f2f2;
+            padding: 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .sidebar h3 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #2874f0;
+            font-size: 1em;
+        }
+
+        .sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        .main-content {
+            width: 75%;
+            padding: 20px;
+        }
+
+        .main-content h1 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .faq h2 {
+            font-size: 1.2em;
+            color: #2874f0;
+            margin-bottom: 10px;
+        }
+
+        .faq p {
+            margin-bottom: 20px;
+            font-size: 1em;
+            color: #555;
+        }
+
+        .support-button {
+            text-align: right;
+            margin-top: 30px;
+        }
+
+        .support-button button {
+            background-color: #2874f0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .support-button button:hover {
+            background-color: #1e5dbb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>Help Center | 24x7 Support</h1>
+       
+    </div>
+
+    <!-- Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>TYPE OF ISSUE</h3>
+            <ul>
+                <li><a href="#">Help with your issues</a></li>
+                <li><a href="#">Help with your order</a></li>
+                <li><a href="#">Help with other issues</a></li>
+            </ul>
+            <h3>HELP TOPICS</h3>
+            <ul>
+                <li><a href="#">Delivery related</a></li>
+                <li><a href="#">Login and my account</a></li>
+                <li><a href="#">Refunds related</a></li>
+                <li><a href="#">Payment</a></li>
+                <li><a href="#">Returns & Pickup related</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1>Login and My Account</h1>
+            <div class="faq">
+                <h2>Can I reactivate my inactive account?</h2>
+                <p>Yes, you can reactivate your inactive account by logging in and following the instructions sent to your registered email.</p>
+                <h2>Do I need to verify my mobile number or email every time I log in?</h2>
+                <p>No, you only need to verify your mobile number or email once when setting up your account.</p>
+                <h2>What is an OTP or verification code?</h2>
+                <p>OTP (One Time Password) is a code sent to your registered mobile or email for verification purposes.</p>
+                <h2>How can I use my mobile number to log in?</h2>
+                <p>You can use your mobile number by selecting the "Log in with mobile number" option on the login page.</p>
+            </div>
+            <!-- Support Button -->
+            <div class="support-button">
+                <button onclick="window.location.href='mailto:siddharthabimanu007.com';">Contact Support</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock content %}

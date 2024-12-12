@@ -1,0 +1,76 @@
+{% extends "users/index.html" %} {% block content %}
+<div class="flex p-[2rem] gap-[2rem] bg-slate-200">
+  <div class="flex flex-col gap-[1rem] bg-white basis-3/4">
+    <div class="capitalize text-4xl font-semibold p-[1rem_2rem]">
+      {{ user.username }}'s Cart
+    </div>
+    <div class="flex flex-col">
+      {% for item in cart_items reversed %}
+      <div class="flex gap-[2rem] border-t-[1px] border-black p-[2rem_3rem] cart-{{item.product.id}}">
+        <img
+          class="size-[10rem] basis-1/5"
+          src="{{ item.product.image.url }}"
+          alt="{{ item.product.name }}"
+        />
+        <div class="flex flex-col gap-[.7rem] basis-3/5">
+          <div class="text-3xl">{{ item.product.name }}</div>
+          <div>
+            {% if item.product.is_available %}
+            <span class="text-green-600">In Stock</span>
+            {% else %}
+            <span class="text-red-600">Out of Stock</span>
+            {% endif %}
+          </div>
+          <div>
+            Category:<span class="font-semibold capitalize px-1"
+              >{{ item.product.category }}</span
+            >
+          </div>
+          <div>
+            Quantity:<span class="quantity-{{ item.product.id }} font-semibold px-1">{{ item.quantity }}</span>
+          </div>
+          <div class="flex gap-[2rem] p-[.3rem] border-2 w-max rounded-full">
+            <div class="icon-{{item.product.id}} size-[1.5rem] cursor-pointer" onclick="updateItem('{{ item.product.id }}','remove')">
+            {% if item.quantity > 1 %}
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 -960 960 960"
+              >
+                <path d="M200-440v-80h560v80H200Z" /></svg>
+            {% else %}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 -960 960 960"
+            >
+              <path
+                d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"
+              /></svg>
+            {% endif %}
+            </div>
+            <div class="quantity-{{item.product.id}}">{{ item.quantity }}</div>
+            <div class="size-[1.5rem] cursor-pointer" onclick="updateItem('{{ item.product.id }}','add')"><svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 -960 960 960"
+              >
+              <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg></div>
+          </div>
+        </div>
+        <div class="text-2xl basis-1/5">
+          <span class="text-base align-text-top">&#x20B9;</span>{{ item.product.price }}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div
+    class="flex flex-col items-center gap-[1rem] h-max py-[2rem] bg-white basis-1/4"
+  >
+    <div>Total: <span class="totalPrice">{{ cart.cart_price }}</span></div>
+    <div
+      class="bg-yellow-400 hover:bg-yellow-500 font-semibold rounded-3xl cursor-pointer p-[.7rem_1.5rem]"
+    >
+      Proceed to Buy
+    </div>
+  </div>
+</div>
+{% endblock content %}

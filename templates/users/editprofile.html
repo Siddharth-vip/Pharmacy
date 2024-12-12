@@ -1,0 +1,87 @@
+
+{% extends "users/index.html" %}
+{% load static %}
+{% block content %}
+<div class="container mx-auto mt-10 p-6">
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6">Edit Profile</h2>
+        
+        <form method="POST" action="{% url 'edit_profile' %}" enctype="multipart/form-data" class="space-y-4">
+            {% csrf_token %}
+            
+            <!-- Profile Picture -->
+            <div class="font-semibold text-3xl p-[1rem_1.5rem] capitalize col-start-2">{{ custom_user.user.username }}'s Details</div>
+            <div class="flex flex-col items-center justify-center row-start-2 gap-[1rem]">
+                {% if custom_user.profile_image %}
+                <img class="size-[10rem] object-cover border rounded-[10rem]" id="preview" src="{{custom_user.profile_image.url}}" alt="{{custom_user.user.username}}">
+                {% else %}
+                <img class="size-[10rem] object-cover border rounded-[10rem]" id="preview" src="{% static "images/avatar.jpg" %}" alt="{{custom_user.user.username}}">     
+                {% endif %}
+                <label class="font-semibold text-sm cursor-pointer" id="file-label" for="image">Click here to update</label>
+                <input type="file" id="image" name="image" class="hidden">
+            </div>
+            
+            <!-- Name -->
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                <input type="text" name="name" id="name" value="{{ user.username }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2">
+            </div>
+            
+            <!-- Email -->
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                <input type="email" name="email" id="email" value="{{ user.email }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2">
+            </div>
+            
+            <!-- Phone -->
+            <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                <input type="tel" name="phone" id="phone" value="{{ custom_user.contact_number }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2">
+            </div>
+            
+            <!-- Address -->
+            <div>
+                <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                <textarea name="address" id="address" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2">{{ custom_user.address }}</textarea>
+            </div>
+            
+            <!-- Password -->
+             {% if messages %}
+             {% for message in messages %}
+             <div class="text-red-700 text-lg">{{message}}</div>
+             {% endfor %}
+             {% endif %}
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">New Password</label>
+                <input type="password" name="password" id="password" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2">
+            </div>
+            
+            <!-- Confirm Password -->
+            <div>
+                <label for="confirm_password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                <input type="password" name="confirm_password" id="confirm_password" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2">
+            </div>
+            
+            <!-- Save Button -->
+            <div class="flex justify-end">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<script> 
+    document.getElementById('image').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('preview');
+    
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+})</script>
+{% endblock content %}
