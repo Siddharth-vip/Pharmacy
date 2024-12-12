@@ -12,7 +12,7 @@
                     <div 
                     onclick="addToCart('{{product.id}}')" 
                     class="bg-orange-500 hover:bg-orange-400 transition-all text-blue-900 font-bold w-[8rem] text-center py-[.5rem] cursor-pointer rounded-xl">Add to Cart</div>
-                    <div class="bg-yellow-400 hover:bg-yellow-300 transition-all text-blue-900 font-bold w-[8rem] text-center py-[.5rem] cursor-pointer rounded-xl">Buy Now</div>
+                    <div onclick="window.location.href = '/buy_now'" class="bg-yellow-400 hover:bg-yellow-300 transition-all text-blue-900 font-bold w-[8rem] text-center py-[.5rem] cursor-pointer rounded-xl">Buy Now</div>
                 </div>
                 <div class="flex flex-col justify-center gap-[2rem] text-xl font-semibold">
                     <div class="ml-[2rem]">Weight: {{ product.weight }}</div>

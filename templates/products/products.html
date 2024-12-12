@@ -18,7 +18,7 @@
             <select name="category" class="p-2 border-2 border-gray-300 rounded-lg bg-gray-100">
                 <option value="">Select Category</option>
                 {% for category in categories %}
-                    <option value="{{ category.id }}" {% if category.id == request.GET.category %} selected {% endif %}>{{ category.name }}</option>
+                    <option value="{{ category.name }}" {% if category.name == request.GET.category %} selected {% endif %}>{{ category.name }}</option>
                 {% endfor %}
             </select>
 

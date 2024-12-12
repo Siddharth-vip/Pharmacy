@@ -143,11 +143,12 @@ def contact(request):
 
 def home(request):
     user = User.objects.filter(username = request.user).first()
+    categories = Category.objects.all()
     if user:
         custom_user = user.customuser_set.all().first()
-        return render(request, 'users/home.html',{'custom_user': custom_user})
+        return render(request, 'users/home.html',{'custom_user': custom_user,'categories':categories})
     else:
-        return render(request,'users/home.html',{})
+        return render(request,'users/home.html',{'categories':categories})
 
 def products(request):
     products = Product.objects.all()
@@ -212,7 +213,7 @@ def remove_item(request,id):
 
 def search_products(request):
     query = request.GET.get('q', '')
-    category_id = request.GET.get('categories')
+    category_id = request.GET.get('category')
     price_range = request.GET.get('price_range')
 
     products = Product.objects.all()
@@ -223,7 +224,7 @@ def search_products(request):
 
     # Filter by category
     if category_id:
-        products = products.filter(categories__id=category_id)
+        products = products.filter(categories__icontains=category_id)
 
     # Filter by price range
     if price_range:
@@ -237,3 +238,6 @@ def search_products(request):
         'categories': categories,
         'request': request
     })
+
+def buy_now(request):
+    return render(request,'/products/buynow.html',{})

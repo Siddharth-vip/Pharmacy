@@ -1,33 +1,89 @@
 {% extends "users/index.html" %} {% load static %} {% block content %}
 
-<div class="flex flex-col items-center justify-center px-[5rem] min-h-[80dvh]">
+<div class="flex flex-col items-center px-[5rem] min-h-[80dvh]">
   <div class="hero relative -mt-[1.7rem] z-0 w-[100dvw] h-[30rem]">
     <button id="prev" class="absolute bg-red-200 z-10 text-2xl rounded-[50%] top-[45%] font-mono left-[2rem] size-[3rem]">
       &lt;
     </button>
       <div class="slider absolute flex w-max h-full transition-all duration-[1s]">
-        <div style="background:url({% static "images/wallpaperflare.com_wallpaper.jpg" %}) no-repeat;background-size:cover;" class="flex justify-center w-[100dvw]"> <div
-            onclick="window.location.href='/products'"
-            class="bg-yellow-500 hover:bg-yellow-300 text-violet-800 p-[.7rem_1.5rem] mr-[10rem] mb-[2rem] self-end h-[3.2rem] text-lg font-bold rounded-xl cursor-pointer"
-          >
-            Shop Now
-          </div></div>
-        <div class="bg-red-600 w-[100dvw]"></div>
-        <div class="bg-yellow-600 w-[100dvw]"></div>
+        <div style="background:url({% static "images/wallpaperflare.com_wallpaper.jpg" %}) no-repeat;background-size:cover;" class="slide relative flex justify-center w-[100dvw]">
+          <p class="text-2xl font-bold text-white absolute top-[3rem] left-[5rem]">We are delighted to have you here!</p>
+          <p class="text-7xl font-extrabold text-white absolute top-[6rem] left-[22rem]">MEDICOMART</p>
+          <div
+          onclick="window.location.href='/products'"
+          class="bg-yellow-500 hover:bg-yellow-300 text-violet-800 p-[.7rem_1.5rem] mb-[2rem] mr-[10rem] self-end h-[3.2rem] text-lg font-bold rounded-xl cursor-pointer"
+        >
+          Shop Now
+        </div></div>
+        <div style="background:url({% static "images/pills-beside-clipboard.jpg" %}) no-repeat;background-size:cover;" class="slide relative flex w-[100dvw]">
+          <p class="text-4xl font-berkshire font-semibold text-black absolute top-[15rem] left-[32rem]">For any inquiries, Contact us for assistance with orders, products, or general questions.</p>
+          <div
+          onclick="window.location.href='/users/contact'"
+          class="bg-yellow-500 hover:bg-yellow-300 text-violet-800 p-[.7rem_1.5rem] mb-[5rem] ml-[50rem] self-end h-[3.2rem] text-lg font-bold rounded-xl cursor-pointer"
+        >
+          Enquiry
+        </div></div>
+        <div style="background:url({% static "images/image.jpg" %}) no-repeat;background-size:cover;background-position:center;" class="slide w-[100dvw]"></div>
       </div>
       <button id="next" class="absolute bg-red-200 z-10 text-2xl rounded-[50%] font-mono top-[45%] right-[2rem] size-[3rem]">
         &gt;
       </button>
+  </div>
+  <div class="flex flex-col gap-[4rem] justify-start my-[10rem]">
+    <div class="text-5xl font-semibold">Shop by Category</div>
+    <div class="grid grid-cols-4 gap-[2rem] p-[2rem]">
+      {% for category in categories %}
+      <div onclick="window.location.href = '/search?category={{category.name}}'">
+        <img class="object-cover" src="{{category.image.url}}" alt="{{category.name}}">
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="flex flex-col justify-start">
+    <div class="bg-emerald-700 text-white w-[100dvw] text-5xl p-[1rem_.5rem]">Why Choose Us?</div>
+    <div class="below relative z-0 w-[100dvw] h-[30rem]">
+      <button id="prev1" class="absolute bg-red-200 z-10 text-2xl rounded-[50%] top-[45%] font-mono left-[2rem] size-[3rem]">
+        &lt;
+      </button>
+        <div class="slider absolute flex w-max h-full transition-all duration-[1s]">
+          <div class="slide w-[100dvw] p-[2rem_5rem] flex justify-around items-center">
+            <img class="h-[20rem] w-[30rem] object-contain" src="{% static "images/productRange.png" %}" alt="">
+            <p class="text-3xl w-[40ch] font-semibold" >Wide Product Selection: From prescription medications to wellness essentials, find everything you need in one place.</p>
+          </div>
+          <div class="slide w-[100dvw] p-[2rem_5rem] flex justify-around items-center">
+            <p class="text-3xl w-[40ch] font-semibold" >Safe and Secure: Your health and privacy matter. We ensure your data and transactions are protected at all times.
+          </p>
+          <img class="h-[20rem] w-[30rem] object-contain" src="{% static "images/27184973.jpg" %}" alt="">
+        </div>
+          <div class="slide w-[100dvw] p-[2rem_5rem] flex justify-around items-center">
+            <img class="h-[20rem] w-[30rem] object-contain" src="{% static "images/cropped-cropped-BULBULRahman-copy-1.png" %}" alt="">
+            <p class="text-3xl w-[40ch] font-semibold" >Expert Support: Our team of licensed pharmacists is here to guide you with professional advice and recommendations.
+          </p></div>
+          <div class="slide w-[100dvw] p-[2rem_5rem] flex justify-around items-center">
+            <p class="text-3xl w-[40ch] font-semibold" >Fast Delivery: Get your orders delivered swiftly to your doorstep, hassle-free.</p>
+            <img class="h-[20rem] w-[30rem] object-contain" src="{% static "images/vecteezy_fast-delivery-icon_.jpg" %}" alt="">
+          </div>
+        </div>
+        <button id="next1" class="absolute bg-red-200 z-10 text-2xl rounded-[50%] font-mono top-[45%] right-[2rem] size-[3rem]">
+          &gt;
+        </button>
+    </div>
   </div>
 </div>
 
 <script>
       next = document.getElementById('next');
       prev = document.getElementById('prev');
-      slider = document.querySelector('.slider')
-      slides = document.querySelectorAll('.slider div')
+      slider = document.querySelector('.hero .slider');
+      slides = document.querySelectorAll('.hero .slider .slide');
+      next1 = document.getElementById('next1');
+      prev1 = document.getElementById('prev1');
+      slider1 = document.querySelector('.below .slider');
+      slides1 = document.querySelectorAll('.below .slider .slide');
       let active = 0;
       let length = slides.length - 1
+      let active1 = 0;
+      let length1 = slides1.length - 1
 
       function loadSlider(){
         let left = slides[active].offsetLeft;
@@ -45,9 +101,29 @@
         loadSlider();
       }
 
-      {% comment %} setInterval(()=>{next.click()},3000) {% endcomment %}
+      setInterval(()=>{next.click()},8000)
 
       loadSlider();
+
+      function loadSlider1(){
+        let left = slides1[active1].offsetLeft;
+        slider1.style.left = -left + 'px';
+      } 
+
+      next1.onclick=()=>{
+        if(active1 + 1 > length1) active1 = 0;
+        else active1 +=1;
+        loadSlider1();
+      }
+      prev1.onclick=()=>{
+        if(active1 - 1 < 0) active1 = length1;
+        else active1 -=1;
+        loadSlider1();
+      }
+
+      {% comment %} setInterval(()=>{next1.click()},8000) {% endcomment %}
+
+      loadSlider1();
 
 </script>
 
