@@ -9,6 +9,9 @@ class CustomUser(models.Model):
     contact_number = models.CharField(max_length=15)
     profile_image = models.ImageField(upload_to='users')
     address = models.TextField(blank=True)
+    
+    def get_addresses(self):
+        return self.address.split('@')
 
     def __str__(self):
         return self.user.username

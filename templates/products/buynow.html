@@ -1,0 +1,146 @@
+{% extends "users/index.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Now</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .address-card {
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+
+        .address-card:hover {
+            border-color: #007bff;
+        }
+
+        .action-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: #28a745;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 1rem;
+            text-decoration: none;
+        }
+
+        .action-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Product Section -->
+        <div class="section">
+            <div class="header">Buy Now</div>
+            <div class="section-title">Product Details</div>
+            <div class="flex flex-col gap-[5rem]">
+                {% for item in cart_items %}
+                <div class="flex gap-[2rem] items-center">
+                <img class="size-[8rem]" src="{{item.product.image.url}}" alt="{{item.product.name}}">
+                <div class="flex flex-col">
+                    <div class="text-2xl">{{ item.product.name }}</div>
+                    <div class="text-xl">&#8377;{{item.product.price}}</div>
+                    <div class="text-lg">Count: {{item.quantity}}</div>
+                </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Address Section -->
+        <div class="section">
+            <div class="section-title">Delivery Address</div>
+            {% for item in custom_user.get_addresses %}
+            <div class="address-card">
+                <input type="radio" name="address" id="address{{forloop.counter}}" checked>
+                <label for="address{{forloop.counter}}">
+                    <strong>{{custom_user.user.username}}</strong> <br>
+                    <p>{{item}}</p>
+                </label>
+            </div>
+            {% endfor %}
+            <a href="#" class="action-btn">Add a New Address</a>
+        </div>
+
+        <!-- Price Section -->
+        <div class="section">
+            <div class="section-title">Price Details</div>
+            <div class="price-details">
+                <div class="price-row">
+                    <span>Price (1 item)</span>
+                    <span>&#8377;1,911</span>
+                </div>
+                <div class="price-row">
+                    <span>Delivery Charges</span>
+                    <span>FREE</span>
+                </div>
+                <div class="price-row">
+                    <span>Platform Fee</span>
+                    <span>&#8377;3</span>
+                </div>
+                <div class="price-row total">
+                    <span>Total Payable</span>
+                    <span>&#8377;1,914</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Section -->
+        <div class="section">
+            <div class="section-title">Payment Options</div>
+            <a href="#" class="action-btn">Proceed to Payment</a>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock content %}

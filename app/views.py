@@ -162,13 +162,15 @@ def products(request):
 
 def product(request,id):
     product = Product.objects.get(id=id)
-    return render(request,'products/product.html',{'product':product})
+    custom_user = User.objects.filter(username=request.user.username).first().customuser_set.all().first()
+    return render(request,'products/product.html',{'product':product,'custom_user':custom_user})
 
 @login_required(login_url='/users/login')
 def cart(request):
     cart,created = Cart.objects.get_or_create(user=request.user)
     cart_items = cart.cartitem_set.all()
-    return render(request,'products/cart.html',{'cart':cart,'cart_items':cart_items})
+    custom_user = User.objects.filter(username=request.user.username).first().customuser_set.all().first()
+    return render(request,'products/cart.html',{'cart':cart,'cart_items':cart_items,'custom_user':custom_user})
 
 @login_required(login_url='/users/login')
 def add_to_cart(request,id):
@@ -240,4 +242,7 @@ def search_products(request):
     })
 
 def buy_now(request):
-    return render(request,'/products/buynow.html',{})
+    custom_user = User.objects.filter(username=request.user.username).first().customuser_set.all().first()
+    cart = Cart.objects.filter(user=request.user).first()
+    cart_items = CartItem.objects.filter(cart=cart)
+    return render(request,'products/buynow.html',{'custom_user':custom_user,'cart_items':cart_items})
