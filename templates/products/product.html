@@ -93,23 +93,50 @@
         <div class="text-sm text-brand-text-muted leading-relaxed">
           <p>{{ product.description|truncatewords:45 }}</p>
         </div>
+
+        <!-- Quantity Selection -->
+        <div class="pt-2 flex items-center gap-4">
+          <span class="text-xs font-semibold text-brand-dark uppercase tracking-wider">Select Quantity:</span>
+          <div class="flex items-center gap-3 bg-brand-cream-light rounded-full border border-brand-border px-3 py-1.5">
+            <button 
+              type="button" 
+              onclick="changeProductQuantity(-1)"
+              class="w-7 h-7 flex items-center justify-center text-brand-text-dark hover:bg-brand-cream rounded-full transition-colors focus:outline-none"
+              title="Decrease quantity"
+            >
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M20 12H4"/></svg>
+            </button>
+            <span id="productDetailQuantity" class="font-bold text-sm text-brand-dark min-w-[24px] text-center">1</span>
+            <button 
+              type="button" 
+              onclick="changeProductQuantity(1)"
+              class="w-7 h-7 flex items-center justify-center text-brand-text-dark hover:bg-brand-cream rounded-full transition-colors focus:outline-none"
+              title="Increase quantity"
+            >
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+            </button>
+          </div>
+        </div>
+
       </div>
 
-      <!-- Action Buttons -->
-      <div class="pt-4 flex flex-col sm:flex-row items-center gap-4">
+      <!-- Action Buttons Group -->
+      <div class="pt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full">
         <button 
-          onclick="addToCart('{{ product.id }}')" 
-          class="wellness-btn-primary w-full sm:flex-1 py-4 text-base shadow-wellness"
+          type="button"
+          onclick="addToCartWithQuantity('{{ product.id }}')" 
+          class="min-w-[160px] sm:flex-1 h-[52px] px-7 py-3 bg-brand-dark text-white font-semibold text-sm sm:text-base rounded-full hover:bg-brand-light active:scale-[0.98] shadow-wellness hover:shadow-wellness-md transition-all duration-200 flex items-center justify-center gap-2.5 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-brand-accent/60 shrink-0"
         >
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-          Add to Cart
+          <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+          <span class="whitespace-nowrap">Add to Cart</span>
         </button>
 
         <button 
-          onclick="window.location.href = '/buy_now'" 
-          class="wellness-btn-accent w-full sm:w-48 py-4 text-base text-center"
+          type="button"
+          onclick="triggerBuyNow('{{ product.id }}')" 
+          class="min-w-[160px] sm:min-w-[180px] h-[52px] px-7 py-3 bg-brand-accent text-brand-dark font-semibold text-sm sm:text-base rounded-full hover:brightness-95 active:scale-[0.98] shadow-wellness hover:shadow-wellness-md transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-brand-dark/40 shrink-0"
         >
-          Buy Now
+          <span class="whitespace-nowrap">Buy Now</span>
         </button>
       </div>
 
@@ -266,14 +293,39 @@
     }
   }
 
-  // Close modals on clicking outside content
-  window.addEventListener('click', (e) => {
-    document.querySelectorAll('.modal').forEach(modal => {
-      if (e.target === modal) {
-        modal.classList.add('hidden');
+  let currentQuantity = 1;
+
+  function changeProductQuantity(delta) {
+    currentQuantity = Math.max(1, currentQuantity + delta);
+    const qtyEl = document.getElementById('productDetailQuantity');
+    if (qtyEl) {
+      qtyEl.textContent = currentQuantity;
+    }
+  }
+
+  function triggerBuyNow(productId) {
+    const isAuth = {% if user.is_authenticated %}true{% else %}false{% endif %};
+    const checkoutUrl = `/checkout/?mode=buy_now&product_id=${productId}&quantity=${currentQuantity}`;
+    if (!isAuth) {
+      const loginUrl = `/users/login/?next=${encodeURIComponent(checkoutUrl)}`;
+      window.location.href = loginUrl;
+    } else {
+      window.location.href = checkoutUrl;
+    }
+  }
+
+  function addToCartWithQuantity(productId) {
+    for (let i = 0; i < currentQuantity; i++) {
+      if (typeof addToCart === 'function') {
+        if (i === 0) {
+          addToCart(productId);
+        } else {
+          // Delay subsequent calls slightly
+          setTimeout(() => addToCart(productId), i * 150);
+        }
       }
-    });
-  });
+    }
+  }
 </script>
 
 {% endblock content %}

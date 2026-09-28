@@ -1,476 +1,880 @@
-{% extends "users/index.html" %} {% load static %} {% block content %}
+{% extends "users/index.html" %}
+{% load static %}
 
-<!-- Hero Section / Editorial Carousel -->
-<section class="relative bg-brand-cream/60 border-b border-brand-border/60 overflow-hidden">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 relative">
-    
-    <!-- Hero Slider Container -->
-    <div class="hero relative w-full overflow-hidden rounded-3xl bg-brand-cream-light border border-brand-border shadow-wellness">
+{% block content %}
+<!-- ============================================ -->
+<!-- 1. 3D HERO SECTION (Three.js WebGL Experience)-->
+<!-- ============================================ -->
+<section class="relative bg-gradient-to-b from-brand-cream/80 via-brand-cream-light to-white border-b border-brand-border/60 overflow-hidden pt-8 pb-16 lg:pt-12 lg:pb-24">
+  <!-- Subtle ambient background glow -->
+  <div class="absolute -top-24 left-1/4 w-96 h-96 rounded-full bg-brand-accent/20 blur-3xl pointer-events-none"></div>
+  <div class="absolute top-1/2 -right-24 w-96 h-96 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none"></div>
+
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
       
-      <!-- Prev Navigation Button -->
-      <button id="prev" aria-label="Previous Slide" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-brand-cream/90 hover:bg-brand-dark text-brand-dark hover:text-white border border-brand-border shadow-md flex items-center justify-center transition-all duration-200 active:scale-95 group focus:outline-none">
-        <svg class="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-
-      <!-- Slides Track -->
-      <div class="slider flex w-full transition-transform duration-700 ease-out" style="transform: translateX(0%);">
+      <!-- Hero Left: Text & CTAs (7 Cols) -->
+      <div class="lg:col-span-7 space-y-6 sm:space-y-7 text-left">
         
-        <!-- Slide 1: Everyday Wellness -->
-        <div class="slide min-w-full flex-shrink-0 grid grid-cols-1 lg:grid-cols-12 items-center min-h-[440px] lg:min-h-[480px] p-8 sm:p-12 lg:p-16 gap-8 bg-gradient-to-r from-brand-cream-card via-brand-cream-light to-brand-cream">
-          <div class="lg:col-span-7 flex flex-col justify-center items-start space-y-5 z-10">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/30 text-brand-dark text-xs font-semibold uppercase tracking-wider">
-              <span class="w-1.5 h-1.5 rounded-full bg-brand-dark"></span>
-              Everyday Wellness
-            </div>
-            <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-dark leading-[1.15] max-w-lg">
-              Better health, <br class="hidden sm:inline" /><span class="italic font-normal text-brand-light">beautifully simple.</span>
-            </h1>
-            <p class="text-base sm:text-lg text-brand-text-muted max-w-md font-normal leading-relaxed">
-              Curated healthcare essentials, vitamins, and personalized self-care tailored for your routine.
-            </p>
-            <div class="pt-2 flex flex-wrap gap-4">
-              <a href="/products" class="wellness-btn-primary">
-                Discover Catalog
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-              </a>
-              <a href="/search?category=vitamins" class="wellness-btn-secondary">
-                View Vitamins
-              </a>
-            </div>
-          </div>
-          <div class="lg:col-span-5 relative flex items-center justify-center">
-            <div class="relative w-full max-w-sm aspect-square rounded-2xl overflow-hidden shadow-wellness border border-brand-border/80 bg-white p-3">
-              <img class="w-full h-full object-cover rounded-xl" src="{% static "images/wallpaperflare.com_wallpaper.jpg" %}" alt="Everyday Wellness">
-              <div class="absolute bottom-6 left-6 right-6 p-3 bg-brand-dark/90 backdrop-blur-md rounded-xl text-white text-xs flex items-center justify-between">
-                <span>100% Certified Remedies</span>
-                <span class="text-brand-accent font-semibold">Explore &rarr;</span>
-              </div>
-            </div>
-          </div>
+        <!-- Live Status Badge -->
+        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-brand-cream-card border border-brand-border/80 shadow-sm text-brand-dark text-xs font-semibold uppercase tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+          <span>100% Certified Pharmacy &bull; Verified Purity</span>
         </div>
 
-        <!-- Slide 2: Natural Care & Ayurveda -->
-        <div class="slide min-w-full flex-shrink-0 grid grid-cols-1 lg:grid-cols-12 items-center min-h-[440px] lg:min-h-[480px] p-8 sm:p-12 lg:p-16 gap-8 bg-gradient-to-r from-brand-cream-card via-[#F7F2E7] to-brand-cream">
-          <div class="lg:col-span-7 flex flex-col justify-center items-start space-y-5 z-10">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/30 text-brand-dark text-xs font-semibold uppercase tracking-wider">
-              <span class="w-1.5 h-1.5 rounded-full bg-brand-dark"></span>
-              Natural Care
-            </div>
-            <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-dark leading-[1.15] max-w-lg">
-              Wellness inspired <br class="hidden sm:inline" /><span class="italic font-normal text-brand-light">by nature.</span>
-            </h2>
-            <p class="text-base sm:text-lg text-brand-text-muted max-w-md font-normal leading-relaxed">
-              Explore time-tested Ayurvedic remedies, organic botanicals, and herbal health solutions.
-            </p>
-            <div class="pt-2 flex flex-wrap gap-4">
-              <a href="/search?category=ayurvedic" class="wellness-btn-primary">
-                Explore Collection
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-              </a>
-              <a href="/users/about" class="wellness-btn-secondary">
-                Our Purity Standard
-              </a>
-            </div>
-          </div>
-          <div class="lg:col-span-5 relative flex items-center justify-center">
-            <div class="relative w-full max-w-sm aspect-square rounded-2xl overflow-hidden shadow-wellness border border-brand-border/80 bg-white p-3">
-              <img class="w-full h-full object-cover rounded-xl" src="{% static "images/ayurvedic.png" %}" alt="Ayurvedic Wellness">
-              <div class="absolute bottom-6 left-6 right-6 p-3 bg-brand-dark/90 backdrop-blur-md rounded-xl text-white text-xs flex items-center justify-between">
-                <span>Herbal Extracts &bull; Zero Additives</span>
-                <span class="text-brand-accent font-semibold">Shop Nature &rarr;</span>
-              </div>
-            </div>
-          </div>
+        <!-- Main Headline -->
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-brand-dark leading-[1.12] tracking-tight">
+          Healthcare, Delivered <br />
+          <span class="italic font-normal text-brand-light">With Confidence.</span>
+        </h1>
+
+        <!-- Supporting Paragraph -->
+        <p class="text-base sm:text-lg text-brand-text-muted max-w-xl leading-relaxed font-normal">
+          Authentic medicines, essential vitamins, and pharmacist-verified wellness formulations — curated for your everyday health vitality.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+          <a href="/products" class="wellness-btn-primary min-w-[180px] h-[52px] px-8 py-3.5 text-sm sm:text-base font-semibold shadow-wellness-md hover:shadow-wellness-lg flex items-center justify-center gap-2">
+            <span>Shop Healthcare</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+          <a href="/wellness" class="wellness-btn-secondary min-w-[180px] h-[52px] px-8 py-3.5 text-sm sm:text-base font-semibold flex items-center justify-center gap-2">
+            <span>Explore Wellness</span>
+            <svg class="w-4 h-4 text-brand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          </a>
         </div>
 
-        <!-- Slide 3: Active Lifestyle -->
-        <div class="slide min-w-full flex-shrink-0 grid grid-cols-1 lg:grid-cols-12 items-center min-h-[440px] lg:min-h-[480px] p-8 sm:p-12 lg:p-16 gap-8 bg-gradient-to-r from-brand-cream-card via-brand-cream-light to-brand-cream">
-          <div class="lg:col-span-7 flex flex-col justify-center items-start space-y-5 z-10">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/30 text-brand-dark text-xs font-semibold uppercase tracking-wider">
-              <span class="w-1.5 h-1.5 rounded-full bg-brand-dark"></span>
-              Active Lifestyle
-            </div>
-            <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-dark leading-[1.15] max-w-lg">
-              Support your <br class="hidden sm:inline" /><span class="italic font-normal text-brand-light">everyday performance.</span>
-            </h2>
-            <p class="text-base sm:text-lg text-brand-text-muted max-w-md font-normal leading-relaxed">
-              Premium fitness nutrition, clean proteins, and essential minerals to keep you energized.
-            </p>
-            <div class="pt-2 flex flex-wrap gap-4">
-              <a href="/search?category=fitness" class="wellness-btn-primary">
-                Shop Fitness
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-              </a>
-              <a href="/products" class="wellness-btn-secondary">
-                View All Supplements
-              </a>
-            </div>
+        <!-- Trust Indicators Strip (Mini) -->
+        <div class="pt-4 border-t border-brand-border/60 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-medium text-brand-text-dark">
+          <div class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <span>Certified Products</span>
           </div>
-          <div class="lg:col-span-5 relative flex items-center justify-center">
-            <div class="relative w-full max-w-sm aspect-square rounded-2xl overflow-hidden shadow-wellness border border-brand-border/80 bg-white p-3">
-              <img class="w-full h-full object-cover rounded-xl" src="{% static "images/vitamins_and_supplements_4.jpg" %}" alt="Fitness & Supplements">
-              <div class="absolute bottom-6 left-6 right-6 p-3 bg-brand-dark/90 backdrop-blur-md rounded-xl text-white text-xs flex items-center justify-between">
-                <span>Peak Vitality &amp; Recovery</span>
-                <span class="text-brand-accent font-semibold">Active &rarr;</span>
-              </div>
-            </div>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <span>Pharmacist Verified</span>
           </div>
-        </div>
-
-        <!-- Slide 4: Personal Care -->
-        <div class="slide min-w-full flex-shrink-0 grid grid-cols-1 lg:grid-cols-12 items-center min-h-[440px] lg:min-h-[480px] p-8 sm:p-12 lg:p-16 gap-8 bg-gradient-to-r from-brand-cream-card via-brand-cream-light to-brand-cream">
-          <div class="lg:col-span-7 flex flex-col justify-center items-start space-y-5 z-10">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/30 text-brand-dark text-xs font-semibold uppercase tracking-wider">
-              <span class="w-1.5 h-1.5 rounded-full bg-brand-dark"></span>
-              Personal Care
-            </div>
-            <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-dark leading-[1.15] max-w-lg">
-              Care that fits your <br class="hidden sm:inline" /><span class="italic font-normal text-brand-light">everyday routine.</span>
-            </h2>
-            <p class="text-base sm:text-lg text-brand-text-muted max-w-md font-normal leading-relaxed">
-              Discover certified diagnostics, skin wellness essentials, and verified healthcare products.
-            </p>
-            <div class="pt-2 flex flex-wrap gap-4">
-              <a href="/products" class="wellness-btn-primary">
-                Shop Wellness
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-              </a>
-              <a href="/users/contact" class="wellness-btn-secondary">
-                Ask Pharmacist
-              </a>
-            </div>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <span>Secure Checkout</span>
           </div>
-          <div class="lg:col-span-5 relative flex items-center justify-center">
-            <div class="relative w-full max-w-sm aspect-square rounded-2xl overflow-hidden shadow-wellness border border-brand-border/80 bg-white p-3">
-              <img class="w-full h-full object-cover rounded-xl" src="{% static "images/pills-beside-clipboard.jpg" %}" alt="Personal Care Essentials">
-              <div class="absolute bottom-6 left-6 right-6 p-3 bg-brand-dark/90 backdrop-blur-md rounded-xl text-white text-xs flex items-center justify-between">
-                <span>Verified Diagnostic Support</span>
-                <span class="text-brand-accent font-semibold">Explore &rarr;</span>
-              </div>
-            </div>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <span>Reliable Delivery</span>
           </div>
         </div>
 
       </div>
 
-      <!-- Next Navigation Button -->
-      <button id="next" aria-label="Next Slide" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-brand-cream/90 hover:bg-brand-dark text-brand-dark hover:text-white border border-brand-border shadow-md flex items-center justify-center transition-all duration-200 active:scale-95 group focus:outline-none">
-        <svg class="w-5 h-5 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
+      <!-- Hero Right: Interactive 3D WebGL Canvas (5 Cols) -->
+      <div class="lg:col-span-5 relative flex items-center justify-center min-h-[380px] sm:min-h-[440px] lg:min-h-[480px]">
+        
+        <!-- 3D Canvas Container -->
+        <div id="hero-3d-container" class="relative w-full h-[380px] sm:h-[440px] lg:h-[480px] rounded-3xl bg-gradient-to-tr from-brand-cream/60 to-white/40 border border-brand-border/80 shadow-wellness overflow-hidden flex items-center justify-center">
+          
+          <canvas id="hero-3d-canvas" class="w-full h-full cursor-grab active:cursor-grabbing"></canvas>
 
-      <!-- Slide Indicator Dots -->
-      <div id="slide-indicators" class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
-        <button class="indicator-dot w-8 h-2 rounded-full bg-brand-dark transition-all duration-300" onclick="goToSlide(0)"></button>
-        <button class="indicator-dot w-2 h-2 rounded-full bg-brand-dark/30 hover:bg-brand-dark/60 transition-all duration-300" onclick="goToSlide(1)"></button>
-        <button class="indicator-dot w-2 h-2 rounded-full bg-brand-dark/30 hover:bg-brand-dark/60 transition-all duration-300" onclick="goToSlide(2)"></button>
-        <button class="indicator-dot w-2 h-2 rounded-full bg-brand-dark/30 hover:bg-brand-dark/60 transition-all duration-300" onclick="goToSlide(3)"></button>
+          <!-- Floating Interactive Badge 1: Pharmacist Inspected -->
+          <div class="animate-float absolute top-6 left-6 z-20 bg-white/90 backdrop-blur-md rounded-2xl px-4 py-2.5 shadow-wellness border border-brand-border/80 flex items-center gap-2 text-xs font-semibold text-brand-dark pointer-events-none">
+            <div class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs">🌿</div>
+            <div>
+              <span class="block text-[10px] text-brand-text-muted uppercase tracking-wider">Quality Shield</span>
+              <span>100% Genuine Care</span>
+            </div>
+          </div>
+
+          <!-- Floating Interactive Badge 2: Zero Risk COD -->
+          <div class="animate-float-delayed absolute bottom-6 right-6 z-20 bg-white/90 backdrop-blur-md rounded-2xl px-4 py-2.5 shadow-wellness border border-brand-border/80 flex items-center gap-2 text-xs font-semibold text-brand-dark pointer-events-none">
+            <div class="w-6 h-6 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center text-xs">✨</div>
+            <div>
+              <span class="block text-[10px] text-brand-text-muted uppercase tracking-wider">Doorstep Handover</span>
+              <span>Cash on Delivery</span>
+            </div>
+          </div>
+
+          <!-- 3D Mouse Prompt -->
+          <div class="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 text-[11px] text-brand-text-muted/70 tracking-wider font-medium pointer-events-none hidden sm:block">
+            &bull; Move cursor to interact in 3D &bull;
+          </div>
+
+        </div>
+
       </div>
 
     </div>
-
   </div>
 </section>
 
-<!-- Section 1: Explore Collections / Categories -->
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-  <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-    <div>
-      <span class="text-xs font-semibold uppercase tracking-widest text-brand-text-muted">Categories</span>
-      <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-dark mt-1">Explore Collections</h2>
-      <p class="text-sm text-brand-text-muted mt-1.5">Curated formulations designed for every stage of your health journey.</p>
-    </div>
-    <a href="/products" class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-dark hover:text-brand-light transition-colors group">
-      <span>View All Categories</span>
-      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-    </a>
-  </div>
-
-  <!-- Category Grid -->
-  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
-    {% for category in categories %}
-    <div 
-      onclick="window.location.href = '/search?category={{category.name}}'"
-      class="wellness-card group bg-brand-cream-card hover:bg-white rounded-2xl p-5 border border-brand-border cursor-pointer shadow-sm hover:shadow-wellness flex flex-col items-center text-center justify-between min-h-[220px]"
-    >
-      <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-white p-3 flex items-center justify-center border border-brand-border/60 group-hover:scale-105 transition-transform overflow-hidden">
-        {% if category.image %}
-          <img class="w-full h-full object-contain" src="{{ category.image.url }}" alt="{{ category.name }}">
-        {% else %}
-          <img class="w-full h-full object-contain" src="{% static 'images/ayurvedic.png' %}" alt="{{ category.name }}">
-        {% endif %}
-      </div>
+<!-- ============================================ -->
+<!-- 2. GLOBAL TRUST STRIP                        -->
+<!-- ============================================ -->
+<section class="bg-white border-b border-brand-border/60 py-6 sm:py-8">
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8 items-center">
       
-      <div class="mt-4 w-full">
-        <h3 class="font-medium text-base text-brand-dark group-hover:text-brand-light transition-colors capitalize truncate">{{ category.name }}</h3>
-        <span class="text-xs text-brand-text-muted mt-0.5 inline-block group-hover:text-brand-dark font-medium transition-colors">
-          Browse Collection &rarr;
-        </span>
+      <!-- Trust Item 1 -->
+      <div class="flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-brand-cream text-brand-dark flex items-center justify-center shrink-0 border border-brand-border/70 shadow-sm">
+          <svg class="w-5 h-5 text-emerald-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        </div>
+        <div>
+          <h4 class="font-bold text-xs sm:text-sm text-brand-dark leading-tight">100% Authentic</h4>
+          <p class="text-[11px] text-brand-text-muted">Direct from manufacturers</p>
+        </div>
       </div>
-    </div>
-    {% empty %}
-    <!-- Fallback Category Cards if empty -->
-    <div onclick="window.location.href='/products'" class="wellness-card bg-brand-cream-card rounded-2xl p-5 border border-brand-border cursor-pointer flex flex-col items-center">
-      <div class="w-24 h-24 bg-white rounded-xl p-3 flex items-center justify-center border border-brand-border/60">
-        <img class="w-full h-full object-contain" src="{% static 'images/vitamins_and_supplements_4.jpg' %}" alt="Vitamins">
+
+      <!-- Trust Item 2 -->
+      <div class="flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-brand-cream text-brand-dark flex items-center justify-center shrink-0 border border-brand-border/70 shadow-sm">
+          <svg class="w-5 h-5 text-emerald-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+        </div>
+        <div>
+          <h4 class="font-bold text-xs sm:text-sm text-brand-dark leading-tight">Pharmacist Inspected</h4>
+          <p class="text-[11px] text-brand-text-muted">Clinical batch validation</p>
+        </div>
       </div>
-      <h3 class="font-medium text-base text-brand-dark mt-4">Vitamins</h3>
-    </div>
-    <div onclick="window.location.href='/products'" class="wellness-card bg-brand-cream-card rounded-2xl p-5 border border-brand-border cursor-pointer flex flex-col items-center">
-      <div class="w-24 h-24 bg-white rounded-xl p-3 flex items-center justify-center border border-brand-border/60">
-        <img class="w-full h-full object-contain" src="{% static 'images/ayurvedic.png' %}" alt="Ayurveda">
+
+      <!-- Trust Item 3 -->
+      <div class="flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-brand-cream text-brand-dark flex items-center justify-center shrink-0 border border-brand-border/70 shadow-sm">
+          <svg class="w-5 h-5 text-emerald-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        </div>
+        <div>
+          <h4 class="font-bold text-xs sm:text-sm text-brand-dark leading-tight">Secure Payments</h4>
+          <p class="text-[11px] text-brand-text-muted">Zero risk Cash on Delivery</p>
+        </div>
       </div>
-      <h3 class="font-medium text-base text-brand-dark mt-4">Natural Care</h3>
+
+      <!-- Trust Item 4 -->
+      <div class="flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-brand-cream text-brand-dark flex items-center justify-center shrink-0 border border-brand-border/70 shadow-sm">
+          <svg class="w-5 h-5 text-emerald-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <div>
+          <h4 class="font-bold text-xs sm:text-sm text-brand-dark leading-tight">Reliable Dispatch</h4>
+          <p class="text-[11px] text-brand-text-muted">Tamper-evident packing</p>
+        </div>
+      </div>
+
+      <!-- Trust Item 5 -->
+      <div class="flex items-center gap-3.5 col-span-2 md:col-span-1">
+        <div class="w-11 h-11 rounded-2xl bg-brand-cream text-brand-dark flex items-center justify-center shrink-0 border border-brand-border/70 shadow-sm">
+          <svg class="w-5 h-5 text-emerald-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        </div>
+        <div>
+          <h4 class="font-bold text-xs sm:text-sm text-brand-dark leading-tight">Pharmacy Support</h4>
+          <p class="text-[11px] text-brand-text-muted">Consultation &amp; advisory</p>
+        </div>
+      </div>
+
     </div>
-    {% endfor %}
   </div>
 </section>
 
-<!-- Section 2: Featured Products / Curated For You -->
-{% if featured_products %}
-<section class="bg-brand-cream/40 border-y border-brand-border/60 py-16">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-      <div>
-        <span class="text-xs font-semibold uppercase tracking-widest text-brand-text-muted">Editor's Pick</span>
-        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-dark mt-1">Curated For You</h2>
-        <p class="text-sm text-brand-text-muted mt-1.5">Pharmacist-approved essentials formulated for superior absorption and efficacy.</p>
+<!-- ============================================ -->
+<!-- 3. EXPLORE HEALTHCARE COLLECTIONS (3D Cards) -->
+<!-- ============================================ -->
+<section class="py-16 lg:py-24 bg-brand-cream/30 border-b border-brand-border/60">
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-12">
+    
+    <!-- Section Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div class="space-y-2">
+        <span class="wellness-badge bg-brand-accent/40 text-brand-dark text-[11px] font-semibold tracking-widest uppercase px-3 py-1">Curated Range</span>
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-dark">Explore Healthcare Collections</h2>
+        <p class="text-sm sm:text-base text-brand-text-muted max-w-xl leading-relaxed">
+          Discover products formulated for targeted biological wellness, daily prevention, and specialized clinical care.
+        </p>
       </div>
-      <a href="/products" class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-dark hover:text-brand-light transition-colors group">
-        <span>View Full Store</span>
+      <a href="/products" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-dark hover:text-brand-light transition-colors group self-start md:self-end">
+        <span>Browse Complete Catalog</span>
         <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
       </a>
     </div>
 
-    <!-- Products Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- 3D Category Interactive Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      
+      <!-- Category 1: Fitness & Performance -->
+      <a href="/products?category=fitness" class="card-3d-tilt preserve-3d group bg-white rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-7 flex flex-col justify-between min-h-[260px] hover:border-brand-dark/40 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-4 translate-z-20">
+          <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-800 border border-amber-200 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition-transform">
+            🏋️
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-xl text-brand-dark group-hover:text-brand-light transition-colors">Fitness &amp; Active</h3>
+            <p class="text-xs text-brand-text-muted mt-1.5 leading-relaxed">
+              Clean whey proteins, essential BCAAs, electrolytes, and joint mobility nutrition.
+            </p>
+          </div>
+        </div>
+        <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-semibold text-brand-dark group-hover:text-brand-light translate-z-10">
+          <span>Browse Collection</span>
+          <span class="group-hover:translate-x-1.5 transition-transform">&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Category 2: Vitamins & Micronutrients -->
+      <a href="/products?category=vitamins" class="card-3d-tilt preserve-3d group bg-white rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-7 flex flex-col justify-between min-h-[260px] hover:border-brand-dark/40 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-4 translate-z-20">
+          <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition-transform">
+            💊
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-xl text-brand-dark group-hover:text-brand-light transition-colors">Vitamins &amp; Minerals</h3>
+            <p class="text-xs text-brand-text-muted mt-1.5 leading-relaxed">
+              High-absorption Vitamin D3, B-complex, Zinc, Vitamin C, and daily multivitamins.
+            </p>
+          </div>
+        </div>
+        <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-semibold text-brand-dark group-hover:text-brand-light translate-z-10">
+          <span>Browse Collection</span>
+          <span class="group-hover:translate-x-1.5 transition-transform">&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Category 3: Nutritional Supplements -->
+      <a href="/products?category=supplements" class="card-3d-tilt preserve-3d group bg-white rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-7 flex flex-col justify-between min-h-[260px] hover:border-brand-dark/40 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-4 translate-z-20">
+          <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-800 border border-blue-200 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition-transform">
+            🧪
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-xl text-brand-dark group-hover:text-brand-light transition-colors">Supplements</h3>
+            <p class="text-xs text-brand-text-muted mt-1.5 leading-relaxed">
+              Omega-3 fatty acids, CoQ10, marine collagen, and cellular metabolic enhancers.
+            </p>
+          </div>
+        </div>
+        <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-semibold text-brand-dark group-hover:text-brand-light translate-z-10">
+          <span>Browse Collection</span>
+          <span class="group-hover:translate-x-1.5 transition-transform">&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Category 4: Ayurvedic & Herbal -->
+      <a href="/products?category=ayurvedic" class="card-3d-tilt preserve-3d group bg-white rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-7 flex flex-col justify-between min-h-[260px] hover:border-brand-dark/40 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-4 translate-z-20">
+          <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-900 border border-emerald-300 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition-transform">
+            🌿
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-xl text-brand-dark group-hover:text-brand-light transition-colors">Ayurvedic Remedies</h3>
+            <p class="text-xs text-brand-text-muted mt-1.5 leading-relaxed">
+              Organic Ashwagandha, Triphala, Giloy, and authentic botanical extracts.
+            </p>
+          </div>
+        </div>
+        <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-semibold text-brand-dark group-hover:text-brand-light translate-z-10">
+          <span>Browse Collection</span>
+          <span class="group-hover:translate-x-1.5 transition-transform">&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Category 5: Homeopathic Care -->
+      <a href="/products?category=homeopathy" class="card-3d-tilt preserve-3d group bg-white rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-7 flex flex-col justify-between min-h-[260px] hover:border-brand-dark/40 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-4 translate-z-20">
+          <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-800 border border-indigo-200 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition-transform">
+            💧
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-xl text-brand-dark group-hover:text-brand-light transition-colors">Homeopathy</h3>
+            <p class="text-xs text-brand-text-muted mt-1.5 leading-relaxed">
+              Dilutions, bio-chemic tissue salts, mother tinctures, and gentle symptom relief.
+            </p>
+          </div>
+        </div>
+        <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-semibold text-brand-dark group-hover:text-brand-light translate-z-10">
+          <span>Browse Collection</span>
+          <span class="group-hover:translate-x-1.5 transition-transform">&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Category 6: Personal & Sexual Wellness -->
+      <a href="/products?category=sexual supplements" class="card-3d-tilt preserve-3d group bg-white rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-7 flex flex-col justify-between min-h-[260px] hover:border-brand-dark/40 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-4 translate-z-20">
+          <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-800 border border-rose-200 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition-transform">
+            ✨
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-xl text-brand-dark group-hover:text-brand-light transition-colors">Personal Wellness</h3>
+            <p class="text-xs text-brand-text-muted mt-1.5 leading-relaxed">
+              Discreet, certified personal wellness formulations, hormone balance, and stamina.
+            </p>
+          </div>
+        </div>
+        <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-semibold text-brand-dark group-hover:text-brand-light translate-z-10">
+          <span>Browse Collection</span>
+          <span class="group-hover:translate-x-1.5 transition-transform">&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Category 7: Diabetes & Blood Sugar -->
+      <a href="/products?category=diabetes care" class="card-3d-tilt preserve-3d group bg-white rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-7 flex flex-col justify-between min-h-[260px] hover:border-brand-dark/40 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-4 translate-z-20">
+          <div class="w-14 h-14 rounded-2xl bg-purple-50 text-purple-800 border border-purple-200 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition-transform">
+            🩸
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-xl text-brand-dark group-hover:text-brand-light transition-colors">Diabetes Care</h3>
+            <p class="text-xs text-brand-text-muted mt-1.5 leading-relaxed">
+              Glucose monitoring strips, HbA1c screening support, and glycemic balance tonics.
+            </p>
+          </div>
+        </div>
+        <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-semibold text-brand-dark group-hover:text-brand-light translate-z-10">
+          <span>Browse Collection</span>
+          <span class="group-hover:translate-x-1.5 transition-transform">&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Category 8: Daily Family Healthcare -->
+      <a href="/products?category=healthcare" class="card-3d-tilt preserve-3d group bg-white rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-7 flex flex-col justify-between min-h-[260px] hover:border-brand-dark/40 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-4 translate-z-20">
+          <div class="w-14 h-14 rounded-2xl bg-teal-50 text-teal-800 border border-teal-200 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition-transform">
+            🏥
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-xl text-brand-dark group-hover:text-brand-light transition-colors">Everyday Care</h3>
+            <p class="text-xs text-brand-text-muted mt-1.5 leading-relaxed">
+              First aid essentials, antiseptic care, fever management, and clinical diagnostics.
+            </p>
+          </div>
+        </div>
+        <div class="pt-4 border-t border-brand-border/50 flex items-center justify-between text-xs font-semibold text-brand-dark group-hover:text-brand-light translate-z-10">
+          <span>Browse Collection</span>
+          <span class="group-hover:translate-x-1.5 transition-transform">&rarr;</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 4. FEATURED HEALTHCARE ESSENTIALS (Products) -->
+<!-- ============================================ -->
+{% if featured_products %}
+<section class="py-16 lg:py-24 bg-white border-b border-brand-border/60">
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-12">
+    
+    <!-- Section Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div class="space-y-2">
+        <span class="wellness-badge bg-brand-dark text-brand-accent text-[11px] font-semibold tracking-widest uppercase px-3 py-1">In Stock &bull; Ready to Dispatch</span>
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-dark">Featured Healthcare Essentials</h2>
+        <p class="text-sm sm:text-base text-brand-text-muted max-w-xl leading-relaxed">
+          Pharmacist-approved medicines, certified dietary supplements, and daily health formulations.
+        </p>
+      </div>
+      <a href="/products" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-dark hover:text-brand-light transition-colors group self-start md:self-end">
+        <span>View All Products</span>
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      </a>
+    </div>
+
+    <!-- 4-Column Product Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
       {% for item in featured_products %}
-      <div class="wellness-card bg-white rounded-2xl border border-brand-border/80 shadow-wellness overflow-hidden flex flex-col justify-between group">
-        <!-- Image & Badges -->
-        <div class="relative bg-brand-cream-light/60 p-6 flex items-center justify-center h-52 border-b border-brand-border/40 cursor-pointer" onclick="window.location.href = '/products/{{ item.id }}'">
+      <div class="wellness-card bg-white rounded-3xl border border-brand-border/80 shadow-wellness overflow-hidden flex flex-col justify-between group hover:shadow-wellness-lg transition-all duration-300">
+        
+        <!-- Image Area with Badges -->
+        <div class="relative bg-brand-cream-light/60 p-6 flex items-center justify-center h-56 border-b border-brand-border/40 cursor-pointer" onclick="window.location.href = '/products/{{ item.id }}'">
           {% if item.image %}
-            <img class="max-h-40 max-w-full object-contain group-hover:scale-105 transition-transform duration-300" src="{{ item.image.url }}" alt="{{ item.name }}">
+            <img class="max-h-44 max-w-full object-contain group-hover:scale-105 transition-transform duration-300" src="{{ item.image.url }}" alt="{{ item.name }}" loading="lazy">
           {% else %}
-            <img class="max-h-40 max-w-full object-contain" src="{% static 'images/image.jpg' %}" alt="{{ item.name }}">
+            <img class="max-h-44 max-w-full object-contain" src="{% static 'images/image.jpg' %}" alt="{{ item.name }}" loading="lazy">
           {% endif %}
-          
+
           <div class="absolute top-3 left-3 flex flex-wrap gap-1">
             {% for cat in item.get_categories|slice:":1" %}
-            <span class="wellness-badge bg-brand-accent/40 text-brand-dark text-[10px]">{{ cat }}</span>
+            <span class="wellness-badge bg-brand-accent/40 text-brand-dark text-[10px] font-semibold">{{ cat }}</span>
             {% endfor %}
           </div>
+          
+          <div class="absolute top-3 right-3">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+              In Stock
+            </span>
+          </div>
         </div>
 
-        <!-- Details -->
-        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
-          <div>
-            <!-- Rating -->
-            <div class="flex items-center gap-1 text-amber-500 text-xs mb-1.5">
-              <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-              <span class="text-brand-text-muted font-medium ml-1">{{ item.rating|default:"4.8" }}</span>
-            </div>
+        <!-- Content Area -->
+        <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+          <div class="space-y-2">
             
-            <!-- Title -->
-            <h3 class="font-semibold text-base text-brand-dark hover:text-brand-light transition-colors line-clamp-2 cursor-pointer" onclick="window.location.href = '/products/{{ item.id }}'">
+            <!-- Rating -->
+            <div class="flex items-center gap-1 text-amber-500 text-xs">
+              <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <span class="text-brand-text-dark font-semibold ml-1">{{ item.rating|default:"4.8" }}</span>
+              <span class="text-brand-text-muted text-[11px]">(Verified)</span>
+            </div>
+
+            <!-- Product Title -->
+            <h3 class="font-serif font-bold text-base text-brand-dark hover:text-brand-light transition-colors line-clamp-2 cursor-pointer" onclick="window.location.href = '/products/{{ item.id }}'">
               {{ item.name }}
             </h3>
+            
+            <p class="text-xs text-brand-text-muted line-clamp-2 leading-relaxed font-normal">
+              {{ item.description|truncatewords:15 }}
+            </p>
           </div>
 
-          <!-- Price & Action -->
-          <div class="pt-3 border-t border-brand-border/60 flex items-center justify-between gap-3">
-            <div>
-              <span class="text-xs text-brand-text-muted block">Price</span>
-              <span class="font-serif text-xl font-bold text-brand-dark">&#x20B9;{{ item.price }}</span>
+          <!-- Price & Dual Actions -->
+          <div class="pt-4 border-t border-brand-border/60 space-y-3">
+            <div class="flex items-baseline justify-between">
+              <div>
+                <span class="text-[11px] text-brand-text-muted block">Price</span>
+                <span class="font-serif text-2xl font-bold text-brand-dark">&#x20B9;{{ item.price }}</span>
+              </div>
+              <span class="text-[10px] text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200 font-medium">Free Delivery</span>
             </div>
-            <button 
-              onclick="addToCart('{{ item.id }}')"
-              class="px-4 py-2 bg-brand-dark text-brand-cream hover:bg-brand-light active:scale-95 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 shadow-sm"
-            >
-              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              Add
-            </button>
+
+            <div class="grid grid-cols-2 gap-2 pt-1">
+              <button 
+                type="button"
+                onclick="addToCart('{{ item.id }}')"
+                class="w-full py-2.5 px-3 bg-brand-dark text-white hover:bg-brand-light active:scale-95 text-xs font-semibold rounded-full transition-all flex items-center justify-center gap-1.5 shadow-sm whitespace-nowrap focus:outline-none"
+              >
+                <svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                <span>Add</span>
+              </button>
+
+              <button 
+                type="button"
+                onclick="triggerBuyNow('{{ item.id }}')"
+                class="w-full py-2.5 px-3 bg-brand-accent text-brand-dark hover:brightness-95 active:scale-95 text-xs font-semibold rounded-full transition-all flex items-center justify-center gap-1 shadow-sm whitespace-nowrap focus:outline-none"
+              >
+                <span>Buy Now</span>
+              </button>
+            </div>
           </div>
+
         </div>
+
       </div>
       {% endfor %}
     </div>
+
   </div>
 </section>
 {% endif %}
 
-<!-- Section 3: Promotional Wellness Section -->
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-  <div class="rounded-3xl bg-gradient-to-r from-brand-dark to-brand-darker text-white p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-wellness-lg">
-    <!-- Subtle background wellness motif -->
-    <div class="absolute -right-16 -bottom-16 w-80 h-80 rounded-full bg-brand-light/20 blur-3xl pointer-events-none"></div>
-    <div class="absolute right-10 top-10 w-48 h-48 rounded-full bg-brand-accent/10 blur-2xl pointer-events-none"></div>
-
-    <div class="relative z-10 max-w-2xl space-y-6">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-cream/10 border border-brand-cream/20 text-brand-accent text-xs font-semibold uppercase tracking-wider">
-        Pure &bull; Verified &bull; Direct
-      </div>
-      <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-brand-cream">
-        YOUR WELLNESS, <br /><span class="italic text-brand-accent font-normal">YOUR WAY.</span>
-      </h2>
-      <p class="text-base sm:text-lg text-brand-cream/80 font-normal leading-relaxed">
-        Discover bespoke healthcare regimens, natural remedies, and personalized medicine consultation from licensed pharmacists.
-      </p>
-      <div class="pt-2 flex flex-wrap gap-4">
-        <a href="/products" class="bg-brand-accent text-brand-dark font-semibold px-7 py-3.5 rounded-full hover:brightness-95 transition-all shadow-md active:scale-95 text-sm">
-          Explore Wellness
-        </a>
-        <a href="/users/about" class="border border-brand-cream/40 text-brand-cream font-medium px-7 py-3.5 rounded-full hover:bg-white/10 transition-all text-sm">
-          Learn Our Mission
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Section 4: Why Choose Us -->
-<section class="bg-brand-cream/50 border-t border-brand-border/60 py-16">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center max-w-2xl mx-auto mb-12">
-      <span class="text-xs font-semibold uppercase tracking-widest text-brand-text-muted">The MedicoMart Promise</span>
-      <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-dark mt-1">Why Choose Us?</h2>
-      <p class="text-sm text-brand-text-muted mt-2">Setting a new benchmark for pharmacy care, transparency, and wellness speed.</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Feature 1 -->
-      <div class="wellness-card bg-brand-cream-card rounded-2xl p-7 border border-brand-border shadow-sm flex flex-col justify-between">
-        <div class="w-12 h-12 rounded-xl bg-brand-dark text-brand-accent flex items-center justify-center mb-5 shadow-sm">
-          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-          </svg>
-        </div>
-        <div>
-          <h3 class="font-semibold text-lg text-brand-dark mb-2">Trusted Products</h3>
-          <p class="text-sm text-brand-text-muted leading-relaxed">
-            100% genuine medications and supplements sourced directly from certified pharmaceutical partners.
-          </p>
-        </div>
-      </div>
-
-      <!-- Feature 2 -->
-      <div class="wellness-card bg-brand-cream-card rounded-2xl p-7 border border-brand-border shadow-sm flex flex-col justify-between">
-        <div class="w-12 h-12 rounded-xl bg-brand-dark text-brand-accent flex items-center justify-center mb-5 shadow-sm">
-          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-          </svg>
-        </div>
-        <div>
-          <h3 class="font-semibold text-lg text-brand-dark mb-2">Secure Shopping</h3>
-          <p class="text-sm text-brand-text-muted leading-relaxed">
-            Safe, encrypted transactions and complete privacy for all personal medical inquiries and orders.
-          </p>
-        </div>
-      </div>
-
-      <!-- Feature 3 -->
-      <div class="wellness-card bg-brand-cream-card rounded-2xl p-7 border border-brand-border shadow-sm flex flex-col justify-between">
-        <div class="w-12 h-12 rounded-xl bg-brand-dark text-brand-accent flex items-center justify-center mb-5 shadow-sm">
-          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-          </svg>
-        </div>
-        <div>
-          <h3 class="font-semibold text-lg text-brand-dark mb-2">Fast Delivery</h3>
-          <p class="text-sm text-brand-text-muted leading-relaxed">
-            Express temperature-controlled shipping right to your doorstep, with seamless live order tracking.
-          </p>
-        </div>
-      </div>
-
-      <!-- Feature 4 -->
-      <div class="wellness-card bg-brand-cream-card rounded-2xl p-7 border border-brand-border shadow-sm flex flex-col justify-between">
-        <div class="w-12 h-12 rounded-xl bg-brand-dark text-brand-accent flex items-center justify-center mb-5 shadow-sm">
-          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
-          </svg>
-        </div>
-        <div>
-          <h3 class="font-semibold text-lg text-brand-dark mb-2">Expert Support</h3>
-          <p class="text-sm text-brand-text-muted leading-relaxed">
-            Guidance from qualified pharmacists and wellness specialists ready to assist your care questions.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Carousel Script -->
-<script>
-  let activeSlide = 0;
-  const slider = document.querySelector('.hero .slider');
-  const slides = document.querySelectorAll('.hero .slider .slide');
-  const totalSlides = slides.length;
-  const dots = document.querySelectorAll('.indicator-dot');
-  let autoSlideTimer = null;
-
-  function updateSlide() {
-    if (!slider) return;
-    slider.style.transform = `translateX(-${activeSlide * 100}%)`;
+<!-- ============================================ -->
+<!-- 5. SHOP BY HEALTH GOAL (Discovery Section)   -->
+<!-- ============================================ -->
+<section class="py-16 lg:py-24 bg-brand-cream/30 border-b border-brand-border/60">
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-12">
     
-    // Update dots
-    dots.forEach((dot, index) => {
-      if (index === activeSlide) {
-        dot.className = 'indicator-dot w-8 h-2 rounded-full bg-brand-dark transition-all duration-300';
-      } else {
-        dot.className = 'indicator-dot w-2 h-2 rounded-full bg-brand-dark/30 hover:bg-brand-dark/60 transition-all duration-300';
-      }
-    });
-  }
+    <div class="text-center max-w-3xl mx-auto space-y-3">
+      <span class="wellness-badge bg-brand-accent/40 text-brand-dark text-[11px] font-semibold tracking-widest uppercase px-3 py-1">Targeted Solutions</span>
+      <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-dark">Shop By Health Goal</h2>
+      <p class="text-sm sm:text-base text-brand-text-muted leading-relaxed">
+        Find targeted healthcare formulations based on the specific vitality outcomes you want to achieve.
+      </p>
+    </div>
 
-  function nextSlide() {
-    activeSlide = (activeSlide + 1) % totalSlides;
-    updateSlide();
-  }
+    <!-- 8 Goal Cards Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      
+      <!-- Goal 1 -->
+      <a href="/products?category=vitamins" class="p-5 sm:p-6 bg-white rounded-3xl border border-brand-border/80 shadow-wellness hover:-translate-y-1 hover:shadow-wellness-lg transition-all duration-300 flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-800 flex items-center justify-center text-xl shadow-sm">🛡️</div>
+          <h3 class="font-serif font-bold text-lg text-brand-dark group-hover:text-brand-light transition-colors">Immunity Support</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">Daily defense against environmental pathogens.</p>
+        </div>
+        <span class="pt-4 text-xs font-semibold text-brand-dark group-hover:text-brand-light flex items-center justify-between">
+          <span>Explore Goal</span>
+          <span>&rarr;</span>
+        </span>
+      </a>
 
-  function prevSlide() {
-    activeSlide = (activeSlide - 1 + totalSlides) % totalSlides;
-    updateSlide();
-  }
+      <!-- Goal 2 -->
+      <a href="/products?category=wellness" class="p-5 sm:p-6 bg-white rounded-3xl border border-brand-border/80 shadow-wellness hover:-translate-y-1 hover:shadow-wellness-lg transition-all duration-300 flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-800 flex items-center justify-center text-xl shadow-sm">🌿</div>
+          <h3 class="font-serif font-bold text-lg text-brand-dark group-hover:text-brand-light transition-colors">Daily Wellness</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">Foundational multivitamins for balanced energy.</p>
+        </div>
+        <span class="pt-4 text-xs font-semibold text-brand-dark group-hover:text-brand-light flex items-center justify-between">
+          <span>Explore Goal</span>
+          <span>&rarr;</span>
+        </span>
+      </a>
 
-  function goToSlide(index) {
-    activeSlide = index;
-    updateSlide();
-    resetAutoSlide();
-  }
+      <!-- Goal 3 -->
+      <a href="/products?category=supplements" class="p-5 sm:p-6 bg-white rounded-3xl border border-brand-border/80 shadow-wellness hover:-translate-y-1 hover:shadow-wellness-lg transition-all duration-300 flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-800 flex items-center justify-center text-xl shadow-sm">⚡</div>
+          <h3 class="font-serif font-bold text-lg text-brand-dark group-hover:text-brand-light transition-colors">Energy &amp; Vitality</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">Sustained stamina without caffeine crashes.</p>
+        </div>
+        <span class="pt-4 text-xs font-semibold text-brand-dark group-hover:text-brand-light flex items-center justify-between">
+          <span>Explore Goal</span>
+          <span>&rarr;</span>
+        </span>
+      </a>
 
-  const nextBtn = document.getElementById('next');
-  const prevBtn = document.getElementById('prev');
+      <!-- Goal 4 -->
+      <a href="/products?category=ayurvedic" class="p-5 sm:p-6 bg-white rounded-3xl border border-brand-border/80 shadow-wellness hover:-translate-y-1 hover:shadow-wellness-lg transition-all duration-300 flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-800 flex items-center justify-center text-xl shadow-sm">🥑</div>
+          <h3 class="font-serif font-bold text-lg text-brand-dark group-hover:text-brand-light transition-colors">Digestive Balance</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">Probiotics and gentle enzyme complexes.</p>
+        </div>
+        <span class="pt-4 text-xs font-semibold text-brand-dark group-hover:text-brand-light flex items-center justify-between">
+          <span>Explore Goal</span>
+          <span>&rarr;</span>
+        </span>
+      </a>
 
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      nextSlide();
-      resetAutoSlide();
-    });
-  }
+      <!-- Goal 5 -->
+      <a href="/products?category=fitness" class="p-5 sm:p-6 bg-white rounded-3xl border border-brand-border/80 shadow-wellness hover:-translate-y-1 hover:shadow-wellness-lg transition-all duration-300 flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-800 flex items-center justify-center text-xl shadow-sm">🦴</div>
+          <h3 class="font-serif font-bold text-lg text-brand-dark group-hover:text-brand-light transition-colors">Bone &amp; Joint Care</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">Calcium, Vitamin K2, and collagen support.</p>
+        </div>
+        <span class="pt-4 text-xs font-semibold text-brand-dark group-hover:text-brand-light flex items-center justify-between">
+          <span>Explore Goal</span>
+          <span>&rarr;</span>
+        </span>
+      </a>
 
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      prevSlide();
-      resetAutoSlide();
-    });
-  }
+      <!-- Goal 6 -->
+      <a href="/products?category=healthcare" class="p-5 sm:p-6 bg-white rounded-3xl border border-brand-border/80 shadow-wellness hover:-translate-y-1 hover:shadow-wellness-lg transition-all duration-300 flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-red-50 text-red-700 flex items-center justify-center text-xl shadow-sm">❤️</div>
+          <h3 class="font-serif font-bold text-lg text-brand-dark group-hover:text-brand-light transition-colors">Heart Health</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">Cardiovascular arterial support &amp; Omega-3.</p>
+        </div>
+        <span class="pt-4 text-xs font-semibold text-brand-dark group-hover:text-brand-light flex items-center justify-between">
+          <span>Explore Goal</span>
+          <span>&rarr;</span>
+        </span>
+      </a>
 
-  function startAutoSlide() {
-    autoSlideTimer = setInterval(nextSlide, 7000);
-  }
+      <!-- Goal 7 -->
+      <a href="/products?category=skincare" class="p-5 sm:p-6 bg-white rounded-3xl border border-brand-border/80 shadow-wellness hover:-translate-y-1 hover:shadow-wellness-lg transition-all duration-300 flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-pink-50 text-pink-800 flex items-center justify-center text-xl shadow-sm">✨</div>
+          <h3 class="font-serif font-bold text-lg text-brand-dark group-hover:text-brand-light transition-colors">Skin &amp; Hair Care</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">Antioxidant biotin and skin barrier hydration.</p>
+        </div>
+        <span class="pt-4 text-xs font-semibold text-brand-dark group-hover:text-brand-light flex items-center justify-between">
+          <span>Explore Goal</span>
+          <span>&rarr;</span>
+        </span>
+      </a>
 
-  function resetAutoSlide() {
-    clearInterval(autoSlideTimer);
-    startAutoSlide();
-  }
+      <!-- Goal 8 -->
+      <a href="/products" class="p-5 sm:p-6 bg-white rounded-3xl border border-brand-border/80 shadow-wellness hover:-translate-y-1 hover:shadow-wellness-lg transition-all duration-300 flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-900 flex items-center justify-center text-xl shadow-sm">👨‍👩‍👧‍👦</div>
+          <h3 class="font-serif font-bold text-lg text-brand-dark group-hover:text-brand-light transition-colors">Family Wellness</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">Comprehensive care kits for the entire family.</p>
+        </div>
+        <span class="pt-4 text-xs font-semibold text-brand-dark group-hover:text-brand-light flex items-center justify-between">
+          <span>Explore Goal</span>
+          <span>&rarr;</span>
+        </span>
+      </a>
 
-  startAutoSlide();
-  updateSlide();
-</script>
+    </div>
+  </div>
+</section>
 
+<!-- ============================================ -->
+<!-- 6. SMARTER HEALTHCARE DISCOVERY (AI-Inspired)-->
+<!-- ============================================ -->
+<section class="py-16 lg:py-24 bg-gradient-to-br from-brand-dark via-brand-darker to-[#0a231d] text-white relative overflow-hidden">
+  
+  <!-- Subtle 3D background pulse nodes -->
+  <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none animate-pulse-glow"></div>
+  <div class="absolute left-10 bottom-10 w-64 h-64 rounded-full bg-brand-accent/10 blur-2xl pointer-events-none"></div>
+
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+      
+      <!-- Left: AI Discovery Concept & Search -->
+      <div class="lg:col-span-7 space-y-6">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-brand-accent text-xs font-semibold uppercase tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-brand-accent animate-ping"></span>
+          Intelligent Healthcare Search
+        </div>
+
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+          Smarter Healthcare Discovery.
+        </h2>
+
+        <p class="text-sm sm:text-base text-brand-cream/80 max-w-xl leading-relaxed">
+          Need vitamins, chronic medicine refills, or natural remedies? Type your health focus or search directly through our verified pharmacy catalog.
+        </p>
+
+        <!-- Smart Search Box -->
+        <form method="GET" action="/search" class="pt-2 max-w-xl">
+          <div class="relative flex items-center">
+            <input 
+              type="text" 
+              name="query" 
+              placeholder="Search medicines, vitamins, immunity, proteins..." 
+              class="w-full bg-white text-brand-dark placeholder-brand-text-muted rounded-full pl-6 pr-36 py-4 text-sm focus:outline-none focus:ring-4 focus:ring-brand-accent/50 shadow-wellness-lg"
+            >
+            <button 
+              type="submit" 
+              class="absolute right-2 px-6 py-2.5 bg-brand-dark hover:bg-brand-light text-white font-semibold text-xs rounded-full transition-all duration-200 shadow-sm flex items-center gap-1.5"
+            >
+              <span>Search</span>
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </button>
+          </div>
+        </form>
+
+        <!-- Quick Search Pill Tags -->
+        <div class="space-y-2 pt-2">
+          <span class="text-xs text-brand-cream/60 font-medium block">Popular Healthcare Searches:</span>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <a href="/search?query=vitamins" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-brand-cream transition-colors border border-white/10">Daily Multivitamins</a>
+            <a href="/search?query=immunity" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-brand-cream transition-colors border border-white/10">Immunity Boosters</a>
+            <a href="/search?query=omega" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-brand-cream transition-colors border border-white/10">Omega-3 Fish Oil</a>
+            <a href="/search?query=protein" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-brand-cream transition-colors border border-white/10">Clean Protein</a>
+            <a href="/search?query=ayurvedic" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-brand-cream transition-colors border border-white/10">Ayurvedic Tonics</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: AI Healthcare 3D Orb Visual Representation -->
+      <div class="lg:col-span-5 flex items-center justify-center">
+        <div class="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center">
+          
+          <!-- Outer Rotating Orbit Rings -->
+          <div class="absolute inset-0 rounded-full border border-dashed border-brand-accent/30 animate-orbit pointer-events-none"></div>
+          <div class="absolute inset-4 rounded-full border border-emerald-500/20 animate-spin-reverse pointer-events-none" style="animation-duration: 25s;"></div>
+
+          <!-- Glowing Central AI Core -->
+          <div class="w-48 h-48 rounded-full bg-gradient-to-tr from-brand-dark via-emerald-800 to-brand-accent/60 shadow-wellness-lg border-2 border-brand-accent/40 flex flex-col items-center justify-center text-center p-6 space-y-2 animate-pulse-glow">
+            <div class="text-3xl">✨</div>
+            <span class="font-serif font-bold text-sm text-white">Smart Match</span>
+            <span class="text-[10px] text-brand-cream/80 leading-tight">Verified Pharmacy Database</span>
+          </div>
+
+          <!-- Floating Node 1: Pharmacist Network -->
+          <div class="absolute -top-2 right-4 bg-white/10 backdrop-blur-md rounded-2xl px-3 py-1.5 border border-white/20 text-[11px] text-brand-cream font-medium shadow-sm">
+            🩺 Certified Pharmacists
+          </div>
+
+          <!-- Floating Node 2: Genuine Batch -->
+          <div class="absolute -bottom-2 left-4 bg-white/10 backdrop-blur-md rounded-2xl px-3 py-1.5 border border-white/20 text-[11px] text-brand-cream font-medium shadow-sm">
+            🔒 Batch Verified
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 7. HEALTH & WELLNESS EDUCATION PREVIEW       -->
+<!-- ============================================ -->
+<section class="py-16 lg:py-24 bg-white border-b border-brand-border/60">
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-12">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div class="space-y-2">
+        <span class="wellness-badge bg-brand-accent/40 text-brand-dark text-[11px] font-semibold tracking-widest uppercase px-3 py-1">Clinical Knowledge</span>
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-dark">Understand Your Health Better</h2>
+        <p class="text-sm sm:text-base text-brand-text-muted max-w-xl leading-relaxed">
+          Evidence-backed educational guides to help you make informed decisions about everyday vitality.
+        </p>
+      </div>
+      <a href="/wellness" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-dark hover:text-brand-light transition-colors group self-start md:self-end">
+        <span>Visit Wellness Education Hub</span>
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      </a>
+    </div>
+
+    <!-- 4 Educational Guide Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      
+      <!-- Guide 1 -->
+      <article class="bg-brand-cream-light/40 rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-7 flex flex-col justify-between space-y-4 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-3">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-brand-health bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">Nutrition</span>
+          <h3 class="font-serif font-bold text-lg text-brand-dark leading-snug">Understanding Vitamins &amp; Minerals</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">
+            Fat-soluble vs water-soluble micronutrients and dietary absorption pathways.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-brand-border/50 flex items-center justify-between text-xs">
+          <span class="text-brand-text-muted">4 min read</span>
+          <a href="https://en.wikipedia.org/wiki/Vitamin" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-dark hover:text-brand-light transition-colors inline-flex items-center gap-1">
+            <span>Read Guide</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Guide 2 -->
+      <article class="bg-brand-cream-light/40 rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-7 flex flex-col justify-between space-y-4 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-3">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-blue-800 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200">Lifestyle</span>
+          <h3 class="font-serif font-bold text-lg text-brand-dark leading-snug">How to Maintain a Healthy Routine</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">
+            Simple, sustainable daily rhythms for physical vitality and restful sleep.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-brand-border/50 flex items-center justify-between text-xs">
+          <span class="text-brand-text-muted">5 min read</span>
+          <a href="https://www.who.int/initiatives/behealthy/healthy-diet" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-dark hover:text-brand-light transition-colors inline-flex items-center gap-1">
+            <span>Read Guide</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Guide 3 -->
+      <article class="bg-brand-cream-light/40 rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-7 flex flex-col justify-between space-y-4 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-3">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-teal-800 bg-teal-50 px-2.5 py-1 rounded-md border border-teal-200">Hydration</span>
+          <h3 class="font-serif font-bold text-lg text-brand-dark leading-snug">Science of Cellular Hydration</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">
+            How water intake and electrolytes govern kidney filtration and cognitive alertness.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-brand-border/50 flex items-center justify-between text-xs">
+          <span class="text-brand-text-muted">3 min read</span>
+          <a href="https://www.hsph.harvard.edu/nutritionsource/water/" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-dark hover:text-brand-light transition-colors inline-flex items-center gap-1">
+            <span>Read Guide</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Guide 4 -->
+      <article class="bg-brand-cream-light/40 rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-7 flex flex-col justify-between space-y-4 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-3">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-rose-800 bg-rose-50 px-2.5 py-1 rounded-md border border-rose-200">Safety</span>
+          <h3 class="font-serif font-bold text-lg text-brand-dark leading-snug">Medicine Safety &amp; Storage</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">
+            Protecting medication potency from moisture, sunlight, and heat degradation.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-brand-border/50 flex items-center justify-between text-xs">
+          <span class="text-brand-text-muted">4 min read</span>
+          <a href="https://www.cdc.gov/medication-safety/about/storage-safe-use.html" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-dark hover:text-brand-light transition-colors inline-flex items-center gap-1">
+            <span>Read Guide</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 8. HOW MEDICOMART WORKS                      -->
+<!-- ============================================ -->
+<section class="py-16 lg:py-24 bg-brand-cream/30 border-b border-brand-border/60">
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-12">
+    
+    <div class="text-center max-w-2xl mx-auto space-y-3">
+      <span class="wellness-badge bg-brand-accent/40 text-brand-dark text-[11px] font-semibold tracking-widest uppercase px-3 py-1">Seamless Experience</span>
+      <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-dark">How MedicoMart Works</h2>
+      <p class="text-sm sm:text-base text-brand-text-muted">A simple, transparent 4-step pathway to verified healthcare delivered to your door.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+      <!-- Step 1 -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 border border-brand-border/80 shadow-wellness space-y-4 relative">
+        <div class="w-10 h-10 rounded-2xl bg-brand-dark text-brand-accent flex items-center justify-center font-bold text-sm shadow-sm">
+          1
+        </div>
+        <h3 class="font-serif font-bold text-lg text-brand-dark">Discover</h3>
+        <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+          Browse certified OTC wellness formulations, vitamins, and healthcare essentials in our catalog.
+        </p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 border border-brand-border/80 shadow-wellness space-y-4 relative">
+        <div class="w-10 h-10 rounded-2xl bg-brand-dark text-brand-accent flex items-center justify-center font-bold text-sm shadow-sm">
+          2
+        </div>
+        <h3 class="font-serif font-bold text-lg text-brand-dark">Choose &amp; Inspect</h3>
+        <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+          Review composition, dosage details, and pharmacist verification notes for complete clarity.
+        </p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 border border-brand-border/80 shadow-wellness space-y-4 relative">
+        <div class="w-10 h-10 rounded-2xl bg-brand-dark text-brand-accent flex items-center justify-center font-bold text-sm shadow-sm">
+          3
+        </div>
+        <h3 class="font-serif font-bold text-lg text-brand-dark">Secure Checkout</h3>
+        <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+          Select your delivery address and choose Cash on Delivery with zero upfront payment risk.
+        </p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 border border-brand-border/80 shadow-wellness space-y-4 relative">
+        <div class="w-10 h-10 rounded-2xl bg-brand-dark text-brand-accent flex items-center justify-center font-bold text-sm shadow-sm">
+          4
+        </div>
+        <h3 class="font-serif font-bold text-lg text-brand-dark">Delivered Safely</h3>
+        <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+          Receive pharmacist-inspected medicines sealed in temperature-protected packaging.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 9. FINAL PROMOTIONAL CTA BANNER              -->
+<!-- ============================================ -->
+<section class="py-16 lg:py-20 bg-brand-cream-light">
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12">
+    <div class="rounded-3xl bg-gradient-to-r from-brand-dark to-[#092b23] text-white p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-wellness-lg text-center space-y-6">
+      
+      <div class="relative z-10 max-w-3xl mx-auto space-y-5">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-brand-accent text-xs font-semibold uppercase tracking-wider">
+          Trusted Healthcare &bull; Fast Delivery
+        </span>
+
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-brand-cream">
+          Your Everyday Health Essentials, <br />
+          <span class="italic text-brand-accent font-normal">All In One Place.</span>
+        </h2>
+
+        <p class="text-base sm:text-lg text-brand-cream/80 max-w-xl mx-auto leading-relaxed">
+          Join thousands of families who trust MedicoMart for authentic pharmacy products and evidence-backed wellness guidance.
+        </p>
+
+        <div class="pt-4 flex flex-wrap justify-center gap-4">
+          <a href="/products" class="bg-brand-accent text-brand-dark font-semibold px-8 py-3.5 rounded-full hover:brightness-95 transition-all shadow-md active:scale-95 text-sm sm:text-base">
+            Shop Healthcare Catalog
+          </a>
+          <a href="/wellness" class="border border-brand-cream/40 text-brand-cream font-medium px-8 py-3.5 rounded-full hover:bg-white/10 transition-all text-sm sm:text-base">
+            Explore Wellness Hub
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Include Three.js via CDN for 3D Hero Scene -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="{% static 'js/wellness-hero-3d.js' %}"></script>
 {% endblock content %}
-

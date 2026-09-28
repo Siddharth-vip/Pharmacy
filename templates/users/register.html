@@ -32,6 +32,7 @@
     <!-- Register Form -->
     <form method="POST" class="space-y-4">
       {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next|default:request.GET.next|default:'' }}">
       
       <div class="space-y-1.5">
         <label for="username" class="block text-xs font-semibold text-brand-dark uppercase tracking-wider">Full Username</label>
@@ -113,7 +114,7 @@
     <!-- Footer Links -->
     <div class="border-t border-brand-border/60 pt-5 text-center text-xs text-brand-text-muted">
       Already have an account?
-      <a href="/users/login" class="text-brand-dark font-semibold hover:underline ml-1">Sign In</a>
+      <a href="/users/login/{% if next or request.GET.next %}?next={{ next|default:request.GET.next }}{% endif %}" class="text-brand-dark font-semibold hover:underline ml-1">Sign In</a>
     </div>
 
   </div>

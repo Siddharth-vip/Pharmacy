@@ -1,0 +1,175 @@
+{% extends "users/index.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Orders Page Header Banner -->
+<div class="bg-brand-cream/40 border-b border-brand-border/60 py-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-brand-dark text-brand-accent flex items-center justify-center shrink-0 shadow-sm">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark">My Orders</h1>
+          <p class="text-xs text-brand-text-muted mt-0.5">Track, review, and manage your verified healthcare purchases</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="/products" class="wellness-btn-primary text-xs py-2.5 px-5">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          Shop More Products
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  
+  {% if orders %}
+    <div class="space-y-8">
+      {% for order in orders %}
+      <div class="bg-white rounded-3xl border border-brand-border/80 shadow-wellness overflow-hidden transition-all duration-300 hover:shadow-wellness-md">
+        
+        <!-- Order Card Header -->
+        <div class="bg-brand-cream-light/70 border-b border-brand-border/70 p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span class="font-serif font-bold text-lg text-brand-dark">Order #{{ order.order_id }}</span>
+              
+              <!-- Order Status Badge -->
+              <span class="wellness-badge {% if order.order_status == 'CONFIRMED' %}bg-emerald-100 text-emerald-800 border border-emerald-300{% elif order.order_status == 'PROCESSING' %}bg-blue-100 text-blue-800 border border-blue-300{% elif order.order_status == 'DELIVERED' %}bg-green-100 text-green-900 border border-green-300{% else %}bg-gray-100 text-gray-800 border border-gray-300{% endif %} text-[11px] font-semibold">
+                {{ order.get_order_status_display|default:order.order_status }}
+              </span>
+
+              <!-- Payment Status Badge -->
+              <span class="wellness-badge {% if order.payment_status == 'PAID' %}bg-emerald-50 text-emerald-700 border border-emerald-200{% else %}bg-amber-50 text-amber-800 border border-amber-200{% endif %} text-[11px]">
+                Payment: {{ order.get_payment_status_display|default:order.payment_status }}
+              </span>
+            </div>
+
+            <p class="text-xs text-brand-text-muted">
+              Placed on <strong class="text-brand-text-dark font-medium">{{ order.created_at|date:"d M Y, h:i A" }}</strong>
+            </p>
+          </div>
+
+          <!-- Total & Mode -->
+          <div class="text-left md:text-right flex md:flex-col justify-between items-center md:items-end border-t md:border-t-0 pt-3 md:pt-0 border-brand-border/50">
+            <span class="text-xs text-brand-text-muted">Total Amount</span>
+            <span class="font-serif text-2xl font-bold text-brand-dark">&#x20B9;{{ order.total_amount }}</span>
+          </div>
+        </div>
+
+        <!-- Order Items List -->
+        <div class="p-5 sm:p-6 divide-y divide-brand-border/40">
+          {% for item in order.items.all %}
+          <div class="py-4 first:pt-0 last:pb-0 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            
+            <div class="flex items-center gap-4">
+              <!-- Thumbnail -->
+              <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-brand-cream-light/80 p-2 border border-brand-border/60 flex items-center justify-center shrink-0">
+                {% if item.product_image %}
+                  <img class="w-full h-full object-contain" src="{{ item.product_image.url }}" alt="{{ item.product_name }}">
+                {% elif item.product and item.product.image %}
+                  <img class="w-full h-full object-contain" src="{{ item.product.image.url }}" alt="{{ item.product_name }}">
+                {% else %}
+                  <img class="w-full h-full object-contain" src="{% static 'images/image.jpg' %}" alt="{{ item.product_name }}">
+                {% endif %}
+              </div>
+
+              <!-- Product Info -->
+              <div class="space-y-1">
+                {% if item.product %}
+                  <a href="/products/{{ item.product.id }}" class="font-serif font-bold text-base text-brand-dark hover:text-brand-light transition-colors line-clamp-1">
+                    {{ item.product_name }}
+                  </a>
+                {% else %}
+                  <h3 class="font-serif font-bold text-base text-brand-dark line-clamp-1">
+                    {{ item.product_name }}
+                  </h3>
+                {% endif %}
+                
+                <div class="flex flex-wrap items-center gap-2 text-xs text-brand-text-muted">
+                  {% if item.category %}
+                    <span class="capitalize bg-brand-cream px-2 py-0.5 rounded-md text-brand-dark font-medium border border-brand-border/60">
+                      {{ item.category }}
+                    </span>
+                    <span>&bull;</span>
+                  {% endif %}
+                  <span>Quantity: <strong class="text-brand-dark font-semibold">{{ item.quantity }}</strong></span>
+                  <span>&bull;</span>
+                  <span>Unit Price: <strong class="text-brand-dark">&#x20B9;{{ item.unit_price }}</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item Subtotal -->
+            <div class="text-right sm:text-right w-full sm:w-auto flex sm:flex-col justify-between sm:justify-center border-t sm:border-t-0 pt-2 sm:pt-0 border-brand-border/30">
+              <span class="text-xs text-brand-text-muted sm:block">Item Total</span>
+              <span class="font-serif text-base sm:text-lg font-bold text-brand-dark">&#x20B9;{{ item.subtotal }}</span>
+            </div>
+
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Order Card Footer: Details & Address Snapshot -->
+        <div class="bg-brand-cream-light/40 border-t border-brand-border/60 p-5 sm:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          
+          <div class="space-y-1">
+            <span class="font-semibold text-brand-dark uppercase tracking-wider text-[11px] block">Delivery Address</span>
+            <p class="text-brand-text-muted leading-relaxed font-normal">{{ order.delivery_address }}</p>
+            {% if order.contact_number %}
+              <p class="text-brand-text-muted pt-0.5">Contact: <strong class="text-brand-text-dark font-medium">{{ order.contact_number }}</strong></p>
+            {% endif %}
+          </div>
+
+          <div class="space-y-1 md:text-right flex flex-col justify-between items-start md:items-end">
+            <div class="space-y-0.5">
+              <span class="font-semibold text-brand-dark uppercase tracking-wider text-[11px] block">Payment Information</span>
+              <p class="text-brand-text-muted">Method: <strong class="text-brand-text-dark font-medium">{{ order.payment_method }}</strong></p>
+              <p class="text-brand-text-muted">Payment Status: <strong class="text-amber-800 font-medium">{{ order.get_payment_status_display|default:order.payment_status }}</strong></p>
+            </div>
+
+            <div class="pt-2">
+              <a href="{% url 'order_detail' order.order_id %}" class="wellness-btn-secondary text-xs py-2 px-4 inline-flex">
+                <span>View Full Receipt</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <!-- Empty Orders State -->
+    <div class="bg-white rounded-3xl border border-brand-border/80 p-12 sm:p-16 text-center shadow-wellness max-w-xl mx-auto space-y-5">
+      <div class="w-20 h-20 rounded-full bg-brand-cream flex items-center justify-center text-brand-dark mx-auto shadow-sm">
+        <svg class="w-10 h-10 text-brand-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+        </svg>
+      </div>
+
+      <div class="space-y-2">
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark">No orders yet</h2>
+        <p class="text-sm text-brand-text-muted max-w-md mx-auto">Your purchased healthcare products, verified prescriptions, and wellness orders will appear here.</p>
+      </div>
+
+      <div class="pt-4">
+        <a href="/products" class="wellness-btn-primary inline-flex text-sm px-8 py-3.5 shadow-wellness-md">
+          <span>Start Shopping</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </div>
+    </div>
+  {% endif %}
+
+</div>
+{% endblock content %}

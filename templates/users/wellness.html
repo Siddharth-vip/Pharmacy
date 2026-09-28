@@ -1,0 +1,509 @@
+{% extends "users/index.html" %}
+{% load static %}
+
+{% block content %}
+<!-- 1. WELLNESS HERO SECTION WITH 3D-STYLE FLOATING SCENE -->
+<section class="relative bg-gradient-to-b from-brand-cream/60 via-brand-cream-light to-white border-b border-brand-border/60 py-16 lg:py-24 overflow-hidden">
+  
+  <!-- Subtle Background Decorative Ambient Glows -->
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-brand-accent/20 rounded-full blur-3xl pointer-events-none -z-10"></div>
+  <div class="absolute -top-24 right-10 w-96 h-96 bg-brand-health/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      
+      <!-- Left Column: Hero Text Content -->
+      <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-dark text-brand-cream text-xs font-semibold shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
+          <span>Evidence-Based Healthcare Education</span>
+        </div>
+
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-brand-dark leading-[1.15] tracking-tight">
+          YOUR HEALTH,<br>
+          YOUR EVERYDAY<br>
+          <span class="text-brand-light italic font-normal">WELLNESS JOURNEY.</span>
+        </h1>
+
+        <p class="text-base sm:text-lg text-brand-text-muted max-w-xl mx-auto lg:mx-0 leading-relaxed">
+          Understand your body. Build lasting daily habits. Make informed health choices with simple, certified clinical guides curated by MedicoMart pharmacists.
+        </p>
+
+        <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+          <a href="#guides" class="wellness-btn-primary py-4 px-8 text-sm shadow-wellness-md w-full sm:w-auto">
+            <span>Explore Health Guides</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+          </a>
+          <a href="/products" class="wellness-btn-secondary py-4 px-8 text-sm w-full sm:w-auto">
+            <span>Browse Pharmacy Catalog</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+        </div>
+
+        <!-- Trust Features Checklist -->
+        <div class="pt-6 border-t border-brand-border/60 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-brand-text-muted font-medium">
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Pharmacist Verified
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Clinical Research
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            100% Free Health Guides
+          </span>
+        </div>
+      </div>
+
+      <!-- Right Column: 3D-Style Floating Healthcare Wellness Illustration -->
+      <div class="lg:col-span-5 flex items-center justify-center relative min-h-[380px] sm:min-h-[440px]">
+        
+        <!-- Central Glass Card (Main Anchor) -->
+        <div class="w-72 sm:w-80 h-72 sm:h-80 rounded-3xl bg-white/80 backdrop-blur-md border border-brand-border/90 shadow-wellness-lg p-6 flex flex-col justify-between items-center text-center relative z-10 transition-transform duration-500 hover:scale-105">
+          <div class="w-16 h-16 rounded-2xl bg-brand-cream-light border border-brand-border/70 flex items-center justify-center text-brand-dark shadow-sm">
+            <svg class="w-9 h-9 text-brand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+          </div>
+          <div class="space-y-1.5">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-brand-health bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">Holistic Care</span>
+            <h3 class="font-serif font-bold text-xl text-brand-dark">Vitality &amp; Wellness</h3>
+            <p class="text-xs text-brand-text-muted leading-relaxed">Balancing nutrition, movement, restorative sleep, and certified medicine safety.</p>
+          </div>
+          <div class="w-full pt-3 border-t border-brand-border/60 flex items-center justify-around text-xs font-semibold text-brand-text-dark">
+            <span>98% Purity</span>
+            <span>&bull;</span>
+            <span>Certified</span>
+            <span>&bull;</span>
+            <span>Active Care</span>
+          </div>
+        </div>
+
+        <!-- Floating 3D Object 1: Medicine Bottle (Top-Right) -->
+        <div class="animate-float-slow absolute -top-4 -right-2 sm:right-4 z-20 bg-white rounded-2xl p-3.5 shadow-wellness-md border border-brand-border/80 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+            </svg>
+          </div>
+          <div class="text-left text-xs">
+            <span class="font-bold text-brand-dark block">Medicine Safety</span>
+            <span class="text-brand-text-muted text-[10px]">Verified Potency</span>
+          </div>
+        </div>
+
+        <!-- Floating 3D Object 2: Vitamin Capsule (Bottom-Left) -->
+        <div class="animate-float-delayed absolute -bottom-4 -left-2 sm:left-2 z-20 bg-white rounded-2xl p-3.5 shadow-wellness-md border border-brand-border/80 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <div class="text-left text-xs">
+            <span class="font-bold text-brand-dark block">Daily Vitamins</span>
+            <span class="text-brand-text-muted text-[10px]">Cellular Energy</span>
+          </div>
+        </div>
+
+        <!-- Floating 3D Object 3: Botanical Leaf (Top-Left) -->
+        <div class="animate-float-reverse absolute top-8 -left-6 z-20 bg-white rounded-2xl p-3 shadow-wellness border border-brand-border/80 flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm">
+            🌿
+          </div>
+          <span class="text-xs font-semibold text-brand-dark">Natural Botanical</span>
+        </div>
+
+        <!-- Floating 3D Object 4: Heart with Pulse (Bottom-Right) -->
+        <div class="animate-float-slow absolute bottom-12 -right-4 z-20 bg-white rounded-2xl p-3 shadow-wellness border border-brand-border/80 flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-red-100 text-red-700 flex items-center justify-center text-sm">
+            ❤️
+          </div>
+          <span class="text-xs font-semibold text-brand-dark">Heart Health</span>
+        </div>
+
+        <!-- Floating 3D Object 5: Water Drop (Top Center) -->
+        <div class="animate-pulse-subtle absolute -top-8 left-1/3 z-20 bg-brand-cream-light rounded-full px-3 py-1 shadow-sm border border-brand-border/80 flex items-center gap-1.5 text-xs text-blue-800 font-semibold">
+          <span>💧</span>
+          <span>Hydration</span>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 2. HEALTH & WELLNESS TOPICS SECTION -->
+<section class="py-16 lg:py-24 bg-white border-b border-brand-border/60">
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-12">
+    
+    <div class="text-center max-w-3xl mx-auto space-y-3">
+      <span class="wellness-badge bg-brand-accent/40 text-brand-dark text-[11px] font-semibold tracking-widest uppercase px-3 py-1">Core Pillars</span>
+      <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-dark">Health &amp; Wellness Topics</h2>
+      <p class="text-sm sm:text-base text-brand-text-muted leading-relaxed">
+        Explore clinical pillars designed to help you understand your biological systems and nurture sustainable health.
+      </p>
+    </div>
+
+    <!-- 8 Topic Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      
+      <!-- Topic 1 -->
+      <div class="wellness-card bg-brand-cream-light/60 rounded-3xl border border-brand-border/80 p-6 sm:p-7 space-y-4 hover:-translate-y-1 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-xl shadow-sm">
+          🌿
+        </div>
+        <h3 class="font-serif font-bold text-xl text-brand-dark">Immunity &amp; Defense</h3>
+        <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+          Strengthen your immune barrier with natural zinc, vitamin C, antioxidant flavonoids, and gut microbiome resilience.
+        </p>
+        <a href="#guides" class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-dark hover:text-brand-light">
+          <span>Explore Topic</span>
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Topic 2 -->
+      <div class="wellness-card bg-brand-cream-light/60 rounded-3xl border border-brand-border/80 p-6 sm:p-7 space-y-4 hover:-translate-y-1 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center text-xl shadow-sm">
+          💊
+        </div>
+        <h3 class="font-serif font-bold text-xl text-brand-dark">Vitamins &amp; Nutrition</h3>
+        <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+          Understand micronutrient bioavailability, fat vs water solubility, and daily requirements for sustained metabolic vitality.
+        </p>
+        <a href="#guides" class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-dark hover:text-brand-light">
+          <span>Explore Topic</span>
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Topic 3 -->
+      <div class="wellness-card bg-brand-cream-light/60 rounded-3xl border border-brand-border/80 p-6 sm:p-7 space-y-4 hover:-translate-y-1 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="w-12 h-12 rounded-2xl bg-red-100 text-red-700 flex items-center justify-center text-xl shadow-sm">
+          ❤️
+        </div>
+        <h3 class="font-serif font-bold text-xl text-brand-dark">Heart Health</h3>
+        <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+          Maintain healthy blood pressure, arterial flexibility, and balanced lipid profiles through Omega-3 and cardiovascular habits.
+        </p>
+        <a href="#guides" class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-dark hover:text-brand-light">
+          <span>Explore Topic</span>
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Topic 4 -->
+      <div class="wellness-card bg-brand-cream-light/60 rounded-3xl border border-brand-border/80 p-6 sm:p-7 space-y-4 hover:-translate-y-1 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-800 flex items-center justify-center text-xl shadow-sm">
+          🩸
+        </div>
+        <h3 class="font-serif font-bold text-xl text-brand-dark">Diabetes Awareness</h3>
+        <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+          Learn glycemic index basics, regular HbA1c screening protocols, and natural nutritional ways to stabilize blood sugar.
+        </p>
+        <a href="#guides" class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-dark hover:text-brand-light">
+          <span>Explore Topic</span>
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Topic 5 -->
+      <div class="wellness-card bg-brand-cream-light/60 rounded-3xl border border-brand-border/80 p-6 sm:p-7 space-y-4 hover:-translate-y-1 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="w-12 h-12 rounded-2xl bg-pink-100 text-pink-800 flex items-center justify-center text-xl shadow-sm">
+          ✨
+        </div>
+        <h3 class="font-serif font-bold text-xl text-brand-dark">Skin &amp; Hair Care</h3>
+        <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+          Nutritional support for dermal collagen, hair follicle strength, and antioxidant defense against UV and free radicals.
+        </p>
+        <a href="#guides" class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-dark hover:text-brand-light">
+          <span>Explore Topic</span>
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Topic 6 -->
+      <div class="wellness-card bg-brand-cream-light/60 rounded-3xl border border-brand-border/80 p-6 sm:p-7 space-y-4 hover:-translate-y-1 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="w-12 h-12 rounded-2xl bg-teal-100 text-teal-800 flex items-center justify-center text-xl shadow-sm">
+          🥑
+        </div>
+        <h3 class="font-serif font-bold text-xl text-brand-dark">Digestive Health</h3>
+        <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+          Support probiotic microbiome diversity, enzymatic nutrient breakdown, and comfortable digestive regularity.
+        </p>
+        <a href="#guides" class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-dark hover:text-brand-light">
+          <span>Explore Topic</span>
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Topic 7 -->
+      <div class="wellness-card bg-brand-cream-light/60 rounded-3xl border border-brand-border/80 p-6 sm:p-7 space-y-4 hover:-translate-y-1 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-800 flex items-center justify-center text-xl shadow-sm">
+          🧠
+        </div>
+        <h3 class="font-serif font-bold text-xl text-brand-dark">Mental Wellbeing</h3>
+        <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+          Stress resilience, adaptogenic botanical herbs like Ashwagandha, and restorative practices for cognitive clarity.
+        </p>
+        <a href="#guides" class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-dark hover:text-brand-light">
+          <span>Explore Topic</span>
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Topic 8 -->
+      <div class="wellness-card bg-brand-cream-light/60 rounded-3xl border border-brand-border/80 p-6 sm:p-7 space-y-4 hover:-translate-y-1 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-xl shadow-sm">
+          🏃
+        </div>
+        <h3 class="font-serif font-bold text-xl text-brand-dark">Fitness &amp; Lifestyle</h3>
+        <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+          Sustainable daily movement, joint cartilage nutrition, electrolyte balance, and post-workout recovery principles.
+        </p>
+        <a href="#guides" class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-dark hover:text-brand-light">
+          <span>Explore Topic</span>
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 3. COMPREHENSIVE HEALTH GUIDES SECTION -->
+<section id="guides" class="py-16 lg:py-24 bg-brand-cream/30 border-b border-brand-border/60">
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-12">
+    
+    <div class="text-center max-w-3xl mx-auto space-y-3">
+      <span class="wellness-badge bg-brand-dark text-brand-accent text-[11px] font-semibold tracking-widest uppercase px-3 py-1">Educational Library</span>
+      <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-dark">Featured Health Guides</h2>
+      <p class="text-sm sm:text-base text-brand-text-muted leading-relaxed">
+        Evidence-backed guides to help you make knowledgeable decisions about everyday vitality, nutrition, and family wellness.
+      </p>
+    </div>
+
+    <!-- 8 Guides Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      
+      <!-- Guide 1 -->
+      <article class="bg-white rounded-3xl border border-brand-border/80 shadow-wellness overflow-hidden flex flex-col justify-between p-6 sm:p-7 space-y-4 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-3">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-brand-health bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">Nutrition Guide</span>
+          <h3 class="font-serif font-bold text-lg text-brand-dark leading-snug">Understanding Vitamins &amp; Minerals</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">
+            Fat-soluble (A, D, E, K) versus water-soluble (B-complex, C) micronutrients and how daily dietary absorption works.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-brand-border/50 flex items-center justify-between text-xs">
+          <span class="text-brand-text-muted">4 min read</span>
+          <a href="https://en.wikipedia.org/wiki/Vitamin" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-dark hover:text-brand-light transition-colors duration-200 inline-flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 rounded-sm">
+            <span>Read Guide</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Guide 2 -->
+      <article class="bg-white rounded-3xl border border-brand-border/80 shadow-wellness overflow-hidden flex flex-col justify-between p-6 sm:p-7 space-y-4 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-3">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-blue-800 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200">Daily Habits</span>
+          <h3 class="font-serif font-bold text-lg text-brand-dark leading-snug">How to Maintain a Healthy Lifestyle</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">
+            Simple, sustainable daily rhythms for balancing physical activity, mental rest, and wholesome unrefined meals.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-brand-border/50 flex items-center justify-between text-xs">
+          <span class="text-brand-text-muted">5 min read</span>
+          <a href="https://www.who.int/initiatives/behealthy/healthy-diet" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-dark hover:text-brand-light transition-colors duration-200 inline-flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 rounded-sm">
+            <span>Read Guide</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Guide 3 -->
+      <article class="bg-white rounded-3xl border border-brand-border/80 shadow-wellness overflow-hidden flex flex-col justify-between p-6 sm:p-7 space-y-4 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-3">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-amber-800 bg-amber-50 px-2.5 py-1 rounded-md border border-amber-200">Diet &amp; Energy</span>
+          <h3 class="font-serif font-bold text-lg text-brand-dark leading-snug">Everyday Nutrition Basics</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">
+            Essential macronutrient balance: protein for cellular repair, healthy lipids for hormone balance, and complex fibers for digestion.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-brand-border/50 flex items-center justify-between text-xs">
+          <span class="text-brand-text-muted">6 min read</span>
+          <a href="https://www.hsph.harvard.edu/nutritionsource/what-should-you-eat/" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-dark hover:text-brand-light transition-colors duration-200 inline-flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 rounded-sm">
+            <span>Read Guide</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Guide 4 -->
+      <article class="bg-white rounded-3xl border border-brand-border/80 shadow-wellness overflow-hidden flex flex-col justify-between p-6 sm:p-7 space-y-4 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-3">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-teal-800 bg-teal-50 px-2.5 py-1 rounded-md border border-teal-200">Vital Fluids</span>
+          <h3 class="font-serif font-bold text-lg text-brand-dark leading-snug">Understanding Hydration</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">
+            Why adequate cellular water intake governs cognitive focus, renal filtration, healthy skin elasticity, and electrolyte equilibrium.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-brand-border/50 flex items-center justify-between text-xs">
+          <span class="text-brand-text-muted">3 min read</span>
+          <a href="https://www.hsph.harvard.edu/nutritionsource/water/" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-dark hover:text-brand-light transition-colors duration-200 inline-flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 rounded-sm">
+            <span>Read Guide</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Guide 5 -->
+      <article class="bg-white rounded-3xl border border-brand-border/80 shadow-wellness overflow-hidden flex flex-col justify-between p-6 sm:p-7 space-y-4 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-3">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-800 bg-indigo-50 px-2.5 py-1 rounded-md border border-indigo-200">Rest &amp; Brain</span>
+          <h3 class="font-serif font-bold text-lg text-brand-dark leading-snug">The Importance of Sleep</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">
+            How non-REM and REM sleep cycles regulate cortisol, cellular repair enzymes, immune antibody synthesis, and mental stamina.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-brand-border/50 flex items-center justify-between text-xs">
+          <span class="text-brand-text-muted">5 min read</span>
+          <a href="https://www.cdc.gov/sleep/about/index.html" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-dark hover:text-brand-light transition-colors duration-200 inline-flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 rounded-sm">
+            <span>Read Guide</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Guide 6 -->
+      <article class="bg-white rounded-3xl border border-brand-border/80 shadow-wellness overflow-hidden flex flex-col justify-between p-6 sm:p-7 space-y-4 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-3">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">Active Living</span>
+          <h3 class="font-serif font-bold text-lg text-brand-dark leading-snug">Exercise &amp; Daily Movement</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">
+            Achieving 30 minutes of low-impact cardiovascular activity to optimize mitochondrial health, joint flexibility, and insulin sensitivity.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-brand-border/50 flex items-center justify-between text-xs">
+          <span class="text-brand-text-muted">4 min read</span>
+          <a href="https://www.who.int/news-room/fact-sheets/detail/physical-activity" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-dark hover:text-brand-light transition-colors duration-200 inline-flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 rounded-sm">
+            <span>Read Guide</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Guide 7 -->
+      <article class="bg-white rounded-3xl border border-brand-border/80 shadow-wellness overflow-hidden flex flex-col justify-between p-6 sm:p-7 space-y-4 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-3">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-purple-800 bg-purple-50 px-2.5 py-1 rounded-md border border-purple-200">Preventive Care</span>
+          <h3 class="font-serif font-bold text-lg text-brand-dark leading-snug">Preventive Health Checkups</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">
+            Annual biomarker monitoring: lipid panels, blood pressure trends, liver function, and vitamins D &amp; B12 screenings.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-brand-border/50 flex items-center justify-between text-xs">
+          <span class="text-brand-text-muted">6 min read</span>
+          <a href="https://www.nhs.uk/conditions/nhs-health-check/" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-dark hover:text-brand-light transition-colors duration-200 inline-flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 rounded-sm">
+            <span>Read Guide</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Guide 8 -->
+      <article class="bg-white rounded-3xl border border-brand-border/80 shadow-wellness overflow-hidden flex flex-col justify-between p-6 sm:p-7 space-y-4 hover:shadow-wellness-lg transition-all duration-300">
+        <div class="space-y-3">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-rose-800 bg-rose-50 px-2.5 py-1 rounded-md border border-rose-200">Pharmacy Safety</span>
+          <h3 class="font-serif font-bold text-lg text-brand-dark leading-snug">Medicine Safety &amp; Storage</h3>
+          <p class="text-xs text-brand-text-muted leading-relaxed">
+            Protecting medication potency from moisture, direct sunlight, and heat. Best practices for family medicine safety.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-brand-border/50 flex items-center justify-between text-xs">
+          <span class="text-brand-text-muted">4 min read</span>
+          <a href="https://www.cdc.gov/medication-safety/about/storage-safe-use.html" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-dark hover:text-brand-light transition-colors duration-200 inline-flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 rounded-sm">
+            <span>Read Guide</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- 4. MEDICINE AWARENESS & CLINICAL SAFETY SECTION -->
+<section class="py-16 lg:py-24 bg-white border-b border-brand-border/60">
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-12">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      
+      <div class="lg:col-span-6 space-y-6">
+        <span class="wellness-badge bg-brand-accent/40 text-brand-dark text-[11px] font-semibold tracking-widest uppercase px-3 py-1">Clinical Clarity</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-dark leading-tight">
+          Medicine Awareness &amp; Safe Consumption
+        </h2>
+        <p class="text-sm sm:text-base text-brand-text-muted leading-relaxed">
+          Healthcare medications and botanical supplements work best when used responsibly. Here are key clinical guidelines every patient should understand:
+        </p>
+
+        <div class="space-y-4">
+          <div class="p-4 rounded-2xl bg-brand-cream-light/60 border border-brand-border/70 flex items-start gap-4">
+            <div class="w-8 h-8 rounded-xl bg-brand-dark text-brand-accent flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">1</div>
+            <div class="space-y-1 text-xs sm:text-sm">
+              <strong class="text-brand-dark block font-semibold">Medicine Categories &amp; Purpose</strong>
+              <p class="text-brand-text-muted">Understand the difference between daily preventative vitamins (OTC) and targeted therapeutic prescription medicines.</p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-brand-cream-light/60 border border-brand-border/70 flex items-start gap-4">
+            <div class="w-8 h-8 rounded-xl bg-brand-dark text-brand-accent flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">2</div>
+            <div class="space-y-1 text-xs sm:text-sm">
+              <strong class="text-brand-dark block font-semibold">Common Precautions &amp; Dosages</strong>
+              <p class="text-brand-text-muted">Always review dosing instructions on packaging. Do not double up doses if a routine supplement was skipped.</p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-brand-cream-light/60 border border-brand-border/70 flex items-start gap-4">
+            <div class="w-8 h-8 rounded-xl bg-brand-dark text-brand-accent flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">3</div>
+            <div class="space-y-1 text-xs sm:text-sm">
+              <strong class="text-brand-dark block font-semibold">When Professional Advice is Essential</strong>
+              <p class="text-brand-text-muted">If you are pregnant, nursing, taking chronic heart medication, or experiencing unexpected symptoms, consult your physician immediately.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prominent Medical Advisory Notice Card -->
+      <div class="lg:col-span-6 bg-brand-dark text-white rounded-3xl p-8 sm:p-10 space-y-6 shadow-wellness-lg relative overflow-hidden">
+        <div class="w-12 h-12 rounded-2xl bg-brand-cream text-brand-dark flex items-center justify-center shadow-sm">
+          <svg class="w-6 h-6 text-brand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        </div>
+
+        <div class="space-y-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-brand-accent">Official Healthcare Advisory</span>
+          <h3 class="font-serif text-2xl font-bold text-white">Educational Information Only</h3>
+          <p class="text-sm text-brand-cream/80 leading-relaxed">
+            The content provided in this Wellness Education Center is designed for general health awareness and educational reference only. It is not a substitute for clinical medical diagnosis, prescription writing, or individualized treatment plans.
+          </p>
+          <div class="p-4 rounded-2xl bg-white/10 border border-white/15 text-xs text-brand-cream font-medium">
+            &bull; Always follow your doctor's or registered pharmacist's direct advice before starting any new health regimen.
+          </div>
+        </div>
+
+        <a href="/users/contact" class="wellness-btn-accent w-full py-3.5 text-xs text-center block font-semibold shadow-sm">
+          Speak to a MedicoMart Pharmacist
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+{% endblock content %}

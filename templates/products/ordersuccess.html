@@ -1,0 +1,87 @@
+{% extends "users/index.html" %}
+{% load static %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+  <div class="bg-white rounded-3xl border border-brand-border/80 shadow-wellness-lg p-8 sm:p-12 text-center space-y-8 animate-in fade-in zoom-in-95 duration-300">
+    
+    <!-- Success Icon Animation -->
+    <div class="w-24 h-24 rounded-full bg-emerald-100 border-4 border-emerald-200 text-emerald-800 flex items-center justify-center mx-auto shadow-wellness">
+      <svg class="w-12 h-12 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+
+    <!-- Title & Subtitle -->
+    <div class="space-y-2">
+      <span class="wellness-badge bg-emerald-100 text-emerald-800 text-xs font-semibold px-3 py-1">Order Confirmed</span>
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-brand-dark pt-2">Order Placed Successfully!</h1>
+      <p class="text-sm sm:text-base text-brand-text-muted max-w-lg mx-auto">
+        Thank you for ordering with MedicoMart. A certified pharmacist is preparing your authentic healthcare package.
+      </p>
+    </div>
+
+    <!-- Order Details Grid -->
+    <div class="max-w-xl mx-auto bg-brand-cream-light/70 rounded-2xl border border-brand-border/70 p-6 text-left space-y-4">
+      <div class="flex items-center justify-between border-b border-brand-border/50 pb-3">
+        <span class="text-xs text-brand-text-muted uppercase tracking-wider">Order Reference</span>
+        <span class="font-serif font-bold text-lg text-brand-dark">#{{ order.order_id }}</span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 text-xs">
+        <div>
+          <span class="text-brand-text-muted block">Payment Method</span>
+          <span class="font-semibold text-brand-dark">{{ order.payment_method }}</span>
+        </div>
+        <div>
+          <span class="text-brand-text-muted block">Payment Status</span>
+          <span class="font-semibold text-amber-800">{{ order.get_payment_status_display|default:order.payment_status }}</span>
+        </div>
+        <div>
+          <span class="text-brand-text-muted block">Order Status</span>
+          <span class="font-semibold text-emerald-800">{{ order.get_order_status_display|default:order.order_status }}</span>
+        </div>
+        <div>
+          <span class="text-brand-text-muted block">Total Amount</span>
+          <span class="font-serif font-bold text-sm text-brand-dark">&#x20B9;{{ order.total_amount }}</span>
+        </div>
+      </div>
+
+      <div class="pt-2 border-t border-brand-border/50 text-xs">
+        <span class="text-brand-text-muted block">Delivering To</span>
+        <p class="font-medium text-brand-dark leading-relaxed mt-0.5">{{ order.delivery_address }}</p>
+      </div>
+    </div>
+
+    <!-- Purchased Items Preview -->
+    <div class="max-w-xl mx-auto text-left space-y-3">
+      <h3 class="text-xs font-semibold text-brand-dark uppercase tracking-wider">Purchased Items ({{ order.items.count }})</h3>
+      <div class="divide-y divide-brand-border/40 bg-white rounded-2xl border border-brand-border/60 p-4">
+        {% for item in order.items.all %}
+        <div class="py-2.5 first:pt-0 last:pb-0 flex items-center justify-between gap-3 text-xs">
+          <div class="flex items-center gap-3">
+            <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+            <span class="font-semibold text-brand-dark">{{ item.product_name }}</span>
+            <span class="text-brand-text-muted">&times; {{ item.quantity }}</span>
+          </div>
+          <span class="font-serif font-bold text-brand-dark">&#x20B9;{{ item.subtotal }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
+      <a href="{% url 'orders' %}" class="wellness-btn-primary w-full sm:flex-1 py-4 text-sm shadow-wellness-md">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+        <span>View My Orders</span>
+      </a>
+      <a href="{% url 'home' %}" class="wellness-btn-secondary w-full sm:flex-1 py-4 text-sm">
+        <span>Continue Shopping</span>
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      </a>
+    </div>
+
+  </div>
+</div>
+{% endblock content %}

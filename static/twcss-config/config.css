@@ -26,16 +26,16 @@
 }
 
 *::-webkit-scrollbar-track {
-  background: #F5EFE3;
+  background: #F7F2E8;
 }
 
 *::-webkit-scrollbar-thumb {
-  background: #D8C8AA;
+  background: #C9B27C;
   border-radius: 9999px;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: #173D32;
+  background: #123F35;
 }
 
 .display {
@@ -52,15 +52,15 @@
 }
 
 .wellness-btn-primary {
-  @apply bg-brand-dark text-white font-medium px-6 py-3 rounded-full hover:bg-brand-light transition-all duration-200 active:scale-[0.98] shadow-sm hover:shadow-wellness-md flex items-center justify-center gap-2;
+  @apply bg-brand-dark text-white font-medium px-6 py-3 rounded-full hover:bg-brand-light transition-all duration-200 active:scale-[0.98] shadow-sm hover:shadow-wellness-md flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-brand-accent/60;
 }
 
 .wellness-btn-secondary {
-  @apply bg-transparent text-brand-dark border border-brand-dark font-medium px-6 py-3 rounded-full hover:bg-brand-dark hover:text-white transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-2;
+  @apply bg-transparent text-brand-dark border border-brand-dark font-medium px-6 py-3 rounded-full hover:bg-brand-dark hover:text-white transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-brand-dark/40;
 }
 
 .wellness-btn-accent {
-  @apply bg-brand-accent text-brand-dark font-semibold px-6 py-3 rounded-full hover:brightness-95 transition-all duration-200 active:scale-[0.98] shadow-sm;
+  @apply bg-brand-accent text-brand-dark font-semibold px-6 py-3 rounded-full hover:brightness-95 transition-all duration-200 active:scale-[0.98] shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-dark/40;
 }
 
 .wellness-input {
@@ -69,5 +69,81 @@
 
 .wellness-badge {
   @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium tracking-wide uppercase;
+}
+
+/* 3D Card Perspective and Tilt */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.card-3d-tilt {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  will-change: transform;
+}
+
+.translate-z-10 {
+  transform: translateZ(10px);
+}
+
+.translate-z-20 {
+  transform: translateZ(20px);
+}
+
+.translate-z-30 {
+  transform: translateZ(30px);
+}
+
+/* Scroll reveal helper */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* AI Orb & Glowing animations */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(26, 143, 107, 0.35), 0 0 50px rgba(201, 178, 124, 0.2);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(26, 143, 107, 0.55), 0 0 75px rgba(201, 178, 124, 0.35);
+    transform: scale(1.03);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+@keyframes orbit-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-orbit {
+  animation: orbit-slow 20s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 

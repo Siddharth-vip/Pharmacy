@@ -142,6 +142,12 @@ document.addEventListener('click', (e) => {
   }
 });
 
+function triggerBuyNow(productId, quantity = 1) {
+  const checkoutUrl = `/checkout/?mode=buy_now&product_id=${productId}&quantity=${quantity}`;
+  window.location.href = checkoutUrl;
+}
+
+
 
 
 
