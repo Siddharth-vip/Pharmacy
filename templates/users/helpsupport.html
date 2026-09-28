@@ -1,182 +1,101 @@
 {% extends "users/index.html" %}
+{% load static %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help and Support</title>
-    <style>
-        /* General Styles */
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
-        }
+<div class="bg-brand-cream/30 border-b border-brand-border/60 py-12">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
+    <span class="text-xs font-semibold uppercase tracking-widest text-brand-text-muted">Customer Support</span>
+    <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-dark">Help &amp; Support Center</h1>
+    <p class="text-base text-brand-text-muted">Find answers to frequently asked questions, order inquiries, and pharmacist advice.</p>
+  </div>
+</div>
 
-        /* Header */
-        .header {
-            background-color: #2874f0;
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+    
+    <!-- Sidebar Categories -->
+    <div class="lg:col-span-4 space-y-6">
+      <div class="bg-white rounded-3xl border border-brand-border/80 shadow-wellness p-6 space-y-6">
+        <div>
+          <h3 class="text-xs font-semibold text-brand-text-muted uppercase tracking-wider mb-3">Topic Categories</h3>
+          <ul class="space-y-1 text-sm font-medium">
+            <li><a href="#account" class="block px-3.5 py-2.5 rounded-xl bg-brand-cream-light text-brand-dark font-semibold">Login &amp; Account Management</a></li>
+            <li><a href="#delivery" class="block px-3.5 py-2.5 rounded-xl hover:bg-brand-cream text-brand-text-muted hover:text-brand-dark transition-colors">Delivery &amp; Packaging</a></li>
+            <li><a href="#orders" class="block px-3.5 py-2.5 rounded-xl hover:bg-brand-cream text-brand-text-muted hover:text-brand-dark transition-colors">Orders &amp; Refills</a></li>
+            <li><a href="#refunds" class="block px-3.5 py-2.5 rounded-xl hover:bg-brand-cream text-brand-text-muted hover:text-brand-dark transition-colors">Refunds &amp; Returns</a></li>
+            <li><a href="#prescriptions" class="block px-3.5 py-2.5 rounded-xl hover:bg-brand-cream text-brand-text-muted hover:text-brand-dark transition-colors">Prescriptions &amp; Verification</a></li>
+          </ul>
+        </div>
+      </div>
 
-        .header h1 {
-            font-size: 1.5em;
-        }
-
-        .header button {
-            background-color: white;
-            color: #2874f0;
-            border: none;
-            padding: 10px 15px;
-            font-size: 1em;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .header button:hover {
-            background-color: #f0f0f0;
-        }
-
-        /* Container */
-        .container {
-            display: flex;
-            margin: 20px auto;
-            max-width: 1200px;
-            background-color: #fff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: 25%;
-            background: #f2f2f2;
-            padding: 20px;
-            border-right: 1px solid #ddd;
-        }
-
-        .sidebar h3 {
-            font-size: 1.2em;
-            margin-bottom: 15px;
-            color: #555;
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .sidebar ul li {
-            margin-bottom: 10px;
-        }
-
-        .sidebar ul li a {
-            text-decoration: none;
-            color: #2874f0;
-            font-size: 1em;
-        }
-
-        .sidebar ul li a:hover {
-            text-decoration: underline;
-        }
-
-        /* Main Content */
-        .main-content {
-            width: 75%;
-            padding: 20px;
-        }
-
-        .main-content h1 {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .faq h2 {
-            font-size: 1.2em;
-            color: #2874f0;
-            margin-bottom: 10px;
-        }
-
-        .faq p {
-            margin-bottom: 20px;
-            font-size: 1em;
-            color: #555;
-        }
-
-        .support-button {
-            text-align: right;
-            margin-top: 30px;
-        }
-
-        .support-button button {
-            background-color: #2874f0;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1em;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .support-button button:hover {
-            background-color: #1e5dbb;
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <div class="header">
-        <h1>Help Center | 24x7 Support</h1>
-       
+      <div class="rounded-3xl bg-brand-dark text-white p-6 space-y-4">
+        <h4 class="font-serif text-lg font-bold text-brand-cream">Need Personalized Help?</h4>
+        <p class="text-xs text-brand-cream/80 leading-relaxed">Our licensed pharmacists and patient support specialists are available 24/7 to resolve your concerns.</p>
+        <a href="/users/contact" class="wellness-btn-accent w-full py-3 text-xs text-center block">
+          Contact Pharmacist
+        </a>
+      </div>
     </div>
 
-    <!-- Container -->
-    <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <h3>TYPE OF ISSUE</h3>
-            <ul>
-                <li><a href="#">Help with your issues</a></li>
-                <li><a href="#">Help with your order</a></li>
-                <li><a href="#">Help with other issues</a></li>
-            </ul>
-            <h3>HELP TOPICS</h3>
-            <ul>
-                <li><a href="#">Delivery related</a></li>
-                <li><a href="#">Login and my account</a></li>
-                <li><a href="#">Refunds related</a></li>
-                <li><a href="#">Payment</a></li>
-                <li><a href="#">Returns & Pickup related</a></li>
-            </ul>
-        </div>
+    <!-- Main FAQ Content -->
+    <div class="lg:col-span-8 bg-white rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-10 space-y-8">
+      
+      <div id="account" class="space-y-6">
+        <h2 class="font-serif text-2xl font-bold text-brand-dark border-b border-brand-border/60 pb-3">Login &amp; Account Management</h2>
+        
+        <div class="space-y-4">
+          <div class="p-4 rounded-2xl bg-brand-cream-light/60 border border-brand-border/60 space-y-1.5">
+            <h3 class="font-semibold text-base text-brand-dark">How do I verify my phone number or email?</h3>
+            <p class="text-sm text-brand-text-muted leading-relaxed">
+              When creating your account or editing your profile, your phone number and email are securely verified with single-sign-on validation. You don't need to re-verify every time you login.
+            </p>
+          </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <h1>Login and My Account</h1>
-            <div class="faq">
-                <h2>Can I reactivate my inactive account?</h2>
-                <p>Yes, you can reactivate your inactive account by logging in and following the instructions sent to your registered email.</p>
-                <h2>Do I need to verify my mobile number or email every time I log in?</h2>
-                <p>No, you only need to verify your mobile number or email once when setting up your account.</p>
-                <h2>What is an OTP or verification code?</h2>
-                <p>OTP (One Time Password) is a code sent to your registered mobile or email for verification purposes.</p>
-                <h2>How can I use my mobile number to log in?</h2>
-                <p>You can use your mobile number by selecting the "Log in with mobile number" option on the login page.</p>
-            </div>
-            <!-- Support Button -->
-            <div class="support-button">
-                <button onclick="window.location.href='mailto:siddharthabimanu007.com';">Contact Support</button>
-            </div>
+          <div class="p-4 rounded-2xl bg-brand-cream-light/60 border border-brand-border/60 space-y-1.5">
+            <h3 class="font-semibold text-base text-brand-dark">Can I reactivate an inactive account?</h3>
+            <p class="text-sm text-brand-text-muted leading-relaxed">
+              Yes, you can simply sign in with your registered email or phone number. If you need assistance, click "Forgot Password" or message support.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-brand-cream-light/60 border border-brand-border/60 space-y-1.5">
+            <h3 class="font-semibold text-base text-brand-dark">How do I update my delivery addresses?</h3>
+            <p class="text-sm text-brand-text-muted leading-relaxed">
+              Navigate to <a href="/users/edit_profile" class="text-brand-dark font-semibold underline">Edit Profile</a> to add or modify multiple saved addresses.
+            </p>
+          </div>
         </div>
+      </div>
+
+      <div id="delivery" class="space-y-6 pt-4">
+        <h2 class="font-serif text-2xl font-bold text-brand-dark border-b border-brand-border/60 pb-3">Delivery &amp; Packaging</h2>
+        
+        <div class="space-y-4">
+          <div class="p-4 rounded-2xl bg-brand-cream-light/60 border border-brand-border/60 space-y-1.5">
+            <h3 class="font-semibold text-base text-brand-dark">How are temperature-sensitive medicines shipped?</h3>
+            <p class="text-sm text-brand-text-muted leading-relaxed">
+              All temperature-regulated products (e.g. insulin, specialized serums) are packed in insulated thermal pouches with cooling gel packs to maintain optimal temperature throughout transit.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-brand-cream-light/60 border border-brand-border/60 space-y-1.5">
+            <h3 class="font-semibold text-base text-brand-dark">What is the estimated delivery timeframe?</h3>
+            <p class="text-sm text-brand-text-muted leading-relaxed">
+              Standard orders are delivered in 24 to 48 hours in metro areas, and 2-4 business days nationwide.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-6 border-t border-brand-border/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <span class="text-xs text-brand-text-muted">Still haven't found what you're looking for?</span>
+        <a href="/users/contact" class="wellness-btn-primary text-xs py-3 px-6 inline-flex">
+          Send Us a Direct Message
+        </a>
+      </div>
+
     </div>
-</body>
-</html>
 
-{% endblock content %}
+  </div>
+</div>
+{% endblock content %}

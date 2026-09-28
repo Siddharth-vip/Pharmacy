@@ -142,28 +142,34 @@ def contact(request):
         return render(request,'users/contact.html')
 
 def home(request):
-    user = User.objects.filter(username = request.user).first()
+    user = User.objects.filter(username = request.user).first() if request.user.is_authenticated else None
     categories = Category.objects.all()
+    featured_products = Product.objects.all()[:8]
     if user:
         custom_user = user.customuser_set.all().first()
-        return render(request, 'users/home.html',{'custom_user': custom_user,'categories':categories})
+        return render(request, 'users/home.html',{'custom_user': custom_user,'categories':categories, 'featured_products': featured_products, 'products': featured_products})
     else:
-        return render(request,'users/home.html',{'categories':categories})
+        return render(request,'users/home.html',{'categories':categories, 'featured_products': featured_products, 'products': featured_products})
 
 def products(request):
     products = Product.objects.all()
-    user = User.objects.filter(username = request.user).first()
+    user = User.objects.filter(username = request.user).first() if request.user.is_authenticated else None
     categories = Category.objects.all()
     if user:
         custom_user = user.customuser_set.all().first()
         return render(request, 'products/products.html',{'custom_user': custom_user, 'products': products,'categories':categories})
     else:
-        return render(request,'products/products.html',{ 'products' : products })
+        return render(request,'products/products.html',{'products': products, 'categories': categories})
 
 def product(request,id):
     product = Product.objects.get(id=id)
-    custom_user = User.objects.filter(username=request.user.username).first().customuser_set.all().first()
-    return render(request,'products/product.html',{'product':product,'custom_user':custom_user})
+    custom_user = None
+    if request.user.is_authenticated:
+        user_obj = User.objects.filter(username=request.user.username).first()
+        if user_obj:
+            custom_user = user_obj.customuser_set.all().first()
+    related_products = Product.objects.exclude(id=id)[:6]
+    return render(request,'products/product.html',{'product':product,'custom_user':custom_user, 'related_products': related_products})
 
 @login_required(login_url='/users/login')
 def cart(request):

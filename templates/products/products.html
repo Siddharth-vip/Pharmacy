@@ -2,71 +2,180 @@
 {% load static %}
 
 {% block content %}
-<div class="container mx-auto p-6">
-    <!-- Banner -->
-    <div class="banner mb-8 flex items-center justify-center bg-green-600 text-white text-2xl font-bold py-10 rounded-lg shadow-md">
-        <h1>Explore Our Wide Range of Pharmacy Products</h1>
+<div class="bg-brand-cream/30 border-b border-brand-border/60 py-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header Banner -->
+    <div class="text-center max-w-3xl mx-auto mb-8 space-y-3">
+      <span class="text-xs font-semibold uppercase tracking-widest text-brand-text-muted">Curated Catalog</span>
+      <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-dark">Healthcare &amp; Wellness Essentials</h1>
+      <p class="text-sm sm:text-base text-brand-text-muted">Direct from certified pharmaceutical laboratories and natural botanical sources.</p>
     </div>
 
-    <!-- Search Bar with Filters -->
-    <div class="mb-6 flex justify-center">
-        <form method="GET" action="{% url 'search_products' %}" class="flex items-center gap-[1rem] w-full max-w-3xl relative">
-            <input type="text" name="q" placeholder="Search for medicines, wellness products, and more..." value="{{ request.GET.q }}" 
-                class="w-full p-4 pl-12 pr-14 bg-gray-100 text-gray-700 rounded-full border-2 border-gray-300 focus:outline-none focus:border-green-500">
-
-            <!-- Category Filter -->
-            <select name="category" class="p-2 border-2 border-gray-300 rounded-lg bg-gray-100">
-                <option value="">Select Category</option>
-                {% for category in categories %}
-                    <option value="{{ category.name }}" {% if category.name == request.GET.category %} selected {% endif %}>{{ category.name }}</option>
-                {% endfor %}
-            </select>
-
-            <!-- Price Filter -->
-            <select name="price_range" class="p-2 border-2 border-gray-300 rounded-lg bg-gray-100">
-                <option value="">Select Price Range</option>
-                <option value="">All</option>
-                <option value="0-500" {% if request.GET.price_range == '0-500' %} selected {% endif %}>₹0 - ₹500</option>
-                <option value="501-1000" {% if request.GET.price_range == '501-1000' %} selected {% endif %}>₹501 - ₹1000</option>
-                <option value="1001-5000" {% if request.GET.price_range == '1001-5000' %} selected {% endif %}>₹1001 - ₹5000</option>
-                <option value="5001-10000" {% if request.GET.price_range == '5001-10000' %} selected {% endif %}>₹5001 - ₹10000</option>
-                <option value="10000+" {% if request.GET.price_range == '10000+' %} selected {% endif %}>₹10000+</option>
-            </select>
-
-            <button type="submit" class="bg-green-600 rounded-xl p-[.4rem_.8rem]">
-                Search
-            </button>
-        </form>
-    </div>
-
-    <!-- Product Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {% for item in products %}
-        <div class="product-card flex flex-col gap-4 items-center p-4 bg-white rounded-xl hover:shadow-xl cursor-pointer" onclick="window.location.href = '/products/{{ item.id }}'">
-            <img src="{{ item.image.url }}" alt="{{ item.name }}" class="w-40 h-40 object-contain">
-            <h3 class="text-lg font-semibold text-gray-800 text-center truncate w-48">{{ item.name }}</h3>
-            <p class="text-green-700 font-bold text-xl">&#x20B9;{{ item.price }}</p>
-            <div class="flex gap-2 flex-wrap justify-center mt-2">
-                {% for category in item.get_categories %}
-                <span class="capitalize bg-blue-500 text-white px-3 py-1 rounded-full text-sm">{{ category }}</span>
-                {% endfor %}
-            </div>
-            <button class="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700">View Details</button>
+    <!-- Search & Filter Bar -->
+    <div class="max-w-4xl mx-auto bg-white p-3 sm:p-4 rounded-3xl shadow-wellness border border-brand-border">
+      <form method="GET" action="{% url 'search_products' %}" class="flex flex-col md:flex-row items-center gap-3">
+        <!-- Search Input -->
+        <div class="relative flex-1 w-full">
+          <svg class="w-5 h-5 text-brand-text-muted absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <input 
+            type="text" 
+            name="q" 
+            placeholder="Search medicines, vitamins, supplements..." 
+            value="{{ request.GET.q|default:'' }}" 
+            class="w-full pl-11 pr-4 py-3 bg-brand-cream-light text-brand-text-dark rounded-2xl border border-brand-border/70 focus:outline-none focus:border-brand-dark text-sm placeholder:text-brand-text-muted/70"
+          >
         </div>
-        {% endfor %}
+
+        <!-- Category Dropdown -->
+        <div class="w-full md:w-48 shrink-0">
+          <select 
+            name="category" 
+            class="w-full px-4 py-3 bg-brand-cream-light text-brand-text-dark rounded-2xl border border-brand-border/70 focus:outline-none focus:border-brand-dark text-sm cursor-pointer capitalize"
+          >
+            <option value="">All Categories</option>
+            {% for category in categories %}
+              <option value="{{ category.name }}" {% if category.name == request.GET.category %} selected {% endif %}>{{ category.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Price Range Dropdown -->
+        <div class="w-full md:w-44 shrink-0">
+          <select 
+            name="price_range" 
+            class="w-full px-4 py-3 bg-brand-cream-light text-brand-text-dark rounded-2xl border border-brand-border/70 focus:outline-none focus:border-brand-dark text-sm cursor-pointer"
+          >
+            <option value="">All Prices</option>
+            <option value="0-500" {% if request.GET.price_range == '0-500' %} selected {% endif %}>&#x20B9;0 - &#x20B9;500</option>
+            <option value="501-1000" {% if request.GET.price_range == '501-1000' %} selected {% endif %}>&#x20B9;501 - &#x20B9;1,000</option>
+            <option value="1001-5000" {% if request.GET.price_range == '1001-5000' %} selected {% endif %}>&#x20B9;1,001 - &#x20B9;5,000</option>
+            <option value="5001-10000" {% if request.GET.price_range == '5001-10000' %} selected {% endif %}>&#x20B9;5,001 - &#x20B9;10,000</option>
+            <option value="10000-100000" {% if request.GET.price_range == '10000-100000' or request.GET.price_range == '10000+' %} selected {% endif %}>&#x20B9;10,000+</option>
+          </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button 
+          type="submit" 
+          class="w-full md:w-auto px-6 py-3 bg-brand-dark text-brand-cream hover:bg-brand-light font-medium rounded-2xl transition-all shadow-sm active:scale-95 text-sm shrink-0 flex items-center justify-center gap-2"
+        >
+          <span>Filter</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+        </button>
+      </form>
     </div>
+  </div>
 </div>
 
-<script>
-    // JS for enhanced hover animations
-    document.querySelectorAll('.product-card').forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-        });
+<!-- Products Grid Section -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  
+  <!-- Active Filter / Result Count -->
+  <div class="flex items-center justify-between mb-8 text-sm text-brand-text-muted">
+    <div>
+      Showing <span class="font-semibold text-brand-dark">{{ products|length }}</span> products
+      {% if request.GET.category %}
+        in <span class="font-semibold text-brand-dark capitalize">"{{ request.GET.category }}"</span>
+      {% endif %}
+      {% if request.GET.q %}
+        matching <span class="font-semibold text-brand-dark">"{{ request.GET.q }}"</span>
+      {% endif %}
+    </div>
+    {% if request.GET.q or request.GET.category or request.GET.price_range %}
+      <a href="/products" class="text-brand-dark underline hover:text-brand-light font-medium text-xs">Clear all filters</a>
+    {% endif %}
+  </div>
 
-        card.addEventListener('mouseleave', () => {
-            card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-        });
-    });
-</script>
+  {% if products %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {% for item in products %}
+      <div class="wellness-card bg-white rounded-2xl border border-brand-border/80 shadow-wellness overflow-hidden flex flex-col justify-between group">
+        <!-- Image & Badges -->
+        <div class="relative bg-brand-cream-light/60 p-6 flex items-center justify-center h-52 border-b border-brand-border/40 cursor-pointer" onclick="window.location.href = '/products/{{ item.id }}'">
+          {% if item.image %}
+            <img class="max-h-40 max-w-full object-contain group-hover:scale-105 transition-transform duration-300" src="{{ item.image.url }}" alt="{{ item.name }}">
+          {% else %}
+            <img class="max-h-40 max-w-full object-contain" src="{% static 'images/image.jpg' %}" alt="{{ item.name }}">
+          {% endif %}
+          
+          <div class="absolute top-3 left-3 flex flex-wrap gap-1">
+            {% for cat in item.get_categories|slice:":1" %}
+            <span class="wellness-badge bg-brand-accent/40 text-brand-dark text-[10px] capitalize">{{ cat }}</span>
+            {% endfor %}
+          </div>
+          
+          {% if not item.is_available %}
+          <div class="absolute top-3 right-3">
+            <span class="wellness-badge bg-red-100 text-red-700 text-[10px]">Out of Stock</span>
+          </div>
+          {% endif %}
+        </div>
+
+        <!-- Content -->
+        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+          <div>
+            <!-- Rating -->
+            <div class="flex items-center gap-1 text-amber-500 text-xs mb-1.5">
+              <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <span class="text-brand-text-muted font-medium ml-1">{{ item.rating|default:"4.8" }}</span>
+            </div>
+
+            <!-- Title -->
+            <h3 class="font-semibold text-base text-brand-dark hover:text-brand-light transition-colors line-clamp-2 cursor-pointer" onclick="window.location.href = '/products/{{ item.id }}'">
+              {{ item.name }}
+            </h3>
+            
+            {% if item.weight %}
+            <p class="text-xs text-brand-text-muted mt-1">Weight: {{ item.weight }}g</p>
+            {% endif %}
+          </div>
+
+          <!-- Price & Add Action -->
+          <div class="pt-3 border-t border-brand-border/60 flex items-center justify-between gap-3">
+            <div>
+              <span class="text-xs text-brand-text-muted block">Price</span>
+              <span class="font-serif text-xl font-bold text-brand-dark">&#x20B9;{{ item.price }}</span>
+            </div>
+            
+            <div class="flex items-center gap-2">
+              <button 
+                onclick="addToCart('{{ item.id }}')"
+                class="px-3.5 py-2 bg-brand-dark text-brand-cream hover:bg-brand-light active:scale-95 text-xs font-semibold rounded-full transition-all flex items-center gap-1 shadow-sm"
+                title="Add to cart"
+              >
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                Add
+              </button>
+              <a 
+                href="/products/{{ item.id }}" 
+                class="p-2 border border-brand-border text-brand-dark hover:bg-brand-cream rounded-full transition-colors"
+                title="View details"
+              >
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <!-- Empty State -->
+    <div class="bg-white rounded-3xl border border-brand-border p-12 text-center max-w-lg mx-auto shadow-sm space-y-4">
+      <div class="w-16 h-16 rounded-full bg-brand-cream flex items-center justify-center text-brand-dark mx-auto">
+        <svg class="w-8 h-8 text-brand-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 9.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <h3 class="font-serif text-2xl font-bold text-brand-dark">No Products Found</h3>
+      <p class="text-sm text-brand-text-muted">We couldn't find any healthcare products matching your selected search criteria. Try adjusting your filters.</p>
+      <div class="pt-2">
+        <a href="/products" class="wellness-btn-primary mx-auto inline-flex">
+          Reset Filter &amp; View All
+        </a>
+      </div>
+    </div>
+  {% endif %}
+</div>
 {% endblock content %}
+

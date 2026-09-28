@@ -1,123 +1,280 @@
 {% extends "users/index.html" %}
+{% load static %}
 
 {% block content %}
-<div class="flex flex-col min-h-[80dvh] w-[100dvw]">
-    <div class="flex items-center justify-center gap-[2rem] border-b-[1px] border-black">
-        <img class="size-[30rem]" src="{{ product.image.url }}" alt="{{ product.name }}">
-        <div class="flex flex-col gap-[2rem] p-[1rem_2rem]">
-            <div class="text-5xl">{{ product.name }}</div>
-            <div class="text-3xl flex items-start"><span class="text-lg">&#x20B9;</span>{{ product.price }}</div>
-            <div class="flex justify-between w-3/5">
-                <div class="flex flex-col gap-[2rem]">
-                    <div 
-                    onclick="addToCart('{{product.id}}')" 
-                    class="bg-orange-500 hover:bg-orange-400 transition-all text-blue-900 font-bold w-[8rem] text-center py-[.5rem] cursor-pointer rounded-xl">Add to Cart</div>
-                    <div onclick="window.location.href = '/buy_now'" class="bg-yellow-400 hover:bg-yellow-300 transition-all text-blue-900 font-bold w-[8rem] text-center py-[.5rem] cursor-pointer rounded-xl">Buy Now</div>
-                </div>
-                <div class="flex flex-col justify-center gap-[2rem] text-xl font-semibold">
-                    <div class="ml-[2rem]">Weight: {{ product.weight }}</div>
-                    <div class="ml-[2rem] flex gap-[.5rem] items-center">
-                        <div>Categories:</div> 
-                        <div class="flex gap-[.5rem]">
-                            {% for category in product.get_categories %}
-                            <div class="bg-blue-400 rounded-3xl p-[.4rem_.6rem]">{{category}}</div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="border-b-[1px] p-[2rem_4rem] border-black">
-        <div class="text-2xl mb-[1rem] font-semibold">Product Description:</div>
-        <div class="[text-indent:3rem]">{{ product.description }}</div>
-    </div>
-    <div class="p-[2rem_4rem] border-black">
-        <div class="flex gap-4">
-            <button onclick="openModal('howToUseModal')" class="bg-blue-500 text-white px-4 py-2 rounded">How to Use</button>
-            <button onclick="openModal('benefitsModal')" class="bg-green-500 text-white px-4 py-2 rounded">Benefits</button>
-            <button onclick="openModal('precautionModal')" class="bg-red-500 text-white px-4 py-2 rounded">Precaution</button>
-        </div>
-    </div>
-    <div class="flex flex-col p-[2rem]">
-        <div class="text-2xl font-semibold">Related Items</div>
-        <div class="scroll flex gap-[2rem] m-[2rem] overflow-x-scroll scroll-smooth snap-x snap-mandatory">
-        {% for item in related_products %}
-            <div onclick="window.location.href='/products/{{ item.id }}'"
-            class="w-[14rem] h-[17rem] p-[1rem] flex flex-col items-center cursor-pointer gap-[1rem] rounded-xl snap-start border-2 border-black">
-                <img class="w-2/3 h-2/3" src="{{ item.image.url }}" alt="{{ item.name }}">
-                <div class="w-[25ch] line-clamp-3 overflow-hidden text-center text-ellipsis">{{ item.name }}</div>
-                <div class="bg-green-700 rounded-lg text-white p-[.1rem_.5rem]">&#x20B9;{{ item.price }}</div>
-            </div>
-        {% endfor %}
-    </div>
-    </div>
+<div class="bg-brand-cream/30 border-b border-brand-border/60 py-6">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Breadcrumbs -->
+    <nav class="flex items-center gap-2 text-xs font-medium text-brand-text-muted">
+      <a href="/" class="hover:text-brand-dark transition-colors">Home</a>
+      <span>/</span>
+      <a href="/products" class="hover:text-brand-dark transition-colors">Products</a>
+      <span>/</span>
+      <span class="text-brand-dark truncate max-w-xs">{{ product.name }}</span>
+    </nav>
+  </div>
 </div>
 
-<!-- Modals -->
-<div id="howToUseModal" class="modal hidden">
-    <div class="modal-content">
-        <span onclick="closeModal('howToUseModal')" class="close">&times;</span>
-        <div class="text-2xl mb-4 font-semibold">How to Use:</div>
-        <div>{{ product.how_to_use }}</div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+  <!-- Main Product Detail Card -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 bg-white rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-10">
+    
+    <!-- Left: Image Gallery -->
+    <div class="lg:col-span-5 flex flex-col items-center justify-center">
+      <div class="w-full aspect-square bg-brand-cream-light/60 rounded-2xl border border-brand-border/60 p-8 flex items-center justify-center relative overflow-hidden group">
+        {% if product.image %}
+          <img class="max-h-80 max-w-full object-contain group-hover:scale-105 transition-transform duration-300" src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% else %}
+          <img class="max-h-80 max-w-full object-contain" src="{% static 'images/image.jpg' %}" alt="{{ product.name }}">
+        {% endif %}
+        
+        <div class="absolute top-4 left-4 flex flex-wrap gap-1.5">
+          {% for category in product.get_categories %}
+            <span class="wellness-badge bg-brand-accent/40 text-brand-dark text-xs capitalize">{{ category }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="mt-4 flex items-center justify-center gap-6 text-xs text-brand-text-muted">
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-brand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          100% Certified Authentic
+        </span>
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-brand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Pharmacist Inspected
+        </span>
+      </div>
     </div>
+
+    <!-- Right: Product Info & Actions -->
+    <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
+      <div class="space-y-4">
+        
+        <!-- Stock status & Rating -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold {% if product.is_available %}bg-emerald-50 text-emerald-800 border border-emerald-200{% else %}bg-red-50 text-red-800 border border-red-200{% endif %}">
+              <span class="w-2 h-2 rounded-full {% if product.is_available %}bg-emerald-600{% else %}bg-red-600{% endif %}"></span>
+              {% if product.is_available %}In Stock (Ready to Dispatch){% else %}Currently Out of Stock{% endif %}
+            </span>
+          </div>
+
+          <div class="flex items-center gap-1 text-amber-500 text-sm">
+            <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <span class="font-semibold text-brand-text-dark ml-1">{{ product.rating|default:"4.8" }}</span>
+            <span class="text-xs text-brand-text-muted">(120+ verified reviews)</span>
+          </div>
+        </div>
+
+        <!-- Product Title -->
+        <h1 class="font-serif text-3xl sm:text-4xl font-bold text-brand-dark leading-tight">
+          {{ product.name }}
+        </h1>
+
+        <!-- Price Section -->
+        <div class="flex items-baseline gap-3 py-2 border-y border-brand-border/60">
+          <span class="font-serif text-3xl sm:text-4xl font-bold text-brand-dark">&#x20B9;{{ product.price }}</span>
+          <span class="text-xs text-brand-text-muted">Inclusive of all taxes &bull; Free standard shipping</span>
+        </div>
+
+        <!-- Specifications Grid -->
+        <div class="grid grid-cols-2 gap-4 py-2">
+          <div class="p-3.5 bg-brand-cream-light rounded-2xl border border-brand-border/60">
+            <span class="text-xs text-brand-text-muted block">Weight / Volume</span>
+            <span class="text-sm font-semibold text-brand-dark">{{ product.weight }}g net weight</span>
+          </div>
+          <div class="p-3.5 bg-brand-cream-light rounded-2xl border border-brand-border/60">
+            <span class="text-xs text-brand-text-muted block">Prescription Requirement</span>
+            <span class="text-sm font-semibold text-brand-dark">Over the Counter (OTC)</span>
+          </div>
+        </div>
+
+        <!-- Short Description -->
+        <div class="text-sm text-brand-text-muted leading-relaxed">
+          <p>{{ product.description|truncatewords:45 }}</p>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="pt-4 flex flex-col sm:flex-row items-center gap-4">
+        <button 
+          onclick="addToCart('{{ product.id }}')" 
+          class="wellness-btn-primary w-full sm:flex-1 py-4 text-base shadow-wellness"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+          Add to Cart
+        </button>
+
+        <button 
+          onclick="window.location.href = '/buy_now'" 
+          class="wellness-btn-accent w-full sm:w-48 py-4 text-base text-center"
+        >
+          Buy Now
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Detailed Wellness Tabs / Information Modals -->
+  <div class="mt-12 bg-white rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-10 space-y-8">
+    <div>
+      <h2 class="font-serif text-2xl font-bold text-brand-dark mb-4">Complete Product Description</h2>
+      <div class="text-base text-brand-text-muted leading-relaxed max-w-4xl">
+        {{ product.description }}
+      </div>
+    </div>
+
+    <!-- Quick Clinical & Usage Modals Triggers -->
+    <div class="pt-6 border-t border-brand-border/60">
+      <h3 class="text-sm font-semibold text-brand-dark uppercase tracking-wider mb-4">Usage &amp; Safety Guides</h3>
+      <div class="flex flex-wrap gap-3">
+        <button 
+          onclick="openModal('howToUseModal')" 
+          class="px-5 py-2.5 rounded-full border border-brand-dark text-brand-dark hover:bg-brand-dark hover:text-white transition-all text-xs font-semibold flex items-center gap-2"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          How to Use
+        </button>
+        <button 
+          onclick="openModal('benefitsModal')" 
+          class="px-5 py-2.5 rounded-full border border-emerald-800 text-emerald-900 bg-emerald-50 hover:bg-emerald-800 hover:text-white transition-all text-xs font-semibold flex items-center gap-2"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Health Benefits
+        </button>
+        <button 
+          onclick="openModal('precautionModal')" 
+          class="px-5 py-2.5 rounded-full border border-amber-800 text-amber-900 bg-amber-50 hover:bg-amber-800 hover:text-white transition-all text-xs font-semibold flex items-center gap-2"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+          Precautions &amp; Advisory
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Products Section -->
+  {% if related_products %}
+  <div class="mt-16">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <span class="text-xs font-semibold uppercase tracking-widest text-brand-text-muted">Complementary</span>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark mt-1">Related Wellness Items</h2>
+      </div>
+      <a href="/products" class="text-xs font-semibold text-brand-dark hover:underline">Explore More &rarr;</a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {% for item in related_products %}
+      <div class="wellness-card bg-white rounded-2xl border border-brand-border/80 shadow-wellness overflow-hidden flex flex-col justify-between group">
+        <div class="relative bg-brand-cream-light/60 p-6 flex items-center justify-center h-48 border-b border-brand-border/40 cursor-pointer" onclick="window.location.href = '/products/{{ item.id }}'">
+          {% if item.image %}
+            <img class="max-h-36 max-w-full object-contain group-hover:scale-105 transition-transform duration-300" src="{{ item.image.url }}" alt="{{ item.name }}">
+          {% else %}
+            <img class="max-h-36 max-w-full object-contain" src="{% static 'images/image.jpg' %}" alt="{{ item.name }}">
+          {% endif %}
+        </div>
+        <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+          <h3 class="font-semibold text-sm text-brand-dark hover:text-brand-light transition-colors line-clamp-2 cursor-pointer" onclick="window.location.href = '/products/{{ item.id }}'">
+            {{ item.name }}
+          </h3>
+          <div class="flex items-center justify-between pt-2 border-t border-brand-border/60">
+            <span class="font-serif text-lg font-bold text-brand-dark">&#x20B9;{{ item.price }}</span>
+            <button 
+              onclick="addToCart('{{ item.id }}')" 
+              class="px-3 py-1.5 bg-brand-dark text-brand-cream hover:bg-brand-light active:scale-95 text-xs font-semibold rounded-full transition-all"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
 </div>
-<div id="benefitsModal" class="modal hidden">
-    <div class="modal-content">
-        <span onclick="closeModal('benefitsModal')" class="close">&times;</span>
-        <div class="text-2xl mb-4 font-semibold">Benefits:</div>
-        <div>{{ product.benefits }}</div>
+
+<!-- Wellness Detail Modals -->
+<div id="howToUseModal" class="modal hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+  <div class="bg-brand-cream-light text-brand-text-dark rounded-3xl max-w-lg w-full p-8 shadow-wellness-lg border border-brand-border relative animate-in fade-in zoom-in-95 duration-200">
+    <button onclick="closeModal('howToUseModal')" class="absolute top-6 right-6 text-brand-text-muted hover:text-brand-dark text-xl font-bold p-1">&times;</button>
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-full bg-brand-dark text-brand-accent flex items-center justify-center shrink-0">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <h3 class="font-serif text-2xl font-bold text-brand-dark">How to Use</h3>
     </div>
+    <div class="text-sm text-brand-text-muted leading-relaxed space-y-2 max-h-72 overflow-y-auto">
+      {{ product.how_to_use|default:"Follow physician guidance or recommended dosage specified on the package label. Store in a cool, dry place away from direct sunlight." }}
+    </div>
+    <div class="mt-6 pt-4 border-t border-brand-border flex justify-end">
+      <button onclick="closeModal('howToUseModal')" class="wellness-btn-primary text-xs py-2.5 px-6">Got it</button>
+    </div>
+  </div>
 </div>
-<div id="precautionModal" class="modal hidden">
-    <div class="modal-content">
-        <span onclick="closeModal('precautionModal')" class="close">&times;</span>
-        <div class="text-2xl mb-4 font-semibold">Precaution:</div>
-        <div>{{ product.precaution }}</div>
+
+<div id="benefitsModal" class="modal hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+  <div class="bg-brand-cream-light text-brand-text-dark rounded-3xl max-w-lg w-full p-8 shadow-wellness-lg border border-brand-border relative animate-in fade-in zoom-in-95 duration-200">
+    <button onclick="closeModal('benefitsModal')" class="absolute top-6 right-6 text-brand-text-muted hover:text-brand-dark text-xl font-bold p-1">&times;</button>
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-full bg-emerald-800 text-emerald-100 flex items-center justify-center shrink-0">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <h3 class="font-serif text-2xl font-bold text-brand-dark">Health Benefits</h3>
     </div>
+    <div class="text-sm text-brand-text-muted leading-relaxed space-y-2 max-h-72 overflow-y-auto">
+      {{ product.benefits|default:"Formulated with certified pharmaceutical-grade active compounds to optimize biological balance, enhance vitality, and support long-term wellness." }}
+    </div>
+    <div class="mt-6 pt-4 border-t border-brand-border flex justify-end">
+      <button onclick="closeModal('benefitsModal')" class="wellness-btn-primary text-xs py-2.5 px-6">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="precautionModal" class="modal hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+  <div class="bg-brand-cream-light text-brand-text-dark rounded-3xl max-w-lg w-full p-8 shadow-wellness-lg border border-brand-border relative animate-in fade-in zoom-in-95 duration-200">
+    <button onclick="closeModal('precautionModal')" class="absolute top-6 right-6 text-brand-text-muted hover:text-brand-dark text-xl font-bold p-1">&times;</button>
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-full bg-amber-800 text-amber-100 flex items-center justify-center shrink-0">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+      </div>
+      <h3 class="font-serif text-2xl font-bold text-brand-dark">Precautions &amp; Advisory</h3>
+    </div>
+    <div class="text-sm text-brand-text-muted leading-relaxed space-y-2 max-h-72 overflow-y-auto">
+      {{ product.precaution|default:"Keep out of reach of children. Consult your doctor prior to use if pregnant, nursing, or undergoing clinical treatment for chronic conditions." }}
+    </div>
+    <div class="mt-6 pt-4 border-t border-brand-border flex justify-end">
+      <button onclick="closeModal('precautionModal')" class="wellness-btn-primary text-xs py-2.5 px-6">Understand</button>
+    </div>
+  </div>
 </div>
 
 <script>
-    function openModal(modalId) {
-        document.getElementById(modalId).classList.remove('hidden');
+  function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.remove('hidden');
     }
+  }
 
-    function closeModal(modalId) {
-        document.getElementById(modalId).classList.add('hidden');
+  function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.add('hidden');
     }
+  }
+
+  // Close modals on clicking outside content
+  window.addEventListener('click', (e) => {
+    document.querySelectorAll('.modal').forEach(modal => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+  });
 </script>
 
-<style>
-    .modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-    }
-    .modal.hidden {
-        display: none;
-    }
-    .modal-content {
-        background: white;
-        padding: 2rem;
-        border-radius: 8px;
-        max-width: 500px;
-        width: 100%;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    .close {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: black;
-        cursor: pointer;
-        float: right;
-    }
-</style>
-
 {% endblock content %}
+

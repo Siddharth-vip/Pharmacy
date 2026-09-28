@@ -1,100 +1,79 @@
 {% extends "users/index.html" %}
+{% load static %}
 
 {% block content %}
-<!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
-    <style>
-        /* General body styling */
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-        }
+<div class="bg-brand-cream/30 border-b border-brand-border/60 py-12">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+    <span class="text-xs font-semibold uppercase tracking-widest text-brand-text-muted">Our Philosophy</span>
+    <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-dark">About MedicoMart</h1>
+    <p class="text-base sm:text-lg text-brand-text-muted leading-relaxed">
+      Where modern pharmaceutical innovation meets natural wellness, redefining how you and your family access healthcare.
+    </p>
+  </div>
+</div>
 
-        /* Container styling */
-        .about-container {
-            max-width: 800px;
-            margin: 50px auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
+  <!-- Story Section -->
+  <div class="bg-white rounded-3xl border border-brand-border/80 shadow-wellness p-8 sm:p-12 space-y-6">
+    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark">Our Healthcare Journey</h2>
+    <p class="text-base text-brand-text-muted leading-relaxed">
+      Our journey began with a simple, uncompromising idea: to make genuine, high-quality healthcare and natural wellness products available to everyone, everywhere, at the click of a button. In today’s fast-paced world, managing your vitality shouldn't be complicated or opaque.
+    </p>
+    <p class="text-base text-brand-text-muted leading-relaxed">
+      At <strong class="text-brand-dark font-semibold">MedicoMart</strong>, we are more than an online pharmacy — we are your lifelong healthcare companion. From verified prescription medicines to daily vitamins and organic botanicals, we deliver certified peace of mind right to your doorstep.
+    </p>
+  </div>
 
-        /* Heading styles */
-        h1, h2 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
+  <!-- Mission Banner -->
+  <div class="rounded-3xl bg-brand-dark text-white p-8 sm:p-12 space-y-4">
+    <span class="text-xs font-semibold uppercase tracking-widest text-brand-accent">Our Mission</span>
+    <h3 class="font-serif text-2xl sm:text-3xl font-bold text-brand-cream">
+      Empowering individual health through pure, accessible, and transparent solutions.
+    </h3>
+    <p class="text-sm text-brand-cream/80 leading-relaxed">
+      Every product is inspected by certified medical professionals, ensuring clinical safety, maximum potency, and complete compliance with health authorities.
+    </p>
+  </div>
 
-        /* Paragraph styles */
-        p {
-            margin: 10px 0;
-        }
+  <!-- Why We're Different Grid -->
+  <div class="space-y-6">
+    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark text-center">Why MedicoMart is Different</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <div class="wellness-card bg-white rounded-2xl p-6 border border-brand-border shadow-sm space-y-2">
+        <div class="w-10 h-10 rounded-xl bg-brand-cream flex items-center justify-center text-brand-dark font-bold text-sm">01</div>
+        <h4 class="font-semibold text-lg text-brand-dark">Authenticity Guaranteed</h4>
+        <p class="text-sm text-brand-text-muted leading-relaxed">Every item is sourced directly from licensed, certified manufacturers with verifiable batch tracking.</p>
+      </div>
 
-        /* Unordered list styles */
-        ul {
-            margin: 10px 0;
-            padding-left: 20px;
-        }
+      <div class="wellness-card bg-white rounded-2xl p-6 border border-brand-border shadow-sm space-y-2">
+        <div class="w-10 h-10 rounded-xl bg-brand-cream flex items-center justify-center text-brand-dark font-bold text-sm">02</div>
+        <h4 class="font-semibold text-lg text-brand-dark">Expert Pharmacist Guidance</h4>
+        <p class="text-sm text-brand-text-muted leading-relaxed">Our qualified clinical team reviews orders and assists with personalized medication queries.</p>
+      </div>
 
-        ul li {
-            margin-bottom: 8px;
-        }
+      <div class="wellness-card bg-white rounded-2xl p-6 border border-brand-border shadow-sm space-y-2">
+        <div class="w-10 h-10 rounded-xl bg-brand-cream flex items-center justify-center text-brand-dark font-bold text-sm">03</div>
+        <h4 class="font-semibold text-lg text-brand-dark">Cold-Chain &amp; Express Safety</h4>
+        <p class="text-sm text-brand-text-muted leading-relaxed">Careful temperature-controlled packaging ensures medicine potency from lab to your home.</p>
+      </div>
 
-        /* Strong emphasis styling */
-        strong {
-            color: #2c3e50;
-        }
+      <div class="wellness-card bg-white rounded-2xl p-6 border border-brand-border shadow-sm space-y-2">
+        <div class="w-10 h-10 rounded-xl bg-brand-cream flex items-center justify-center text-brand-dark font-bold text-sm">04</div>
+        <h4 class="font-semibold text-lg text-brand-dark">Customer-First Philosophy</h4>
+        <p class="text-sm text-brand-text-muted leading-relaxed">Dedicated 24/7 care support and transparent pricing designed to put your wellness first.</p>
+      </div>
 
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .about-container {
-                margin: 20px;
-                padding: 15px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="about-container">
-        <h1>About Us</h1>
-        <p>Welcome to <strong>MedicoMart</strong>, where innovation meets care to redefine how you access healthcare.</p>
-        <p>Our journey began with a simple idea: to make high-quality healthcare products and services available to everyone, everywhere, at the click of a button. In today’s fast-paced world, we believe that managing your health should be effortless, convenient, and reliable. That’s why we’ve created a platform that puts your well-being first.</p>
-        <p>At <strong>MedicoMart</strong>, we’re more than just an online pharmacy — we’re your healthcare companion. From trusted prescription medicines to everyday wellness essentials, we deliver everything you need, right to your doorstep.</p>
-        
-        <h2>Our Mission</h2>
-        <p>To empower individuals with seamless access to affordable and genuine healthcare solutions, ensuring better health for all.</p>
-
-        <h2>Why We’re Different</h2>
-        <ul>
-            <li><strong>Authenticity You Can Trust:</strong> Every product is sourced directly from licensed manufacturers and verified for quality by our certified pharmacists.</li>
-            <li><strong>Expert Support:</strong> Need guidance? Our team of experienced pharmacists and healthcare professionals is here to assist you every step of the way.</li>
-            <li><strong>Hassle-Free Experience:</strong> Upload your prescription, place your order, and leave the rest to us. We handle the verification and ensure a smooth delivery process.</li>
-            <li><strong>Customer-First Approach:</strong> With 24/7 support and a commitment to your satisfaction, your health and happiness are always our priority.</li>
-        </ul>
-
-        <h2>What Drives Us</h2>
-        <p>Healthcare is personal, and so is our approach. Whether it’s offering personalized recommendations, enabling quick refills, or introducing subscription plans to simplify your routine, we’re constantly innovating to make life healthier for you and your loved ones.</p>
-
-        <h2>Our Promise</h2>
-        <p>With <strong>MedicoMart</strong>, you’re not just buying medicine — you’re gaining a partner dedicated to your health journey. We’re committed to delivering quality, transparency, and care, because you deserve nothing less.</p>
-
-        <h2>Join Us in the Journey</h2>
-        <p>Together, let’s build a healthier future. Explore our extensive catalog, discover the ease of online pharmacy services, and experience healthcare like never before.</p>
-        <p>Let’s make well-being simpler, smarter, and more accessible — one order at a time.</p>
     </div>
-</body>
-</html>
+  </div>
 
-
-
-
+  <!-- CTA Box -->
+  <div class="bg-brand-cream-card rounded-3xl border border-brand-border p-8 sm:p-10 text-center space-y-4">
+    <h3 class="font-serif text-2xl font-bold text-brand-dark">Start Your Wellness Journey Today</h3>
+    <p class="text-sm text-brand-text-muted max-w-md mx-auto">Explore curated medicines, vitamins, and natural care products designed for your everyday vitality.</p>
+    <div class="pt-2">
+      <a href="/products" class="wellness-btn-primary inline-flex">Explore Store Catalog</a>
+    </div>
+  </div>
+</div>
 {% endblock content %}

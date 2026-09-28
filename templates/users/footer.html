@@ -1,7 +1,116 @@
-<div class="flex items-center justify-center text-md my-[2rem] gap-6">
-    <a href="/home" class="">Home</a>
-    <a href="/products">Products</a>
-    <a href="" class="">About</a>
-    <a href="" class="">Contact</a>
+{% load static %}
+<footer class="bg-brand-darker text-brand-cream border-t border-white/10 mt-auto">
+  <!-- Trust Badges Bar -->
+  <div class="border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center md:text-left">
+      <div class="flex flex-col md:flex-row items-center gap-3 justify-center md:justify-start">
+        <div class="w-10 h-10 rounded-full bg-brand-dark flex items-center justify-center text-brand-accent shrink-0">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-white">100% Genuine Care</h4>
+          <p class="text-xs text-brand-cream/60">Direct from certified brands</p>
+        </div>
+      </div>
+      
+      <div class="flex flex-col md:flex-row items-center gap-3 justify-center md:justify-start">
+        <div class="w-10 h-10 rounded-full bg-brand-dark flex items-center justify-center text-brand-accent shrink-0">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-white">Express Delivery</h4>
+          <p class="text-xs text-brand-cream/60">Carefully packaged & fast</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row items-center gap-3 justify-center md:justify-start">
+        <div class="w-10 h-10 rounded-full bg-brand-dark flex items-center justify-center text-brand-accent shrink-0">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-white">Secure Payments</h4>
+          <p class="text-xs text-brand-cream/60">Encrypted checkout safety</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row items-center gap-3 justify-center md:justify-start">
+        <div class="w-10 h-10 rounded-full bg-brand-dark flex items-center justify-center text-brand-accent shrink-0">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-white">Dedicated Support</h4>
+          <p class="text-xs text-brand-cream/60">Expert wellness assistance</p>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="text-center pb-[2rem]">&copy;2024 Company.Inc</div>
+
+  <!-- Main Footer Content -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+      
+      <!-- Brand & Mission Column -->
+      <div class="lg:col-span-2 space-y-4">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-brand-cream flex items-center justify-center text-brand-dark">
+            <svg class="w-5 h-5 text-brand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+            </svg>
+          </div>
+          <span class="font-serif text-2xl font-bold tracking-tight text-white">MEDICOMART</span>
+        </div>
+        <p class="text-sm text-brand-cream/70 leading-relaxed max-w-sm">
+          Better health, beautifully simple. Curated healthcare, natural wellness, vitamins, and personalized self-care delivered to your door.
+        </p>
+        <div class="pt-2 text-xs text-brand-accent/80 font-medium">
+          Professional care &bull; Certified quality &bull; Pure wellness
+        </div>
+      </div>
+
+      <!-- Shop Column -->
+      <div class="space-y-3">
+        <h4 class="text-sm font-semibold tracking-wider uppercase text-brand-accent">Shop</h4>
+        <ul class="space-y-2 text-sm text-brand-cream/70">
+          <li><a href="/products" class="hover:text-white transition-colors">All Products</a></li>
+          <li><a href="/search?category=vitamins" class="hover:text-white transition-colors">Vitamins & Supplements</a></li>
+          <li><a href="/search?category=ayurvedic" class="hover:text-white transition-colors">Ayurveda & Natural Care</a></li>
+          <li><a href="/search?category=fitness" class="hover:text-white transition-colors">Fitness & Nutrition</a></li>
+          <li><a href="/search?category=diabetes" class="hover:text-white transition-colors">Diabetes Care</a></li>
+        </ul>
+      </div>
+
+      <!-- Company Column -->
+      <div class="space-y-3">
+        <h4 class="text-sm font-semibold tracking-wider uppercase text-brand-accent">Company</h4>
+        <ul class="space-y-2 text-sm text-brand-cream/70">
+          <li><a href="/users/about" class="hover:text-white transition-colors">About Us</a></li>
+          <li><a href="/users/contact" class="hover:text-white transition-colors">Contact Us</a></li>
+          <li><a href="/products" class="hover:text-white transition-colors">Curated Collections</a></li>
+          <li><a href="/users/help_support" class="hover:text-white transition-colors">Help & Support</a></li>
+        </ul>
+      </div>
+
+      <!-- Customer Support Column -->
+      <div class="space-y-3">
+        <h4 class="text-sm font-semibold tracking-wider uppercase text-brand-accent">Account</h4>
+        <ul class="space-y-2 text-sm text-brand-cream/70">
+          <li><a href="/cart" class="hover:text-white transition-colors">Shopping Cart</a></li>
+          <li><a href="/users/edit_profile" class="hover:text-white transition-colors">My Profile</a></li>
+          <li><a href="/users/login" class="hover:text-white transition-colors">Sign In</a></li>
+          <li><a href="/users/register" class="hover:text-white transition-colors">Create Account</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div class="border-t border-white/10 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-brand-cream/60">
+      <p>&copy; 2026 MedicoMart Inc. All rights reserved. Premium Health &amp; Wellness.</p>
+      <div class="flex gap-6">
+        <a href="/users/about" class="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="/users/about" class="hover:text-white transition-colors">Terms of Service</a>
+        <a href="/users/help_support" class="hover:text-white transition-colors">Security</a>
+      </div>
+    </div>
+  </div>
+</footer>

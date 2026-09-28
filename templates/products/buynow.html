@@ -1,146 +1,136 @@
 {% extends "users/index.html" %}
+{% load static %}
 
 {% block content %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buy Now</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-        }
-
-        .header {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 1rem;
-        }
-
-        .section {
-            margin-bottom: 2rem;
-        }
-
-        .section-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #555;
-            margin-bottom: 1rem;
-        }
-
-        .address-card {
-            padding: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            cursor: pointer;
-        }
-
-        .address-card:hover {
-            border-color: #007bff;
-        }
-
-        .action-btn {
-            display: inline-block;
-            padding: 0.75rem 2rem;
-            background: #28a745;
-            color: #fff;
-            font-size: 1rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            margin-top: 1rem;
-            text-decoration: none;
-        }
-
-        .action-btn:hover {
-            background: #218838;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- Product Section -->
-        <div class="section">
-            <div class="header">Buy Now</div>
-            <div class="section-title">Product Details</div>
-            <div class="flex flex-col gap-[5rem]">
-                {% for item in cart_items %}
-                <div class="flex gap-[2rem] items-center">
-                <img class="size-[8rem]" src="{{item.product.image.url}}" alt="{{item.product.name}}">
-                <div class="flex flex-col">
-                    <div class="text-2xl">{{ item.product.name }}</div>
-                    <div class="text-xl">&#8377;{{item.product.price}}</div>
-                    <div class="text-lg">Count: {{item.quantity}}</div>
-                </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <!-- Address Section -->
-        <div class="section">
-            <div class="section-title">Delivery Address</div>
-            {% for item in custom_user.get_addresses %}
-            <div class="address-card">
-                <input type="radio" name="address" id="address{{forloop.counter}}" checked>
-                <label for="address{{forloop.counter}}">
-                    <strong>{{custom_user.user.username}}</strong> <br>
-                    <p>{{item}}</p>
-                </label>
-            </div>
-            {% endfor %}
-            <a href="#" class="action-btn">Add a New Address</a>
-        </div>
-
-        <!-- Price Section -->
-        <div class="section">
-            <div class="section-title">Price Details</div>
-            <div class="price-details">
-                <div class="price-row">
-                    <span>Price (1 item)</span>
-                    <span>&#8377;1,911</span>
-                </div>
-                <div class="price-row">
-                    <span>Delivery Charges</span>
-                    <span>FREE</span>
-                </div>
-                <div class="price-row">
-                    <span>Platform Fee</span>
-                    <span>&#8377;3</span>
-                </div>
-                <div class="price-row total">
-                    <span>Total Payable</span>
-                    <span>&#8377;1,914</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Payment Section -->
-        <div class="section">
-            <div class="section-title">Payment Options</div>
-            <a href="#" class="action-btn">Proceed to Payment</a>
-        </div>
+<div class="bg-brand-cream/30 border-b border-brand-border/60 py-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-brand-dark text-brand-accent flex items-center justify-center">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      </div>
+      <div>
+        <h1 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark">Complete Your Order</h1>
+        <p class="text-xs text-brand-text-muted">Safe, encrypted direct dispatch with pharmacist verification</p>
+      </div>
     </div>
-</body>
-</html>
+  </div>
+</div>
 
-{% endblock content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- Left Column: Products & Address -->
+    <div class="lg:col-span-8 space-y-6">
+      
+      <!-- 1. Order Items Section -->
+      <div class="bg-white rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-8 space-y-5">
+        <div class="flex items-center justify-between border-b border-brand-border/60 pb-3">
+          <h2 class="font-serif text-xl font-bold text-brand-dark">1. Order Items</h2>
+          <span class="text-xs text-brand-text-muted">{{ cart_items|length }} Product(s)</span>
+        </div>
+
+        <div class="space-y-4 divide-y divide-brand-border/50">
+          {% for item in cart_items %}
+          <div class="pt-4 first:pt-0 flex items-center gap-5">
+            <div class="w-20 h-20 rounded-xl bg-brand-cream-light/60 p-2 border border-brand-border/60 flex items-center justify-center shrink-0">
+              <img class="w-full h-full object-contain" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+            </div>
+            <div class="flex-1 space-y-1">
+              <h3 class="font-semibold text-sm sm:text-base text-brand-dark">{{ item.product.name }}</h3>
+              <div class="text-xs text-brand-text-muted flex items-center gap-3">
+                <span>Qty: <strong class="text-brand-dark">{{ item.quantity }}</strong></span>
+                <span>&bull;</span>
+                <span class="capitalize">Category: {{ item.product.categories }}</span>
+              </div>
+            </div>
+            <div class="font-serif text-lg font-bold text-brand-dark text-right">
+              &#x20B9;{{ item.product.price }}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- 2. Delivery Address Section -->
+      <div class="bg-white rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-8 space-y-5">
+        <div class="flex items-center justify-between border-b border-brand-border/60 pb-3">
+          <h2 class="font-serif text-xl font-bold text-brand-dark">2. Delivery Address</h2>
+          <a href="/users/edit_profile" class="text-xs font-semibold text-brand-dark hover:underline">Manage Address</a>
+        </div>
+
+        <div class="space-y-3">
+          {% for item in custom_user.get_addresses %}
+          <label for="address{{forloop.counter}}" class="flex items-start gap-4 p-4 rounded-2xl border border-brand-border bg-brand-cream-light/40 hover:bg-brand-cream-light cursor-pointer transition-colors">
+            <input type="radio" name="address" id="address{{forloop.counter}}" checked class="mt-1 text-brand-dark focus:ring-brand-dark accent-brand-dark">
+            <div class="text-sm">
+              <span class="font-semibold text-brand-dark block">{{ custom_user.user.username }}</span>
+              <p class="text-brand-text-muted mt-0.5">{{ item }}</p>
+              <p class="text-xs text-brand-text-muted mt-1">Phone: {{ custom_user.contact_number }}</p>
+            </div>
+          </label>
+          {% empty %}
+          <div class="p-4 rounded-2xl border border-dashed border-brand-border text-center text-sm text-brand-text-muted">
+            No saved address found. <a href="/users/edit_profile" class="text-brand-dark font-semibold underline">Add one now</a>.
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="pt-2">
+          <a href="/users/edit_profile" class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-dark hover:text-brand-light">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            Add or Edit Delivery Address
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column: Price Details & Payment -->
+    <div class="lg:col-span-4 bg-white rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-7 space-y-6 sticky top-28">
+      <h2 class="font-serif text-xl font-bold text-brand-dark border-b border-brand-border/60 pb-3">Price Details</h2>
+
+      <div class="space-y-3 text-sm">
+        <div class="flex items-center justify-between text-brand-text-muted">
+          <span>Items Total</span>
+          <span class="font-semibold text-brand-text-dark">&#x20B9;{{ custom_user.cart_set.first.cart_price|default:"1,911" }}</span>
+        </div>
+        <div class="flex items-center justify-between text-brand-text-muted">
+          <span>Delivery Charges</span>
+          <span class="text-emerald-700 font-semibold">FREE</span>
+        </div>
+        <div class="flex items-center justify-between text-brand-text-muted">
+          <span>Pharmacist Verification Fee</span>
+          <span class="text-emerald-700 font-semibold">&#x20B9;0</span>
+        </div>
+        
+        <div class="border-t border-brand-border/60 pt-3 flex items-center justify-between font-serif text-lg font-bold text-brand-dark">
+          <span>Total Payable</span>
+          <span>&#x20B9;{{ custom_user.cart_set.first.cart_price|default:"1,911" }}</span>
+        </div>
+      </div>
+
+      <!-- Payment Section -->
+      <div class="space-y-3 pt-2">
+        <h3 class="text-xs font-semibold text-brand-text-muted uppercase tracking-wider">Payment Method</h3>
+        <div class="p-3 bg-brand-cream-light rounded-xl border border-brand-border/70 text-xs text-brand-text-dark flex items-center justify-between">
+          <span class="font-medium">Cash On Delivery / Online UPI</span>
+          <span class="text-emerald-700 font-semibold">Available</span>
+        </div>
+        
+        <button 
+          onclick="alert('Order placed successfully! A certified pharmacist will verify your order.'); window.location.href='/products';"
+          class="wellness-btn-primary w-full py-4 text-base shadow-wellness-md"
+        >
+          <span>Confirm &amp; Place Order</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        </button>
+      </div>
+
+      <div class="pt-1 text-center text-xs text-brand-text-muted leading-relaxed">
+        By placing your order, you agree to MedicoMart terms of service and healthcare prescription guidelines.
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock content %}

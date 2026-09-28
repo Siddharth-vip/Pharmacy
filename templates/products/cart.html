@@ -1,76 +1,158 @@
-{% extends "users/index.html" %} {% block content %}
-<div class="flex p-[2rem] gap-[2rem] bg-slate-200">
-  <div class="flex flex-col gap-[1rem] bg-white basis-3/4">
-    <div class="capitalize text-4xl font-semibold p-[1rem_2rem]">
-      {{ user.username }}'s Cart
-    </div>
-    <div class="flex flex-col">
-      {% for item in cart_items reversed %}
-      <div class="flex gap-[2rem] border-t-[1px] border-black p-[2rem_3rem] cart-{{item.product.id}}">
-        <img
-          class="size-[10rem] basis-1/5"
-          src="{{ item.product.image.url }}"
-          alt="{{ item.product.name }}"
-        />
-        <div class="flex flex-col gap-[.7rem] basis-3/5">
-          <div class="text-3xl">{{ item.product.name }}</div>
-          <div>
-            {% if item.product.is_available %}
-            <span class="text-green-600">In Stock</span>
-            {% else %}
-            <span class="text-red-600">Out of Stock</span>
-            {% endif %}
-          </div>
-          <div>
-            Category:<span class="font-semibold capitalize px-1"
-              >{{ item.product.category }}</span
-            >
-          </div>
-          <div>
-            Quantity:<span class="quantity-{{ item.product.id }} font-semibold px-1">{{ item.quantity }}</span>
-          </div>
-          <div class="flex gap-[2rem] p-[.3rem] border-2 w-max rounded-full">
-            <div class="icon-{{item.product.id}} size-[1.5rem] cursor-pointer" onclick="updateItem('{{ item.product.id }}','remove')">
-            {% if item.quantity > 1 %}
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 -960 960 960"
-              >
-                <path d="M200-440v-80h560v80H200Z" /></svg>
-            {% else %}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 -960 960 960"
-            >
-              <path
-                d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"
-              /></svg>
-            {% endif %}
-            </div>
-            <div class="quantity-{{item.product.id}}">{{ item.quantity }}</div>
-            <div class="size-[1.5rem] cursor-pointer" onclick="updateItem('{{ item.product.id }}','add')"><svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 -960 960 960"
-              >
-              <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg></div>
-          </div>
-        </div>
-        <div class="text-2xl basis-1/5">
-          <span class="text-base align-text-top">&#x20B9;</span>{{ item.product.price }}
-        </div>
+{% extends "users/index.html" %} 
+{% load static %}
+
+{% block content %}
+<div class="bg-brand-cream/30 border-b border-brand-border/60 py-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-brand-dark text-brand-accent flex items-center justify-center">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
       </div>
-      {% endfor %}
-    </div>
-  </div>
-  <div
-    class="flex flex-col items-center gap-[1rem] h-max py-[2rem] bg-white basis-1/4"
-  >
-    <div>Total: <span class="totalPrice">{{ cart.cart_price }}</span></div>
-    <div onclick ="window.location.href='/buy_now'"
-      class="bg-yellow-400 hover:bg-yellow-500 font-semibold rounded-3xl cursor-pointer p-[.7rem_1.5rem]"
-    >
-      Proceed to Buy
+      <div>
+        <h1 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark">Your Wellness Cart</h1>
+        <p class="text-xs text-brand-text-muted">Review your items and proceed to secure healthcare checkout</p>
+      </div>
     </div>
   </div>
 </div>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- Cart Items List (Left Column) -->
+    <div class="lg:col-span-8 space-y-4">
+      {% if cart_items %}
+        <div class="space-y-4">
+          {% for item in cart_items reversed %}
+          <div class="cart-{{ item.product.id }} bg-white rounded-2xl border border-brand-border/80 shadow-wellness p-5 sm:p-6 flex flex-col sm:flex-row items-center gap-5 transition-all duration-300">
+            <!-- Product Image -->
+            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-brand-cream-light/70 p-3 border border-brand-border/60 flex items-center justify-center shrink-0">
+              <img
+                class="w-full h-full object-contain"
+                src="{{ item.product.image.url }}"
+                alt="{{ item.product.name }}"
+              />
+            </div>
+
+            <!-- Product Details -->
+            <div class="flex-1 text-center sm:text-left space-y-1.5 w-full">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <a href="/products/{{ item.product.id }}" class="font-serif text-lg font-bold text-brand-dark hover:text-brand-light transition-colors line-clamp-1">
+                  {{ item.product.name }}
+                </a>
+                <div class="font-serif text-xl font-bold text-brand-dark shrink-0">
+                  &#x20B9;{{ item.product.price }}
+                </div>
+              </div>
+
+              <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 text-xs">
+                {% if item.product.is_available %}
+                  <span class="inline-flex items-center gap-1 text-emerald-700 font-medium">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> In Stock
+                  </span>
+                {% else %}
+                  <span class="inline-flex items-center gap-1 text-red-600 font-medium">
+                    <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span> Out of Stock
+                  </span>
+                {% endif %}
+                <span class="text-brand-border">&bull;</span>
+                <span class="text-brand-text-muted capitalize">Category: <strong class="text-brand-text-dark font-medium">{{ item.product.categories|default:"Wellness" }}</strong></span>
+              </div>
+
+              <!-- Quantity Stepper & Controls -->
+              <div class="pt-3 flex items-center justify-center sm:justify-start gap-4">
+                <div class="flex items-center gap-3 bg-brand-cream-light rounded-full border border-brand-border px-3 py-1.5">
+                  <!-- Remove / Decrement Button -->
+                  <button 
+                    type="button"
+                    class="icon-{{ item.product.id }} w-6 h-6 flex items-center justify-center text-brand-text-dark/70 hover:text-brand-dark cursor-pointer transition-colors focus:outline-none"
+                    onclick="updateItem('{{ item.product.id }}','remove')"
+                    title="Decrease quantity"
+                  >
+                    {% if item.quantity > 1 %}
+                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M20 12H4"/></svg>
+                    {% else %}
+                      <svg class="w-4 h-4 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                    {% endif %}
+                  </button>
+
+                  <span class="quantity-{{ item.product.id }} font-semibold text-sm text-brand-dark min-w-[20px] text-center">
+                    {{ item.quantity }}
+                  </span>
+
+                  <!-- Add / Increment Button -->
+                  <button 
+                    type="button"
+                    class="w-6 h-6 flex items-center justify-center text-brand-text-dark/70 hover:text-brand-dark cursor-pointer transition-colors focus:outline-none"
+                    onclick="updateItem('{{ item.product.id }}','add')"
+                    title="Increase quantity"
+                  >
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <!-- Empty Cart State -->
+        <div class="bg-white rounded-3xl border border-brand-border/80 p-12 text-center shadow-wellness space-y-4">
+          <div class="w-16 h-16 rounded-full bg-brand-cream flex items-center justify-center text-brand-dark mx-auto">
+            <svg class="w-8 h-8 text-brand-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+          </div>
+          <h2 class="font-serif text-2xl font-bold text-brand-dark">Your Cart is Currently Empty</h2>
+          <p class="text-sm text-brand-text-muted max-w-sm mx-auto">Explore our curated collections of healthcare essentials, vitamins, and Ayurveda to begin your journey.</p>
+          <div class="pt-3">
+            <a href="/products" class="wellness-btn-primary inline-flex">
+              Explore Products
+            </a>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Order Summary Card (Right Column) -->
+    <div class="lg:col-span-4 bg-white rounded-3xl border border-brand-border/80 shadow-wellness p-6 sm:p-7 space-y-5 sticky top-28">
+      <h2 class="font-serif text-xl font-bold text-brand-dark border-b border-brand-border/60 pb-3">Order Summary</h2>
+
+      <div class="space-y-3 text-sm">
+        <div class="flex items-center justify-between text-brand-text-muted">
+          <span>Items Subtotal</span>
+          <span class="font-medium text-brand-text-dark">&#x20B9;<span class="totalPrice">{{ cart.cart_price }}</span></span>
+        </div>
+        <div class="flex items-center justify-between text-brand-text-muted">
+          <span>Standard Delivery</span>
+          <span class="text-emerald-700 font-semibold">FREE</span>
+        </div>
+        <div class="flex items-center justify-between text-brand-text-muted">
+          <span>Healthcare Packaging</span>
+          <span class="text-emerald-700 font-semibold">&#x20B9;0</span>
+        </div>
+        
+        <div class="border-t border-brand-border/60 pt-3 flex items-center justify-between font-serif text-lg font-bold text-brand-dark">
+          <span>Total Payable</span>
+          <span>&#x20B9;<span class="totalPrice">{{ cart.cart_price }}</span></span>
+        </div>
+      </div>
+
+      <!-- Checkout Button -->
+      <button 
+        onclick="window.location.href='/buy_now'"
+        class="wellness-btn-primary w-full py-4 text-base shadow-wellness-md"
+      >
+        <span>Proceed to Checkout</span>
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      </button>
+
+      <div class="pt-2 flex items-center justify-center gap-2 text-xs text-brand-text-muted">
+        <svg class="w-4 h-4 text-brand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        <span>256-Bit Encrypted Secure Checkout</span>
+      </div>
+    </div>
+
+  </div>
+</div>
 {% endblock content %}
+
